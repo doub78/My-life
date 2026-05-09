@@ -1,55 +1,62 @@
 # Life OS — Claude Context
 
 ## Who
-19 years old, turning 20 on November 2, 2026. From Myanmar/Thailand.
-Hard goal: reach $20K+/month income AND save $20K+ for university abroad — both before 20th birthday.
-School options: China (~$8-12K/yr, preferred but family won't allow), Singapore (~$25-35K/yr, family preference).
-Diploma cert arrives June–July 2026.
+**Nang (AA).** 19, turning 20 on November 2, 2026. From Myanmar, living in Thailand (expense-free).
+Native languages: Myanmar, Thai, English. Learning Japanese (Mon/Tue/Wed 19:30–21:30, visa only).
+Got scammed for $4,000. Now building something transparent and mine.
+Critical relatives don't believe in me. Benchmark for success = my future self.
 
-## 5 Ventures (priority order)
-1. **AI Faceless Video Service** — Fiverr gig → retainer clients → agency (primary focus)
-2. **YouTube Automation** — faceless channels, viral niches, ad revenue + affiliates
-3. **E-Commerce** — Chinese suppliers → dropshipping
-4. **Digital Products** — templates/tools/guides, build once sell forever
-5. **ZEN Travel Agency** — Myanmar→Thailand outbound tours (family business, existing clients)
+## The Hard Goals
+- **$20,000+/month** by November 2, 2026 (hard birthday deadline)
+- **Save $20,000+** to self-fund university abroad by Aug–Sep 2026
+- Full financial independence before turning 20
+- University: China $8–12K/yr (want) or Singapore $25–35K/yr (family push, PSB Academy)
+- Diploma (Business Management) arrives June–July 2026
+
+## Real Identity
+**Content creator.** Life Path 3 (Creative Communicator). Saturn in 5th house = content + discipline.
+Wired to CREATE and COMMUNICATE. Needs structure or scatters. Best path monetizes creative expression.
+Core fear: being 20 and still dependent on parents.
+
+## The 4 Channels (priority order)
+1. **TikTok** — Philosophy & Psychology content. Posting daily. Primary growth engine.
+2. **YouTube EN (@evren-updated)** — Beauty/Glow Up. DORMANT 2 years. First short: 100K views. 300 subs. REACTIVATING NOW — highest potential.
+3. **YouTube TH (@yakjatama)** — Thai Storytelling. 1,180 subs. 1,800/4,000 watch hours. **220 hours from monetization.**
+4. **ZEN Travel** — Myanmar→Thailand tours. Cash bridge while content grows. Ads running.
+
+## Current Numbers
+- TikTok: posting (followers TBD)
+- @evren-updated: 300 subs, dormant
+- @yakjatama: 1,180 subs, 1,800 watch hours (goal: 4,000)
+- Monthly income: $0 (15,000 THB allowance from parents)
+
+## Monetization Path
+Content → audience → backend. Not AdSense alone.
+- @yakjatama: 220 watch hours → monetize → Thai AdSense
+- @evren-updated: English + beauty = high RPM + brand deals at 10K subs
+- TikTok: creator fund + brand deals (philosophy/psychology audience)
+- ZEN Travel: bookings as cash bridge throughout
+- Digital products: Phase 2 backend to content audiences
 
 ## The App
-Single-file mobile PWA at `index.html`.
-- **6 tabs**: Today / Goals / Pipeline / Focus / Reflect / Plan
-- Pure HTML/CSS/JS — no frameworks, no build step, no npm
-- All data in localStorage (keys prefixed `lfs_`)
-- Offline-capable via `sw.js` service worker + `manifest.json`
-- Dark theme, mobile-first design
-- Book frameworks applied INVISIBLY — techniques shape features but names never appear in UI
+Single-file mobile PWA at `index.html`. Repo: doub78/My-life.
+Pure HTML/CSS/JS. No frameworks, no npm. localStorage (lfs_ prefix). Offline via sw.js.
 
-## Key Constants (top of `<script>` block)
-```
-SPRINT_START = May 9, 2026
-B20_DL       = Nov 2, 2026  (20th birthday deadline)
-ABROAD_DL    = Sept 1, 2026 (target departure)
-VENTURES     = array of 5 ventures with id, name, note, col
-MORNING      = 6-item morning routine checklist
-MOVES_DEFAULTS = 5 pre-filled next moves
-```
+**6 tabs:** Today / Goals / Pipeline / Focus / Reflect / Plan
 
-## Files
-- `index.html`    — entire app
-- `manifest.json` — PWA metadata
-- `sw.js`         — service worker for offline caching
-- `icon.svg`      — app icon
-- `CLAUDE.md`     — this file
+**Key constants:**
+- SPRINT_START = May 9, 2026
+- B20_DL = Nov 2, 2026
+- ABROAD_DL = Sep 1, 2026
+- WATCH_HOURS_START = 1800, WATCH_HOURS_GOAL = 4000
+- VENTURES = 4 channels (tiktok, evren, yakja, zen)
+- CONTENT_CHECKS = 4 daily content actions
+- MOVES_DEFAULTS = 5 content-path moves
 
-## Rules for Working on This App
-- **Never show book names or titles in the UI**
-- No comments explaining what the code does — only add comments for non-obvious WHY
+## Rules
+- Never show book names or framework names in UI
+- No comments explaining what code does — only WHY if non-obvious
 - Mobile-first, content over decoration
 - Don't add features beyond what's asked
-- Push finished changes to **main branch** of `doub78/My-life`
-- Keep it a single HTML file — no splitting into multiple files
-
-## Next 5 Moves (pre-filled)
-1. Launch Fiverr gig for AI faceless video service
-2. Land first paid client ($150–300)
-3. Convert to first monthly retainer ($300–500/mo)
-4. Reach $1,000/month from 3 clients
-5. Hit school fund target and depart abroad
+- Push finished changes to **main branch** of doub78/My-life
+- Keep it a single HTML file
