@@ -499,7 +499,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 <div id="flash" class="flash">Saved ✓</div>
 
 <script>
-// ── CONSTANTS ────────────────────────────────────────────────────────────────
 const SPRINT_START = new Date('2026-05-09T00:00:00')
 const B20_DL       = new Date('2026-11-02T00:00:00')
 const ABROAD_DL    = new Date('2026-09-01T00:00:00')
@@ -533,7 +532,6 @@ const MOVES_DEFAULTS = [
 const STAGES = ['Prospect','Messaged','Replied','Proposal','Closed']
 const STAGE_COLORS = { Prospect:'#7c3aed', Messaged:'#3b82f6', Replied:'#f59e0b', Proposal:'#ea580c', Closed:'#10b981' }
 
-// ── STORAGE ──────────────────────────────────────────────────────────────────
 const S = {
   get(k, d=null) { try { const v=localStorage.getItem('lfs_'+k); return v!==null?JSON.parse(v):d } catch{return d} },
   set(k, v)      { try { localStorage.setItem('lfs_'+k, JSON.stringify(v)) } catch{} },
@@ -541,7 +539,6 @@ const S = {
 const today  = () => new Date().toISOString().slice(0,10)
 const dayDiff= (a,b) => Math.ceil((a-b)/86400000)
 
-// ── UI HELPERS ───────────────────────────────────────────────────────────────
 let _ft = null
 function flash(msg='Saved ✓') {
   const el = document.getElementById('flash')
@@ -563,7 +560,6 @@ function switchTab(name, btn) {
 function openModal(id)  { document.getElementById(id).classList.add('open') }
 function closeModal(id) { document.getElementById(id).classList.remove('open') }
 
-// ── HEADER ───────────────────────────────────────────────────────────────────
 function renderHeader() {
   const now = new Date()
   const b20d = dayDiff(B20_DL, now)
@@ -580,13 +576,10 @@ function renderHeader() {
   document.getElementById('stat-abroad').textContent= Math.max(0,dayDiff(ABROAD_DL,now))+'d'
 }
 
-// ── TODAY ────────────────────────────────────────────────────────────────────
 function renderToday() {
-  // Identity
   const id_el = document.getElementById('identity-input')
   id_el.value = S.get('identity','')
   id_el.onblur = e => S.set('identity', e.target.value)
-
   renderMorning()
   renderTop3()
   renderOutreach()
@@ -677,13 +670,11 @@ function renderVentSnap() {
       <span class="vent-pct">${p}%</span>
     </div>`
   }).join('')
-  // pipeline closed total
   const closed = S.get('pipeline',[]).filter(c=>c.stage==='Closed')
   const total  = closed.reduce((s,c)=>s+(c.value||0),0)
   document.getElementById('stat-pipeline').textContent = '$'+total.toLocaleString()
 }
 
-// ── GOALS ────────────────────────────────────────────────────────────────────
 function renderGoals() {
   renderSprintDetail()
   renderMoves()
@@ -762,7 +753,6 @@ function saveVentures() {
 
 function saveIntention() { S.set('week_intention', document.getElementById('week-intention').value); flash() }
 
-// ── PIPELINE ─────────────────────────────────────────────────────────────────
 function renderPipeline() {
   const contacts = S.get('pipeline',[])
   const board    = document.getElementById('pipeline-board')
@@ -825,7 +815,6 @@ function removeContact(id) {
   S.set('pipeline', S.get('pipeline',[]).filter(x=>x.id!==id)); renderPipeline()
 }
 
-// ── FOCUS TIMER ──────────────────────────────────────────────────────────────
 let tDur=25, tSec=25*60, tRunning=false, tInterval=null
 
 function setDur(min, btn) {
@@ -891,7 +880,6 @@ function routeTask(action) {
   document.getElementById('router-input').value=''; renderFocusLog(); flash('Routed: '+action+' ✓')
 }
 
-// ── REFLECT ──────────────────────────────────────────────────────────────────
 let _limitPushed = null
 
 function setLimit(val) {
@@ -946,7 +934,6 @@ function loadTodayReflect() {
   if(entry.limitPushed!==null) setLimit(entry.limitPushed)
 }
 
-// ── PLAN ─────────────────────────────────────────────────────────────────────
 function renderPlan() {
   document.getElementById('offer-text').value   = S.get('my_offer','')
   document.getElementById('sprint-win').value   = S.get('sprint_win','')
@@ -987,7 +974,6 @@ function updateFundDisplay(fs,ft) {
   document.getElementById('fund-fill').style.width = pct+'%'
 }
 
-// ── INIT ─────────────────────────────────────────────────────────────────────
 function init() {
   renderHeader()
   renderToday()
