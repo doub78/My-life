@@ -258,9 +258,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
   </div>
 
   <div class="card">
-    <div class="card-title">5 Outreach Today</div>
-    <div class="o-dots" id="o-dots"></div>
-    <div id="o-lbl" class="t-xs t-muted" style="text-align:center;margin-top:4px">0 of 5 done</div>
+    <div class="flex ai-c jb" style="margin-bottom:10px">
+      <span class="card-title" style="margin-bottom:0">Content Today</span>
+      <span id="content-chip" class="chip">0/4</span>
+    </div>
+    <div id="content-today-list"></div>
   </div>
 
   <div class="card">
@@ -274,6 +276,21 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
   <div class="card">
     <div class="card-title">12-Week Sprint</div>
     <div id="sprint-detail"></div>
+  </div>
+
+  <div class="card">
+    <div class="flex ai-c jb" style="margin-bottom:10px">
+      <span class="card-title" style="margin-bottom:0">@yakjatama · Watch Hours</span>
+      <button class="btn btn-ghost btn-sm" onclick="saveWatchHours()">Update</button>
+    </div>
+    <div class="flex ai-c g2" style="margin-bottom:8px">
+      <input type="number" id="watch-hours-input" placeholder="1800" style="max-width:100px" />
+      <span class="t-xs t-muted">/ 4,000 hrs to monetize</span>
+    </div>
+    <div class="prog-bar" style="height:8px">
+      <div class="prog-fill" id="watch-hours-fill" style="background:var(--blue)"></div>
+    </div>
+    <div id="watch-hours-lbl" class="t-xs t-muted" style="margin-top:6px"></div>
   </div>
 
   <div class="card">
@@ -325,7 +342,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     </div>
     <div class="field">
       <label>Working on</label>
-      <input type="text" id="focus-task" placeholder="e.g. Fiverr gig page copy" />
+      <input type="text" id="focus-task" placeholder="e.g. Film TikTok · Edit YouTube · Plan content" />
     </div>
     <div class="timer-controls">
       <button id="timer-btn" class="btn btn-primary" onclick="timerToggle()">Start</button>
@@ -408,8 +425,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 <!-- PLAN -->
 <div id="tab-plan" class="tab-pane">
   <div class="card">
-    <div class="card-title">My Offer</div>
-    <textarea id="offer-text" rows="4" placeholder="I help [WHO] achieve [RESULT] in [TIMEFRAME] without [PAIN] using [METHOD]"></textarea>
+    <div class="card-title">My Content Brand</div>
+    <textarea id="offer-text" rows="4" placeholder="My brand is about [TOPIC]. I create content for [WHO]. My unique angle is [WHAT MAKES ME DIFFERENT]. My goal is [VISION]."></textarea>
     <button class="btn btn-primary btn-sm btn-full mt2" onclick="saveOffer()">Save</button>
   </div>
 
@@ -499,39 +516,50 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 <div id="flash" class="flash">Saved ✓</div>
 
 <script>
+// ── CONSTANTS ────────────────────────────────────────────────────────────────
 const SPRINT_START = new Date('2026-05-09T00:00:00')
 const B20_DL       = new Date('2026-11-02T00:00:00')
 const ABROAD_DL    = new Date('2026-09-01T00:00:00')
 const SPRINT_WEEKS = 12
 
 const VENTURES = [
-  { id:'video',   name:'AI Video Service',  note:'Fiverr → retainer → agency',   col:'#7c3aed' },
-  { id:'yt',      name:'YouTube Auto',      note:'Faceless channels, ad rev',      col:'#3b82f6' },
-  { id:'ecom',    name:'E-Commerce',        note:'Chinese suppliers, dropship',    col:'#10b981' },
-  { id:'digital', name:'Digital Products',  note:'Templates, tools, guides',       col:'#f59e0b' },
-  { id:'zen',     name:'ZEN Travel',        note:'Myanmar→Thailand tours',         col:'#e11d48' },
+  { id:'tiktok', name:'TikTok',       note:'Philosophy · Psychology',            col:'#7c3aed' },
+  { id:'evren',  name:'YouTube EN',   note:'@evren-updated · Beauty · Glow Up',  col:'#e11d48' },
+  { id:'yakja',  name:'YouTube TH',   note:'@yakjatama · Thai Storytelling',      col:'#3b82f6' },
+  { id:'zen',    name:'ZEN Travel',   note:'Myanmar → Thailand · Cash bridge',    col:'#10b981' },
 ]
 
 const MORNING = [
   'Wake up on time',
   'Cold shower',
   '30 min exercise',
+  'Review goals & channel stats',
+  'Plan today\'s content',
   'Journal / reflect',
-  'Review top 3 tasks',
-  'Review goals & moves',
 ]
 
 const MOVES_DEFAULTS = [
-  'Launch Fiverr gig for AI faceless video service',
-  'Land first paid client ($150–300)',
-  'Convert to first monthly retainer ($300–500/mo)',
-  'Reach $1,000/month from 3 clients',
-  'Hit school fund target and depart abroad',
+  'Post philosophy/psychology on TikTok every day',
+  'Reactivate @evren-updated — publish first video',
+  'Hit 4,000 watch hours on @yakjatama (1,800 now)',
+  'Land first ZEN booking or brand deal ($150+)',
+  'Reach first $1,000 month from content',
 ]
+
+const CONTENT_CHECKS = [
+  { id:'tiktok', label:'TikTok posted' },
+  { id:'evren',  label:'YouTube EN worked on' },
+  { id:'yakja',  label:'YouTube TH worked on' },
+  { id:'zen',    label:'ZEN lead followed up' },
+]
+
+const WATCH_HOURS_GOAL = 4000
+const WATCH_HOURS_START = 1800
 
 const STAGES = ['Prospect','Messaged','Replied','Proposal','Closed']
 const STAGE_COLORS = { Prospect:'#7c3aed', Messaged:'#3b82f6', Replied:'#f59e0b', Proposal:'#ea580c', Closed:'#10b981' }
 
+// ── STORAGE ──────────────────────────────────────────────────────────────────
 const S = {
   get(k, d=null) { try { const v=localStorage.getItem('lfs_'+k); return v!==null?JSON.parse(v):d } catch{return d} },
   set(k, v)      { try { localStorage.setItem('lfs_'+k, JSON.stringify(v)) } catch{} },
@@ -539,6 +567,7 @@ const S = {
 const today  = () => new Date().toISOString().slice(0,10)
 const dayDiff= (a,b) => Math.ceil((a-b)/86400000)
 
+// ── UI HELPERS ───────────────────────────────────────────────────────────────
 let _ft = null
 function flash(msg='Saved ✓') {
   const el = document.getElementById('flash')
@@ -560,6 +589,7 @@ function switchTab(name, btn) {
 function openModal(id)  { document.getElementById(id).classList.add('open') }
 function closeModal(id) { document.getElementById(id).classList.remove('open') }
 
+// ── HEADER ───────────────────────────────────────────────────────────────────
 function renderHeader() {
   const now = new Date()
   const b20d = dayDiff(B20_DL, now)
@@ -576,13 +606,15 @@ function renderHeader() {
   document.getElementById('stat-abroad').textContent= Math.max(0,dayDiff(ABROAD_DL,now))+'d'
 }
 
+// ── TODAY ────────────────────────────────────────────────────────────────────
 function renderToday() {
   const id_el = document.getElementById('identity-input')
   id_el.value = S.get('identity','')
   id_el.onblur = e => S.set('identity', e.target.value)
+
   renderMorning()
   renderTop3()
-  renderOutreach()
+  renderContentToday()
   renderVentSnap()
 }
 
@@ -639,25 +671,29 @@ function saveTop3(i, val) {
   const tasks = S.get(key, blank); tasks[i].text=val; S.set(key,tasks)
 }
 
-function renderOutreach() {
-  const key   = 'outreach_'+today()
-  const count = S.get(key, 0)
-  const dots  = document.getElementById('o-dots')
-  dots.innerHTML = ''
-  for(let i=0;i<5;i++){
-    const d = document.createElement('div')
-    d.className = 'o-dot'+(i<count?' done':'')
-    d.onclick = ()=>toggleOutreach(i)
-    dots.appendChild(d)
-  }
-  document.getElementById('o-lbl').textContent = count+' of 5 done'
+function renderContentToday() {
+  const key  = 'content_'+today()
+  const done = S.get(key, {})
+  const list = document.getElementById('content-today-list')
+  list.innerHTML = ''
+  CONTENT_CHECKS.forEach(c=>{
+    const row = document.createElement('div')
+    row.className = 'check-row'
+    row.innerHTML = `<div class="check-box${done[c.id]?' done':''}" onclick="toggleContent('${c.id}')"></div>
+      <span class="check-label${done[c.id]?' done':''}">${c.label}</span>`
+    list.appendChild(row)
+  })
+  const n = Object.values(done).filter(Boolean).length
+  const chip = document.getElementById('content-chip')
+  chip.textContent = n+'/4'
+  chip.className = 'chip'+(n===4?' on':'')
 }
 
-function toggleOutreach(i) {
-  const key   = 'outreach_'+today()
-  const count = S.get(key, 0)
-  S.set(key, i<count ? i : i+1)
-  renderOutreach()
+function toggleContent(id) {
+  const key  = 'content_'+today()
+  const done = S.get(key, {})
+  done[id] = !done[id]
+  S.set(key, done); renderContentToday()
 }
 
 function renderVentSnap() {
@@ -675,8 +711,10 @@ function renderVentSnap() {
   document.getElementById('stat-pipeline').textContent = '$'+total.toLocaleString()
 }
 
+// ── GOALS ────────────────────────────────────────────────────────────────────
 function renderGoals() {
   renderSprintDetail()
+  renderWatchHours()
   renderMoves()
   renderVentGoals()
   document.getElementById('week-intention').value = S.get('week_intention','')
@@ -753,6 +791,26 @@ function saveVentures() {
 
 function saveIntention() { S.set('week_intention', document.getElementById('week-intention').value); flash() }
 
+function renderWatchHours() {
+  const hrs  = S.get('watch_hours', WATCH_HOURS_START)
+  const pct  = Math.min(100, (hrs / WATCH_HOURS_GOAL) * 100)
+  const left = Math.max(0, WATCH_HOURS_GOAL - hrs)
+  const el   = document.getElementById('watch-hours-input')
+  if (el) el.value = hrs
+  const fill = document.getElementById('watch-hours-fill')
+  if (fill) fill.style.width = pct + '%'
+  const lbl = document.getElementById('watch-hours-lbl')
+  if (lbl) lbl.textContent = hrs >= WATCH_HOURS_GOAL
+    ? '✓ Monetization unlocked!'
+    : left + ' hours left · ' + pct.toFixed(0) + '% there'
+}
+
+function saveWatchHours() {
+  const val = parseInt(document.getElementById('watch-hours-input').value) || WATCH_HOURS_START
+  S.set('watch_hours', val); renderWatchHours(); flash('Watch hours updated ✓')
+}
+
+// ── PIPELINE ─────────────────────────────────────────────────────────────────
 function renderPipeline() {
   const contacts = S.get('pipeline',[])
   const board    = document.getElementById('pipeline-board')
@@ -815,6 +873,7 @@ function removeContact(id) {
   S.set('pipeline', S.get('pipeline',[]).filter(x=>x.id!==id)); renderPipeline()
 }
 
+// ── FOCUS TIMER ──────────────────────────────────────────────────────────────
 let tDur=25, tSec=25*60, tRunning=false, tInterval=null
 
 function setDur(min, btn) {
@@ -880,6 +939,7 @@ function routeTask(action) {
   document.getElementById('router-input').value=''; renderFocusLog(); flash('Routed: '+action+' ✓')
 }
 
+// ── REFLECT ──────────────────────────────────────────────────────────────────
 let _limitPushed = null
 
 function setLimit(val) {
@@ -934,6 +994,7 @@ function loadTodayReflect() {
   if(entry.limitPushed!==null) setLimit(entry.limitPushed)
 }
 
+// ── PLAN ─────────────────────────────────────────────────────────────────────
 function renderPlan() {
   document.getElementById('offer-text').value   = S.get('my_offer','')
   document.getElementById('sprint-win').value   = S.get('sprint_win','')
@@ -974,10 +1035,12 @@ function updateFundDisplay(fs,ft) {
   document.getElementById('fund-fill').style.width = pct+'%'
 }
 
+// ── INIT ─────────────────────────────────────────────────────────────────────
 function init() {
   renderHeader()
   renderToday()
   renderGoals()
+  renderWatchHours()
   renderFocusLog()
   loadTodayReflect()
   renderPlan()
