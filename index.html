@@ -27,10 +27,11 @@ body::after{content:'';position:fixed;inset:0;opacity:.028;pointer-events:none;z
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")}
 #app{display:flex;flex-direction:column;height:100%;height:100dvh;max-width:480px;margin:0 auto}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes scaleIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
-@keyframes checkPop{0%{transform:scale(1)}50%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes checkPop{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 /* HEADER */
 #hdr{padding:12px 18px 10px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
@@ -45,23 +46,41 @@ body::after{content:'';position:fixed;inset:0;opacity:.028;pointer-events:none;z
 /* MAIN */
 #main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .tab-pane{display:none;padding:16px 16px calc(16px + var(--sb))}
-.tab-pane.active{display:block;animation:fadeUp .28s cubic-bezier(.4,0,.2,1)}
+.tab-pane.active{display:block;animation:fadeUp .3s cubic-bezier(.4,0,.2,1)}
 
 /* GREETING */
-.greeting{padding:6px 0 18px}
-.greeting-date{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
-.greeting-name{font-size:34px;font-weight:800;letter-spacing:-.5px;line-height:1.1;margin-bottom:12px}
+.greeting{padding:4px 0 16px}
+.greeting-date{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.greeting-name{font-size:32px;font-weight:800;letter-spacing:-.5px;line-height:1.1;margin-bottom:10px}
 .greeting-badges{display:flex;gap:7px;flex-wrap:wrap}
 .g-badge{background:var(--card);border:1px solid var(--border);border-radius:100px;font-size:11px;font-weight:600;padding:4px 12px;color:var(--text2)}
 .g-badge.hot{background:var(--accent-dim);border-color:var(--accent);color:var(--accent-l)}
+
+/* QUOTE CARD */
+.quote-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:10px;
+  border-left:3px solid var(--accent);animation:scaleIn .25s cubic-bezier(.4,0,.2,1)}
+.quote-en{font-size:15px;font-weight:600;line-height:1.5;color:var(--text);margin-bottom:6px}
+.quote-zh{font-size:13px;color:var(--text2);line-height:1.5}
+
+/* MANIFESTATION CARD */
+.manifest-card{background:var(--accent-dim);border:1px solid var(--accent);border-radius:14px;padding:16px;margin-bottom:10px;animation:scaleIn .3s cubic-bezier(.4,0,.2,1)}
+.manifest-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-l);margin-bottom:8px}
+.manifest-text{font-size:14px;line-height:1.7;color:var(--text);font-weight:500}
+.manifest-textarea{background:transparent;border:none;color:var(--text);font-family:inherit;font-size:14px;
+  line-height:1.7;width:100%;outline:none;resize:none;padding:0;font-weight:500}
 
 /* CARDS */
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px;animation:scaleIn .22s cubic-bezier(.4,0,.2,1)}
 .card-title{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
 
+/* GOALS SNAPSHOT */
+.goal-snap-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.goal-snap-label{font-size:13px;font-weight:600}
+.goal-snap-val{font-size:13px;color:var(--text2)}
+
 /* PROGRESS */
 .prog-bar{height:4px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:4px}
-.prog-fill{height:100%;border-radius:3px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.prog-fill{height:100%;border-radius:3px;transition:width .6s cubic-bezier(.4,0,.2,1)}
 
 /* INPUTS */
 textarea,input[type=text],input[type=number],input[type=date],select{
@@ -90,7 +109,7 @@ textarea{resize:none;line-height:1.6}
 .check-box{width:24px;height:24px;border:2px solid var(--border);border-radius:8px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;cursor:pointer;
   transition:all .2s cubic-bezier(.4,0,.2,1);-webkit-tap-highlight-color:transparent}
-.check-box.done{background:var(--green);border-color:var(--green);animation:checkPop .25s ease}
+.check-box.done{background:var(--green);border-color:var(--green);animation:checkPop .28s ease}
 .check-box.done::after{content:'✓';color:#fff;font-size:13px;font-weight:800}
 .check-label{font-size:14px;flex:1;transition:all .2s}
 .check-label.done{text-decoration:line-through;color:var(--muted)}
@@ -104,8 +123,7 @@ textarea{resize:none;line-height:1.6}
 .move-item{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--border)}
 .move-item:last-child{border-bottom:none}
 .move-num{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;
-  font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;margin-top:1px}
+  font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 
 /* PIPELINE */
 .stage-section{margin-bottom:14px}
@@ -119,92 +137,74 @@ textarea{resize:none;line-height:1.6}
 
 /* FOCUS TIMER */
 .dur-btns{display:flex;gap:8px;margin-bottom:14px}
-.dur-btn{flex:1;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--surface);
-  color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;
-  transition:all .2s;-webkit-tap-highlight-color:transparent}
-.dur-btn.active{background:var(--purple);border-color:var(--purple);color:#fff}
-.timer-display{text-align:center;padding:20px 0}
-.timer-time{font-size:68px;font-weight:800;letter-spacing:-2px;font-variant-numeric:tabular-nums;
+.dur-btn{flex:1;padding:9px;border-radius:10px;border:1px solid var(--border);background:var(--surface);
+  color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent}
+.dur-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.timer-display{text-align:center;padding:22px 0}
+.timer-time{font-size:70px;font-weight:800;letter-spacing:-3px;font-variant-numeric:tabular-nums;
   line-height:1;color:var(--text);transition:color .3s}
-.timer-time.running{color:var(--purple-l)}
-.timer-label{font-size:11px;color:var(--muted);margin-top:6px;letter-spacing:.1em;text-transform:uppercase}
+.timer-time.running{color:var(--accent-l)}
+.timer-label{font-size:11px;color:var(--muted);margin-top:6px;letter-spacing:.12em;text-transform:uppercase}
 .timer-controls{display:flex;gap:8px;justify-content:center;margin-top:14px}
 
 /* TASK ROUTER */
 .router-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.router-btn{padding:14px 8px;border-radius:10px;border:1px solid var(--border);background:var(--surface);
+.router-btn{padding:15px 8px;border-radius:12px;border:1px solid var(--border);background:var(--surface);
   color:var(--text);font-size:13px;font-weight:600;cursor:pointer;text-align:center;
-  transition:all .2s;-webkit-tap-highlight-color:transparent;line-height:1.4}
-.router-btn:active{transform:scale(.97)}
+  transition:all .2s;-webkit-tap-highlight-color:transparent;line-height:1.4;font-family:inherit}
+.router-btn:active{transform:scale(.96)}
 .router-btn.do{border-color:var(--green);color:var(--green)}
 .router-btn.delegate{border-color:var(--blue);color:var(--blue)}
 .router-btn.automate{border-color:var(--purple);color:var(--purple)}
-.router-btn.delete{border-color:var(--red);color:var(--red)}
+.router-btn.delete{border-color:var(--muted);color:var(--muted)}
 
 /* SLIDERS */
 .slider-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .slider-lbl{font-size:13px;color:var(--muted);min-width:55px}
 .slider-val{font-size:14px;font-weight:700;min-width:20px;text-align:center}
-input[type=range]{flex:1;-webkit-appearance:none;height:4px;background:var(--border);
-  border-radius:2px;outline:none;padding:0;border:none}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;
-  border-radius:50%;background:var(--purple);cursor:pointer}
+input[type=range]{flex:1;-webkit-appearance:none;height:4px;background:var(--border);border-radius:2px;outline:none;padding:0;border:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer}
 
 /* WEEK GRID */
-.week-grid{display:grid;gap:6px}
+.week-grid{display:grid;gap:8px}
 .week-day{display:flex;gap:8px;align-items:flex-start}
 .day-lbl{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);min-width:28px;padding-top:11px}
-.day-lbl.today{color:var(--purple-l)}
+.day-lbl.today{color:var(--accent-l)}
 
 /* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;
-  align-items:flex-end;justify-content:center}
-.modal-overlay.open{display:flex}
-.modal-sheet{background:var(--card);border-top-left-radius:20px;border-top-right-radius:20px;
-  padding:20px 16px calc(20px + var(--sb));width:100%;max-width:480px;max-height:85vh;overflow-y:auto}
-.modal-title{font-size:16px;font-weight:700;margin-bottom:14px}
-.field{margin-bottom:10px}
-.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:3px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:100;
+  align-items:flex-end;justify-content:center;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex;animation:fadeIn .2s ease}
+.modal-sheet{background:var(--card);border-top-left-radius:22px;border-top-right-radius:22px;
+  padding:20px 18px calc(20px + var(--sb));width:100%;max-width:480px;max-height:85vh;overflow-y:auto;
+  border-top:1px solid var(--border)}
+.modal-title{font-size:17px;font-weight:700;margin-bottom:16px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 
 /* BOTTOM NAV */
-#nav{background:var(--surface);border-top:1px solid var(--border);display:flex;
-  flex-shrink:0;padding-bottom:var(--sb)}
+#nav{background:var(--surface);border-top:1px solid var(--border);display:flex;flex-shrink:0;padding-bottom:var(--sb)}
 .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:2px;padding:7px 2px;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  gap:3px;padding:8px 2px;cursor:pointer;-webkit-tap-highlight-color:transparent;
   border:none;background:transparent;color:var(--muted);font-size:9px;font-weight:700;
-  text-transform:uppercase;letter-spacing:.05em;transition:color .2s}
-.nav-btn.active{color:var(--purple-l)}
+  text-transform:uppercase;letter-spacing:.06em;transition:color .2s;font-family:inherit}
+.nav-btn.active{color:var(--accent-l)}
 .nav-icon{font-size:20px;line-height:1.1}
 
 /* UTILS */
-.chip{background:var(--surface);border:1px solid var(--border);border-radius:100px;
-  font-size:11px;padding:2px 10px;color:var(--muted)}
-.chip.on{background:var(--purple);border-color:var(--purple);color:#fff}
-.log-item{display:flex;justify-content:space-between;align-items:center;
-  padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.chip{background:var(--surface);border:1px solid var(--border);border-radius:100px;font-size:11px;padding:3px 11px;color:var(--muted)}
+.chip.on{background:var(--accent-dim);border-color:var(--accent);color:var(--accent-l)}
+.log-item{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
 .log-item:last-child{border-bottom:none}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
-.stat-box{background:var(--card);border:1px solid var(--border);border-radius:10px;
-  padding:12px 8px;text-align:center}
-.stat-val{font-size:22px;font-weight:800;line-height:1.1}
-.stat-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
-.flash{position:fixed;top:16px;left:50%;transform:translateX(-50%);
-  background:var(--green);color:#fff;padding:8px 20px;border-radius:100px;
-  font-size:13px;font-weight:600;z-index:200;opacity:0;
-  transition:opacity .2s;pointer-events:none;white-space:nowrap}
+.flash{position:fixed;top:20px;left:50%;transform:translateX(-50%);
+  background:var(--green);color:#fff;padding:9px 22px;border-radius:100px;
+  font-size:13px;font-weight:600;z-index:200;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
 .flash.show{opacity:1}
 .divider{height:1px;background:var(--border);margin:10px 0}
-.t-muted{color:var(--muted)}
-.t-sm{font-size:13px}
-.t-xs{font-size:11px}
-.t-bold{font-weight:700}
-.mt2{margin-top:8px}
-.mt3{margin-top:12px}
-.flex{display:flex}
-.ai-c{align-items:center}
-.jb{justify-content:space-between}
-.g2{gap:8px}
-.w-full{width:100%}
+.t-muted{color:var(--muted)}.t-2{color:var(--text2)}.t-sm{font-size:13px}.t-xs{font-size:11px}
+.t-bold{font-weight:700}.t-accent{color:var(--accent-l)}
+.mt2{margin-top:8px}.mt3{margin-top:12px}
+.flex{display:flex}.ai-c{align-items:center}.jb{justify-content:space-between}.g2{gap:8px}.w-full{width:100%}
 </style>
 </head>
 <body>
@@ -228,34 +228,37 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 
 <!-- TODAY -->
 <div id="tab-today" class="tab-pane active">
-  <div class="stat-grid">
-    <div class="stat-box">
-      <div id="stat-b20" class="stat-val" style="color:var(--amber)">…</div>
-      <div class="stat-lbl">To B20</div>
-    </div>
-    <div class="stat-box">
-      <div id="stat-abroad" class="stat-val" style="color:var(--blue)">…</div>
-      <div class="stat-lbl">To Abroad</div>
-    </div>
-    <div class="stat-box">
-      <div id="stat-pipeline" class="stat-val" style="color:var(--green)">$0</div>
-      <div class="stat-lbl">Pipeline</div>
+
+  <!-- Greeting -->
+  <div class="greeting">
+    <div class="greeting-date" id="greeting-date">TODAY</div>
+    <div class="greeting-name">Hi Creator</div>
+    <div class="greeting-badges">
+      <span class="g-badge hot" id="g-b20-badge">…d to B20</span>
+      <span class="g-badge" id="g-sprint-badge">Sprint W1</span>
+      <span class="g-badge" id="g-pipeline-badge">$0 closed</span>
     </div>
   </div>
 
+  <!-- Daily Quote -->
+  <div class="quote-card">
+    <div class="quote-en" id="quote-en">…</div>
+    <div class="quote-zh" id="quote-zh">…</div>
+  </div>
+
+  <!-- Manifestation -->
+  <div class="manifest-card">
+    <div class="manifest-label">I Am Becoming</div>
+    <textarea class="manifest-textarea" id="manifest-input" rows="6"></textarea>
+  </div>
+
+  <!-- Goals Snapshot -->
   <div class="card">
-    <div class="card-title">Identity</div>
-    <textarea id="identity-input" rows="2" placeholder="I am becoming…"></textarea>
+    <div class="card-title">Goals Snapshot</div>
+    <div id="goals-snap-content"></div>
   </div>
 
-  <div class="card">
-    <div class="flex ai-c jb" style="margin-bottom:10px">
-      <span class="card-title" style="margin-bottom:0">Morning Routine</span>
-      <span id="morning-chip" class="chip">0/6</span>
-    </div>
-    <div id="morning-list"></div>
-  </div>
-
+  <!-- Top 3 Today -->
   <div class="card">
     <div class="flex ai-c jb" style="margin-bottom:10px">
       <span class="card-title" style="margin-bottom:0">Top 3 Today</span>
@@ -264,6 +267,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     <div id="top3-list"></div>
   </div>
 
+  <!-- Content Checklist -->
   <div class="card">
     <div class="flex ai-c jb" style="margin-bottom:10px">
       <span class="card-title" style="margin-bottom:0">Content Today</span>
@@ -272,10 +276,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     <div id="content-today-list"></div>
   </div>
 
+  <!-- Morning Routine -->
   <div class="card">
-    <div class="card-title">Ventures</div>
-    <div id="vent-snap"></div>
+    <div class="flex ai-c jb" style="margin-bottom:10px">
+      <span class="card-title" style="margin-bottom:0">Morning Routine</span>
+      <span id="morning-chip" class="chip">0/6</span>
+    </div>
+    <div id="morning-list"></div>
   </div>
+
 </div>
 
 <!-- GOALS -->
@@ -430,8 +439,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     <textarea id="reflect-content" rows="4" placeholder="What happened today? What did I learn? What would I do differently?"></textarea>
   </div>
 
-  <div class="card" style="border-color:rgba(239,68,68,.3)">
-    <div class="card-title" style="color:var(--red)">Did I push past my limit today?</div>
+  <div class="card" style="border-color:rgba(232,67,45,.3)">
+    <div class="card-title" style="color:var(--accent-l)">Did I push past my limit today?</div>
     <div class="flex g2 mt2">
       <button id="limit-yes" class="btn btn-secondary btn-full" onclick="setLimit(true)">Yes — I did</button>
       <button id="limit-no" class="btn btn-secondary btn-full" onclick="setLimit(false)">Not today</button>
@@ -599,8 +608,41 @@ const CONTENT_CHECKS = [
 
 const WATCH_HOURS_GOAL = 4000
 const WATCH_HOURS_START = 1800
-const SUBS_CURRENT = 1100
-const SUBS_GOAL = 1000
+
+const MANIFEST_DEFAULT = `I am AVA. I am fully free, fully independent, and financially unstoppable. By November 2, 2026, I earn $20,000 every month through my own work. I depend on no one. I built this alone, from nothing, before I turned 20. Every day I create, I grow, I become more of who I already am.`
+
+const DAILY_QUOTES = [
+  { en: "The cave you fear to enter holds the treasure you seek.", zh: "你所恐惧的洞穴，藏着你渴望的宝藏。" },
+  { en: "Done is better than perfect. Ship it.", zh: "完成胜于完美，先发出去。" },
+  { en: "Your future self is watching you right now.", zh: "未来的你，正在凝视着此刻的你。" },
+  { en: "One post. One video. One booking. That's how it starts.", zh: "一篇帖子，一个视频，一次预订——一切从此开始。" },
+  { en: "Discipline is choosing what you want most over what you want now.", zh: "自律，是在即时欲望与终极目标之间做出选择。" },
+  { en: "The best time to start was yesterday. The next best time is now.", zh: "最好的时机是昨天，其次是现在。" },
+  { en: "Fear is just excitement without breath.", zh: "恐惧不过是还没学会呼吸的兴奋。" },
+  { en: "AVA doesn't wait. AVA executes.", zh: "AVA不等待，AVA只执行。" },
+  { en: "Small daily habits compound into extraordinary outcomes.", zh: "每日微小习惯，日积月累成就非凡。" },
+  { en: "You don't need more time. You need more focus.", zh: "你缺的不是时间，而是专注。" },
+  { en: "The algorithm rewards those who show up every day.", zh: "算法只青睐每天都出现的人。" },
+  { en: "Clarity comes from action, not from thinking.", zh: "清晰来自行动，而非思考。" },
+  { en: "Every creator you admire once had zero followers.", zh: "你崇拜的每一位创作者，都曾经是零粉丝。" },
+  { en: "You are one video away from everything changing.", zh: "你距离改变一切，只差一个视频。" },
+  { en: "Stop preparing to start. Start.", zh: "别再为开始做准备了。就现在，开始。" },
+  { en: "Independence is built, not given.", zh: "独立是争取来的，不是给予的。" },
+  { en: "The compound effect doesn't care about your mood.", zh: "复利效应不在乎你的心情。" },
+  { en: "Money follows value. Create value first.", zh: "金钱追随价值，先创造价值。" },
+  { en: "You have what it takes. You're just scared to find out.", zh: "你有足够的能力，只是还不敢去验证。" },
+  { en: "Consistency beats talent when talent doesn't show up.", zh: "当天赋缺席时，坚持就是最强的天赋。" },
+  { en: "One year from now, you'll wish you started today.", zh: "一年后的你，会感谢今天行动的自己。" },
+  { en: "Build something people want. The market will find you.", zh: "打造人们真正需要的东西，市场自然会找到你。" },
+  { en: "Your breakthrough is on the other side of your discomfort.", zh: "你的突破，就在不适的另一端等你。" },
+  { en: "Be the person you needed when you were younger.", zh: "成为那个年轻时的你所需要的人。" },
+  { en: "Revenue is the report card. Start earning.", zh: "收入是成绩单，开始赚起来吧。" },
+  { en: "Nothing changes if nothing changes.", zh: "不改变，什么都不会改变。" },
+  { en: "You don't rise to your goals. You fall to the level of your systems.", zh: "你不会达到目标的高度，只会落到系统的水平。" },
+  { en: "Every day you don't post, someone else takes your spot.", zh: "你不发内容的每一天，都是别人抢占你位置的一天。" },
+  { en: "The world rewards motion, not intention.", zh: "世界奖励行动，而不是意图。" },
+  { en: "B20. November 2. Non-negotiable.", zh: "二十岁生日。十一月二日。不可动摇。" },
+]
 
 const STAGES = ['Prospect','Messaged','Replied','Proposal','Closed']
 const STAGE_COLORS = { Prospect:'#7c3aed', Messaged:'#3b82f6', Replied:'#f59e0b', Proposal:'#ea580c', Closed:'#10b981' }
@@ -648,20 +690,70 @@ function renderHeader() {
   document.getElementById('sprint-lbl').textContent = 'Sprint W'+wk
   document.getElementById('sprint-days').textContent= 'Day '+sprintDay+' / '+sprintTotal
   document.getElementById('sprint-fill').style.width= pct+'%'
-  document.getElementById('stat-b20').textContent   = b20d+'d'
-  document.getElementById('stat-abroad').textContent= Math.max(0,dayDiff(ABROAD_DL,now))+'d'
+
+  const DAYS   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+  const gd = document.getElementById('greeting-date')
+  if (gd) gd.textContent = DAYS[now.getDay()] + ' · ' + MONTHS[now.getMonth()] + ' ' + now.getDate()
+  const gb = document.getElementById('g-b20-badge')
+  if (gb) gb.textContent = b20d + 'd to B20'
+  const gs = document.getElementById('g-sprint-badge')
+  if (gs) gs.textContent = 'Sprint W' + wk
 }
 
 // ── TODAY ────────────────────────────────────────────────────────────────────
 function renderToday() {
-  const id_el = document.getElementById('identity-input')
-  id_el.value = S.get('identity','')
-  id_el.onblur = e => S.set('identity', e.target.value)
-
-  renderMorning()
+  renderQuote()
+  renderManifestation()
+  renderGoalsSnapshot()
   renderTop3()
   renderContentToday()
-  renderVentSnap()
+  renderMorning()
+}
+
+function renderQuote() {
+  const doy = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000)
+  const q = DAILY_QUOTES[doy % DAILY_QUOTES.length]
+  const en = document.getElementById('quote-en')
+  const zh = document.getElementById('quote-zh')
+  if (en) en.textContent = '“' + q.en + '”'
+  if (zh) zh.textContent = q.zh
+}
+
+function renderManifestation() {
+  const el = document.getElementById('manifest-input')
+  if (!el) return
+  el.value = S.get('manifestation', MANIFEST_DEFAULT)
+  el.style.height = 'auto'
+  el.style.height = el.scrollHeight + 'px'
+  el.oninput = () => { el.style.height = 'auto'; el.style.height = el.scrollHeight + 'px' }
+  el.onblur  = () => S.set('manifestation', el.value)
+}
+
+function renderGoalsSnapshot() {
+  const now = new Date()
+  const currentMonth = now.toISOString().slice(0, 7)
+  const mt = MONTHLY_TARGETS.find(m => m.month === currentMonth) || MONTHLY_TARGETS[0]
+  const income = S.get('monthly_income', {})
+  const actual = income[currentMonth] || 0
+  const pct = Math.min(100, actual / mt.target * 100)
+  const hrs = S.get('watch_hours', WATCH_HOURS_START)
+  const hrsPct = Math.min(100, hrs / WATCH_HOURS_GOAL * 100)
+  const hrsLeft = Math.max(0, WATCH_HOURS_GOAL - hrs)
+  const el = document.getElementById('goals-snap-content')
+  if (!el) return
+  el.innerHTML = `
+    <div class="goal-snap-row">
+      <span class="goal-snap-label">${mt.label} Income</span>
+      <span class="goal-snap-val">$${actual.toLocaleString()} / $${mt.target.toLocaleString()}</span>
+    </div>
+    <div class="prog-bar" style="margin-bottom:14px"><div class="prog-fill" style="width:${pct}%;background:var(--accent)"></div></div>
+    <div class="goal-snap-row">
+      <span class="goal-snap-label">Watch Hours</span>
+      <span class="goal-snap-val">${hrs.toLocaleString()} / 4,000</span>
+    </div>
+    <div class="prog-bar"><div class="prog-fill" style="width:${hrsPct}%;background:var(--blue)"></div></div>
+    <div class="t-xs t-muted" style="margin-top:6px">${hrs >= WATCH_HOURS_GOAL ? '✓ Monetization unlocked!' : hrsLeft + ' hrs to monetize · @yakjatama'}</div>`
 }
 
 function renderMorning() {
@@ -743,18 +835,10 @@ function toggleContent(id) {
 }
 
 function renderVentSnap() {
-  const pcts = S.get('vent_pct', {})
-  document.getElementById('vent-snap').innerHTML = VENTURES.map(v=>{
-    const p = pcts[v.id]||0
-    return `<div class="vent-row">
-      <span class="vent-name">${v.name}</span>
-      <div class="prog-bar" style="flex:1"><div class="prog-fill" style="width:${p}%;background:${v.col}"></div></div>
-      <span class="vent-pct">${p}%</span>
-    </div>`
-  }).join('')
   const closed = S.get('pipeline',[]).filter(c=>c.stage==='Closed')
   const total  = closed.reduce((s,c)=>s+(c.value||0),0)
-  document.getElementById('stat-pipeline').textContent = '$'+total.toLocaleString()
+  const pb = document.getElementById('g-pipeline-badge')
+  if (pb) pb.textContent = '$' + total.toLocaleString() + ' closed'
 }
 
 // ── GOALS ────────────────────────────────────────────────────────────────────
@@ -779,7 +863,7 @@ function renderSprintDetail() {
       <span class="t-sm t-bold">Week ${wk} of ${SPRINT_WEEKS}</span>
       <span class="chip">${left}d left</span>
     </div>
-    <div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:var(--purple)"></div></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:var(--accent)"></div></div>
     <div class="t-xs t-muted" style="margin-top:6px">Day ${sprintDay} of ${total} · ${pct}% complete</div>
     <div class="t-xs t-muted" style="margin-top:3px">May 11 → Aug 3, 2026 · B20: Nov 2</div>`
 }
@@ -853,10 +937,10 @@ function renderMonthlyRoad() {
     const pct    = Math.min(100, (actual / m.target) * 100)
     const isCurrent = m.month === currentMonth
     const isPast    = m.month < currentMonth
-    const barColor  = isPast && actual >= m.target ? 'var(--green)' : isCurrent ? 'var(--purple)' : 'var(--border)'
-    return `<div style="margin-bottom:${isCurrent?14:10}px${isCurrent?';background:rgba(124,58,237,.08);border-radius:10px;padding:10px;margin-left:-4px;margin-right:-4px':''}">
+    const barColor  = isPast && actual >= m.target ? 'var(--green)' : isCurrent ? 'var(--accent)' : 'var(--border)'
+    return `<div style="margin-bottom:${isCurrent?14:10}px${isCurrent?';background:var(--accent-dim);border-radius:10px;padding:10px;margin-left:-4px;margin-right:-4px':''}">
       <div class="flex ai-c jb" style="margin-bottom:4px">
-        <span class="t-sm t-bold" style="color:${isCurrent?'var(--purple-l)':isPast?'var(--muted)':'var(--text)'}">${m.label}${isCurrent?' ← now':''}</span>
+        <span class="t-sm t-bold" style="color:${isCurrent?'var(--accent-l)':isPast?'var(--muted)':'var(--text)'}">${m.label}${isCurrent?' ← now':''}</span>
         <div class="flex ai-c g2">
           <span class="t-xs t-muted">↑$${m.target.toLocaleString()}</span>
           <input type="number" value="${actual||''}" placeholder="0"
@@ -877,6 +961,7 @@ function saveMonthIncome(month, val) {
   income[month] = parseFloat(val) || 0
   S.set('monthly_income', income)
   renderMonthlyRoad()
+  renderGoalsSnapshot()
 }
 
 function renderWatchHours() {
@@ -922,7 +1007,7 @@ function renderPipeline() {
           ${nextStage
             ?`<button class="btn btn-primary btn-sm" onclick="advanceContact('${c.id}')">→ ${nextStage}</button>`
             :'<span class="chip on">Won ✓</span>'}
-          <button class="btn btn-ghost btn-sm" style="color:var(--red)" onclick="removeContact('${c.id}')">Remove</button>
+          <button class="btn btn-ghost btn-sm" style="color:var(--accent)" onclick="removeContact('${c.id}')">Remove</button>
         </div>`
       sec.appendChild(card)
     })
@@ -930,7 +1015,8 @@ function renderPipeline() {
   })
   const total = contacts.filter(c=>c.stage==='Closed').reduce((s,c)=>s+(c.value||0),0)
   document.getElementById('pipeline-total').textContent = '$'+total.toLocaleString()
-  document.getElementById('stat-pipeline').textContent  = '$'+total.toLocaleString()
+  const pb = document.getElementById('g-pipeline-badge')
+  if (pb) pb.textContent = '$' + total.toLocaleString() + ' closed'
 }
 
 function addContact() {
@@ -1033,7 +1119,7 @@ let _limitPushed = null
 function setLimit(val) {
   _limitPushed = val
   const y=document.getElementById('limit-yes'), n=document.getElementById('limit-no')
-  y.style.cssText = val?'background:var(--red);color:#fff;border-color:var(--red)':''
+  y.style.cssText = val?'background:var(--accent);color:#fff;border-color:var(--accent)':''
   n.style.cssText = !val?'background:var(--surface);border-color:var(--border)':''
 }
 
@@ -1065,7 +1151,7 @@ function renderReflectHistory() {
       <span class="t-xs t-muted">Mood ${e.mood}/10 · Energy ${e.energy}/10</span>
     </div>
     ${e.wins.length?`<div class="t-xs t-muted">Wins: ${e.wins.join(', ')}</div>`:''}
-    ${e.limitPushed!==null?`<div class="t-xs" style="color:${e.limitPushed?'var(--red)':'var(--muted)'}">${e.limitPushed?'Pushed past limit':'Did not push'}</div>`:''}
+    ${e.limitPushed!==null?`<div class="t-xs" style="color:${e.limitPushed?'var(--accent-l)':'var(--muted)'}">${e.limitPushed?'Pushed past limit':'Did not push'}</div>`:''}
   </div>`).join('')
 }
 
@@ -1090,7 +1176,7 @@ function renderLessonLog() {
   el.innerHTML = lessons.slice(0, 5).map(l => `
     <div style="padding:8px 0;border-top:1px solid var(--border)">
       <div class="flex ai-c jb">
-        <span class="t-xs t-bold" style="color:var(--purple-l)">${l.source || 'Note'}</span>
+        <span class="t-xs t-bold" style="color:var(--accent-l)">${l.source || 'Note'}</span>
         <span class="t-xs t-muted">${l.date}</span>
       </div>
       <div class="t-sm" style="margin-top:3px">${l.text}</div>
@@ -1155,8 +1241,8 @@ function updateFundDisplay(fs,ft) {
 function init() {
   renderHeader()
   renderToday()
+  renderVentSnap()
   renderGoals()
-  renderWatchHours()
   renderFocusLog()
   renderLessonLog()
   loadTodayReflect()
