@@ -409,6 +409,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
   </div>
 
   <div class="card">
+    <div class="flex ai-c jb" style="margin-bottom:10px">
+      <span class="card-title" style="margin-bottom:0">Lesson Captured</span>
+      <button class="btn btn-ghost btn-sm" onclick="saveLesson()">Save</button>
+    </div>
+    <div class="field"><input type="text" id="lesson-source" placeholder="Source — video, person, article…" /></div>
+    <textarea id="lesson-text" rows="3" placeholder="What's the key insight? How does it apply to AVA?"></textarea>
+    <div id="lesson-log" style="margin-top:10px"></div>
+  </div>
+
+  <div class="card">
     <div class="card-title">Reflection</div>
     <textarea id="reflect-content" rows="4" placeholder="What happened today? What did I learn? What would I do differently?"></textarea>
   </div>
@@ -610,7 +620,7 @@ function switchTab(name, btn) {
   document.getElementById('tab-'+name).classList.add('active')
   btn.classList.add('active')
   if (name==='pipeline') renderPipeline()
-  if (name==='reflect')  renderReflectHistory()
+  if (name==='reflect')  { renderReflectHistory(); renderLessonLog() }
   if (name==='goals')    renderGoals()
   if (name==='plan')     renderPlan()
 }
@@ -1052,6 +1062,34 @@ function renderReflectHistory() {
   </div>`).join('')
 }
 
+function saveLesson() {
+  const source = document.getElementById('lesson-source').value.trim()
+  const text   = document.getElementById('lesson-text').value.trim()
+  if (!text) return
+  const lessons = S.get('lessons', [])
+  lessons.unshift({ source, text, date: today(), time: new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) })
+  S.set('lessons', lessons.slice(0, 50))
+  document.getElementById('lesson-source').value = ''
+  document.getElementById('lesson-text').value   = ''
+  renderLessonLog()
+  flash('Lesson saved ✓')
+}
+
+function renderLessonLog() {
+  const lessons = S.get('lessons', [])
+  const el = document.getElementById('lesson-log')
+  if (!el) return
+  if (!lessons.length) { el.innerHTML = '<div class="t-xs t-muted">No lessons yet — capture your first insight.</div>'; return }
+  el.innerHTML = lessons.slice(0, 5).map(l => `
+    <div style="padding:8px 0;border-top:1px solid var(--border)">
+      <div class="flex ai-c jb">
+        <span class="t-xs t-bold" style="color:var(--purple-l)">${l.source || 'Note'}</span>
+        <span class="t-xs t-muted">${l.date}</span>
+      </div>
+      <div class="t-sm" style="margin-top:3px">${l.text}</div>
+    </div>`).join('')
+}
+
 function loadTodayReflect() {
   const entry = (S.get('reflections',[])||[]).find(e=>e.date===today()); if(!entry) return
   document.getElementById('mood-s').value = entry.mood
@@ -1113,6 +1151,7 @@ function init() {
   renderGoals()
   renderWatchHours()
   renderFocusLog()
+  renderLessonLog()
   loadTodayReflect()
   renderPlan()
   setInterval(renderHeader, 60000)
