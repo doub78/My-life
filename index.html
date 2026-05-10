@@ -274,6 +274,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 <!-- GOALS -->
 <div id="tab-goals" class="tab-pane">
   <div class="card">
+    <div class="flex ai-c jb" style="margin-bottom:10px">
+      <span class="card-title" style="margin-bottom:0">Road to $20K · Nov 2</span>
+      <span id="monthly-total-chip" class="chip">$0 earned</span>
+    </div>
+    <div id="monthly-road"></div>
+  </div>
+
+  <div class="card">
     <div class="card-title">12-Week Sprint</div>
     <div id="sprint-detail"></div>
   </div>
@@ -442,14 +450,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
   </div>
 
   <div class="card">
-    <div class="card-title">School Fund Target</div>
+    <div class="card-title">Singapore Fund</div>
     <div class="field">
       <label>Saved so far ($)</label>
       <input type="number" id="fund-saved" placeholder="0" oninput="updateFund()" />
     </div>
     <div class="field">
       <label>Target ($)</label>
-      <input type="number" id="fund-target" placeholder="20000" oninput="updateFund()" />
+      <input type="number" id="fund-target" placeholder="25000" oninput="updateFund()" />
     </div>
     <div id="fund-bar-wrap" style="margin-top:4px">
       <div class="flex ai-c jb" style="margin-bottom:4px">
@@ -539,12 +547,31 @@ const MORNING = [
 ]
 
 const MOVES_DEFAULTS = [
-  'Post content daily — document the journey publicly',
-  'Reactivate @evren-updated — publish first video',
-  'Hit 4,000 watch hours on @yakjatama (220 left)',
-  'Ship first digital product or app MVP',
-  'Reach first $1,000 month from content + product',
+  'Post Thai video tonight — @yakjatama minimum 3x/week from now',
+  'Post 3 design samples on Facebook — land first paid client this week',
+  'Charge for design work — minimum ฿5,000/project, never work for free',
+  'Hit 4,000 watch hours on @yakjatama — 2,200 hours left, post more',
+  'Activate one Chinese connection — find 1 product to source and test',
 ]
+
+const MONTHLY_TARGETS = [
+  { month:'2026-05', label:'May',  target:500,   focus:'First design client · @yakjatama 3x/week · TikTok daily' },
+  { month:'2026-06', label:'Jun',  target:2000,  focus:'yakjatama monetized · 3 design clients · launch first product' },
+  { month:'2026-07', label:'Jul',  target:5000,  focus:'Scale design services · product selling · pursue brand deals' },
+  { month:'2026-08', label:'Aug',  target:10000, focus:'E-commerce live · brand deals incoming · all channels growing' },
+  { month:'2026-09', label:'Sep',  target:15000, focus:'Systems running · Singapore savings sprint · scale up' },
+  { month:'2026-10', label:'Oct',  target:20000, focus:'Hit $20K · save for Singapore · B20 countdown' },
+]
+
+const DEFAULT_WEEK_PLAN = {
+  Mon: 'TikTok + film @yakjatama · Design client work · Japanese 19:30',
+  Tue: 'TikTok + edit @yakjatama · Design outreach · Japanese 19:30',
+  Wed: 'TikTok + post @yakjatama · Client delivery · Japanese 19:30',
+  Thu: 'TikTok + @evren-updated work · Review week numbers',
+  Fri: 'TikTok + batch content · Chinese connections research',
+  Sat: 'TikTok + product work · Chinese sourcing · week review',
+  Sun: 'Plan next week · Content batch · recharge',
+}
 
 const CONTENT_CHECKS = [
   { id:'tiktok', label:'TikTok posted' },
@@ -713,6 +740,7 @@ function renderVentSnap() {
 
 // ── GOALS ────────────────────────────────────────────────────────────────────
 function renderGoals() {
+  renderMonthlyRoad()
   renderSprintDetail()
   renderWatchHours()
   renderMoves()
@@ -790,6 +818,47 @@ function saveVentures() {
 }
 
 function saveIntention() { S.set('week_intention', document.getElementById('week-intention').value); flash() }
+
+function renderMonthlyRoad() {
+  const income = S.get('monthly_income', {})
+  const currentMonth = new Date().toISOString().slice(0,7)
+  let totalEarned = 0
+  MONTHLY_TARGETS.forEach(m => { totalEarned += income[m.month] || 0 })
+  const chip = document.getElementById('monthly-total-chip')
+  if (chip) chip.textContent = '$' + totalEarned.toLocaleString() + ' earned'
+
+  const el = document.getElementById('monthly-road')
+  if (!el) return
+  el.innerHTML = MONTHLY_TARGETS.map(m => {
+    const actual = income[m.month] || 0
+    const pct    = Math.min(100, (actual / m.target) * 100)
+    const isCurrent = m.month === currentMonth
+    const isPast    = m.month < currentMonth
+    const barColor  = isPast && actual >= m.target ? 'var(--green)' : isCurrent ? 'var(--purple)' : 'var(--border)'
+    return `<div style="margin-bottom:${isCurrent?14:10}px${isCurrent?';background:rgba(124,58,237,.08);border-radius:10px;padding:10px;margin-left:-4px;margin-right:-4px':''}">
+      <div class="flex ai-c jb" style="margin-bottom:4px">
+        <span class="t-sm t-bold" style="color:${isCurrent?'var(--purple-l)':isPast?'var(--muted)':'var(--text)'}">${m.label}${isCurrent?' ← now':''}</span>
+        <div class="flex ai-c g2">
+          <span class="t-xs t-muted">↑$${m.target.toLocaleString()}</span>
+          <input type="number" value="${actual||''}" placeholder="0"
+            style="width:68px;font-size:12px;padding:3px 8px;text-align:right"
+            onchange="saveMonthIncome('${m.month}',this.value)" />
+        </div>
+      </div>
+      <div class="prog-bar" style="height:5px">
+        <div class="prog-fill" style="width:${pct}%;background:${barColor}"></div>
+      </div>
+      ${isCurrent ? `<div class="t-xs t-muted" style="margin-top:6px">${m.focus}</div>` : ''}
+    </div>`
+  }).join('')
+}
+
+function saveMonthIncome(month, val) {
+  const income = S.get('monthly_income', {})
+  income[month] = parseFloat(val) || 0
+  S.set('monthly_income', income)
+  renderMonthlyRoad()
+}
 
 function renderWatchHours() {
   const hrs  = S.get('watch_hours', WATCH_HOURS_START)
@@ -998,7 +1067,7 @@ function loadTodayReflect() {
 function renderPlan() {
   document.getElementById('offer-text').value   = S.get('my_offer','')
   document.getElementById('sprint-win').value   = S.get('sprint_win','')
-  const fs = S.get('fund_saved',0), ft = S.get('fund_target',20000)
+  const fs = S.get('fund_saved',0), ft = S.get('fund_target',25000)
   document.getElementById('fund-saved').value   = fs||''
   document.getElementById('fund-target').value  = ft||''
   updateFundDisplay(fs, ft)
@@ -1007,7 +1076,7 @@ function renderPlan() {
 
 function renderWeekGrid() {
   const days  = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
-  const plan  = S.get('week_plan',{})
+  const plan  = S.get('week_plan', DEFAULT_WEEK_PLAN)
   const dow   = (new Date().getDay()+6)%7
   document.getElementById('week-grid').innerHTML = days.map((d,i)=>`
     <div class="week-day">
