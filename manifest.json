@@ -6,8 +6,8 @@
   "scope": "/My-life/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#07070f",
-  "theme_color": "#7c3aed",
+  "background_color": "#ede0c4",
+  "theme_color": "#ede0c4",
   "icons": [
     {
       "src": "icon.svg",

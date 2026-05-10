@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#7c3aed" />
+<meta name="theme-color" content="#ede0c4" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="description" content="Life OS — Personal operating system" />
@@ -13,18 +13,20 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0d0b08;--surface:#161310;--card:#1d1914;--border:#2a2318;
-  --text:#ede4d0;--text2:#b8a880;--muted:#7a6d52;
-  --accent:#e8432d;--accent-l:#ff6347;--accent-dim:rgba(232,67,45,.12);
-  --green:#5a9e72;--amber:#c8952a;--blue:#5a8fc0;--purple:#8b5cf6;
+  --bg:#ede0c4;--surface:#f5ecda;--card:#fdf8ee;--border:#d4c49a;
+  --text:#1a1208;--text2:#604830;--muted:#907558;
+  --accent:#c93018;--accent-l:#e04428;--accent-dim:rgba(201,48,24,.1);
+  --green:#2d7048;--amber:#9a6d18;--blue:#2a6090;--purple:#6030b8;
   --sb:env(safe-area-inset-bottom,0px)
 }
 html,body{height:100%;background:var(--bg);color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text',system-ui,sans-serif;
   font-size:16px;line-height:1.5;overflow:hidden;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body::after{content:'';position:fixed;inset:0;opacity:.028;pointer-events:none;z-index:9999;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
+  background:radial-gradient(ellipse at 50% 40%, transparent 45%, rgba(140,100,40,.14) 100%)}
+body::after{content:'';position:fixed;inset:0;opacity:.075;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")}
 #app{display:flex;flex-direction:column;height:100%;height:100dvh;max-width:480px;margin:0 auto}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
@@ -189,7 +191,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
   border:none;background:transparent;color:var(--muted);font-size:9px;font-weight:700;
   text-transform:uppercase;letter-spacing:.06em;transition:color .2s;font-family:inherit}
 .nav-btn.active{color:var(--accent-l)}
-.nav-icon{font-size:20px;line-height:1.1}
+.nav-icon{width:22px;height:22px;flex-shrink:0}
 
 /* UTILS */
 .chip{background:var(--surface);border:1px solid var(--border);border-radius:100px;font-size:11px;padding:3px 11px;color:var(--muted)}
@@ -499,12 +501,40 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
 <!-- BOTTOM NAV -->
 <nav id="nav">
-  <button class="nav-btn active" onclick="switchTab('today',this)"><span class="nav-icon">☀️</span>Today</button>
-  <button class="nav-btn" onclick="switchTab('goals',this)"><span class="nav-icon">🎯</span>Goals</button>
-  <button class="nav-btn" onclick="switchTab('pipeline',this)"><span class="nav-icon">💰</span>Pipeline</button>
-  <button class="nav-btn" onclick="switchTab('focus',this)"><span class="nav-icon">⚡</span>Focus</button>
-  <button class="nav-btn" onclick="switchTab('reflect',this)"><span class="nav-icon">📖</span>Reflect</button>
-  <button class="nav-btn" onclick="switchTab('plan',this)"><span class="nav-icon">🗓</span>Plan</button>
+  <button class="nav-btn active" onclick="switchTab('today',this)">
+    <svg class="nav-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+      <circle cx="11" cy="11" r="3.5"/><line x1="11" y1="2.5" x2="11" y2="4.5"/><line x1="11" y1="17.5" x2="11" y2="19.5"/>
+      <line x1="2.5" y1="11" x2="4.5" y2="11"/><line x1="17.5" y1="11" x2="19.5" y2="11"/>
+      <line x1="5" y1="5" x2="6.4" y2="6.4"/><line x1="15.6" y1="15.6" x2="17" y2="17"/>
+      <line x1="17" y1="5" x2="15.6" y2="6.4"/><line x1="6.4" y1="15.6" x2="5" y2="17"/>
+    </svg>Today</button>
+  <button class="nav-btn" onclick="switchTab('goals',this)">
+    <svg class="nav-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+      <circle cx="11" cy="11" r="9"/><circle cx="11" cy="11" r="5.5"/>
+      <circle cx="11" cy="11" r="2" fill="currentColor" stroke="none"/>
+    </svg>Goals</button>
+  <button class="nav-btn" onclick="switchTab('pipeline',this)">
+    <svg class="nav-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2.5 4h17l-6.5 8.5V19l-4-2v-4.5z"/>
+    </svg>Leads</button>
+  <button class="nav-btn" onclick="switchTab('focus',this)">
+    <svg class="nav-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+      <circle cx="11" cy="13" r="7.5"/><polyline points="11 9.5 11 13 13.5 14.5"/>
+      <line x1="8.5" y1="2" x2="13.5" y2="2"/><line x1="11" y1="2" x2="11" y2="5.5"/>
+    </svg>Focus</button>
+  <button class="nav-btn" onclick="switchTab('reflect',this)">
+    <svg class="nav-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 18.5C9 17.5 5 16 3 16.5V5C5 4.5 9 6 11 7z"/>
+      <path d="M11 18.5C13 17.5 17 16 19 16.5V5C17 4.5 13 6 11 7z"/>
+    </svg>Reflect</button>
+  <button class="nav-btn" onclick="switchTab('plan',this)">
+    <svg class="nav-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4.5" width="16" height="15" rx="2"/>
+      <line x1="3" y1="9.5" x2="19" y2="9.5"/>
+      <line x1="7.5" y1="2.5" x2="7.5" y2="6.5"/><line x1="14.5" y1="2.5" x2="14.5" y2="6.5"/>
+      <rect x="6.5" y="12.5" width="2.5" height="2.5" rx="0.5" fill="currentColor" stroke="none"/>
+      <line x1="12" y1="13.75" x2="15.5" y2="13.75"/>
+    </svg>Plan</button>
 </nav>
 </div>
 
