@@ -1,4 +1,4 @@
-const CACHE = 'life-os-v2'
+const CACHE = 'life-os-v3'
 const BASE = '/My-life'
 const ASSETS = [BASE+'/', BASE+'/index.html', BASE+'/manifest.json', BASE+'/icon.svg']
 
