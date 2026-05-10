@@ -1,5 +1,6 @@
-const CACHE = 'life-os-v1'
-const ASSETS = ['/', '/index.html', '/manifest.json', '/icon.svg']
+const CACHE = 'life-os-v2'
+const BASE = '/My-life'
+const ASSETS = [BASE+'/', BASE+'/index.html', BASE+'/manifest.json', BASE+'/icon.svg']
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)))
@@ -17,6 +18,6 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request).catch(() => caches.match('/index.html')))
+    caches.match(e.request).then(r => r || fetch(e.request).catch(() => caches.match(BASE+'/index.html')))
   )
 })
