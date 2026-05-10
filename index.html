@@ -531,10 +531,10 @@ const ABROAD_DL    = new Date('2026-09-01T00:00:00')
 const SPRINT_WEEKS = 12
 
 const VENTURES = [
-  { id:'tiktok', name:'TikTok',       note:'Philosophy · Psychology',              col:'#7c3aed' },
-  { id:'evren',  name:'YouTube EN',   note:'@evren-updated · Beauty · Glow Up',    col:'#e11d48' },
-  { id:'yakja',  name:'YouTube TH',   note:'@yakjatama · Thai Storytelling',        col:'#3b82f6' },
-  { id:'app',    name:'App / Product',note:'Build · Launch · Subscription MRR',    col:'#10b981' },
+  { id:'yakja',  name:'@yakjatama',   note:'Thai Storytelling · 1,100 subs · 1,800/4,000 hrs · PRIORITY', col:'#3b82f6' },
+  { id:'zen',    name:'ZEN Travel',   note:'Em Ava · Facebook content daily · 1-month test · 0 clients',  col:'#f59e0b' },
+  { id:'tiktok', name:'TikTok',       note:'50 followers · post daily · repurpose yakjatama content',      col:'#7c3aed' },
+  { id:'evren',  name:'@evren-updated',note:'Beauty · Glow Up EN · 300 subs · Month 2 reactivation',      col:'#e11d48' },
 ]
 
 const MORNING = [
@@ -547,41 +547,43 @@ const MORNING = [
 ]
 
 const MOVES_DEFAULTS = [
-  'Post Thai video tonight — @yakjatama minimum 3x/week from now',
-  'Post 3 design samples on Facebook — land first paid client this week',
-  'Charge for design work — minimum ฿5,000/project, never work for free',
-  'Hit 4,000 watch hours on @yakjatama — 2,200 hours left, post more',
-  'Activate one Chinese connection — find 1 product to source and test',
+  'Post first Tim Danilov script to @yakjatama — TODAY, not tomorrow',
+  'Post ZEN Tour content on Facebook daily — commit the full month',
+  'Post TikTok daily — repurpose @yakjatama content as short form',
+  'Hit 4,000 watch hours @yakjatama — post every 2 days minimum',
+  'Convert first ZEN inquiry to booking — follow up every interested person',
 ]
 
 const MONTHLY_TARGETS = [
-  { month:'2026-05', label:'May',  target:500,   focus:'First design client · @yakjatama 3x/week · TikTok daily' },
-  { month:'2026-06', label:'Jun',  target:2000,  focus:'yakjatama monetized · 3 design clients · launch first product' },
-  { month:'2026-07', label:'Jul',  target:5000,  focus:'Scale design services · product selling · pursue brand deals' },
-  { month:'2026-08', label:'Aug',  target:10000, focus:'E-commerce live · brand deals incoming · all channels growing' },
-  { month:'2026-09', label:'Sep',  target:15000, focus:'Systems running · Singapore savings sprint · scale up' },
-  { month:'2026-10', label:'Oct',  target:20000, focus:'Hit $20K · save for Singapore · B20 countdown' },
+  { month:'2026-05', label:'May',  target:500,   focus:'Post 10 yakjatama scripts · TikTok daily · ZEN content daily · first ZEN inquiry' },
+  { month:'2026-06', label:'Jun',  target:2000,  focus:'yakjatama monetized · first ZEN booking · reactivate @evren-updated' },
+  { month:'2026-07', label:'Jul',  target:5000,  focus:'All 3 channels posting · ZEN 3-5 bookings · digital product launched' },
+  { month:'2026-08', label:'Aug',  target:10000, focus:'Brand deals · evren monetized · ZEN 10+ bookings · product selling' },
+  { month:'2026-09', label:'Sep',  target:15000, focus:'Systems running · Singapore fund sprint · Psychology channel live' },
+  { month:'2026-10', label:'Oct',  target:20000, focus:'Hit $20K AVA · save · B20 is coming' },
 ]
 
 const DEFAULT_WEEK_PLAN = {
-  Mon: 'TikTok + film @yakjatama · Design client work · Japanese 19:30',
-  Tue: 'TikTok + edit @yakjatama · Design outreach · Japanese 19:30',
-  Wed: 'TikTok + post @yakjatama · Client delivery · Japanese 19:30',
-  Thu: 'TikTok + @evren-updated work · Review week numbers',
-  Fri: 'TikTok + batch content · Chinese connections research',
-  Sat: 'TikTok + product work · Chinese sourcing · week review',
-  Sun: 'Plan next week · Content batch · recharge',
+  Mon: 'Post @yakjatama script · ZEN Facebook post · TikTok · Japanese 19:30',
+  Tue: 'Post @yakjatama script · ZEN Facebook post · TikTok · Japanese 19:30',
+  Wed: 'Post @yakjatama script · ZEN Facebook post · TikTok · Japanese 19:30',
+  Thu: 'Edit @yakjatama batch · ZEN Facebook post · TikTok · Review numbers',
+  Fri: 'Film/script batch · ZEN Facebook post · TikTok · Follow up ZEN leads',
+  Sat: 'Batch @yakjatama scripts · ZEN post · TikTok · Week review',
+  Sun: 'Plan next week · Write 3 scripts · ZEN post · Rest',
 }
 
 const CONTENT_CHECKS = [
-  { id:'tiktok', label:'TikTok posted' },
-  { id:'evren',  label:'YouTube EN worked on' },
-  { id:'yakja',  label:'YouTube TH worked on' },
-  { id:'app',    label:'App / product worked on' },
+  { id:'yakja',  label:'@yakjatama — script / edit / post' },
+  { id:'zen',    label:'ZEN Tour — Facebook post published' },
+  { id:'tiktok', label:'TikTok — posted today' },
+  { id:'script', label:'Tomorrow — 1 script written or planned' },
 ]
 
 const WATCH_HOURS_GOAL = 4000
 const WATCH_HOURS_START = 1800
+const SUBS_CURRENT = 1100
+const SUBS_GOAL = 1000
 
 const STAGES = ['Prospect','Messaged','Replied','Proposal','Closed']
 const STAGE_COLORS = { Prospect:'#7c3aed', Messaged:'#3b82f6', Replied:'#f59e0b', Proposal:'#ea580c', Closed:'#10b981' }
