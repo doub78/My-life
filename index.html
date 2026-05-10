@@ -24,6 +24,8 @@ html,body{height:100%;background:var(--bg);color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
   font-size:16px;line-height:1.5;overflow:hidden}
 #app{display:flex;flex-direction:column;height:100%;height:100dvh;max-width:480px;margin:0 auto}
+
+/* HEADER */
 #hdr{padding:10px 16px 8px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
 .hdr-row{display:flex;align-items:center;justify-content:space-between}
 .hdr-title{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--purple-l)}
@@ -32,20 +34,30 @@ html,body{height:100%;background:var(--bg);color:var(--text);
 .sprint-bar-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin:6px 0 3px}
 .sprint-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
 .sprint-bar-fill{height:100%;background:var(--purple);border-radius:2px;transition:width .5s ease}
+
+/* MAIN */
 #main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .tab-pane{display:none;padding:14px 14px calc(14px + var(--sb));animation:fadeIn .2s ease}
 .tab-pane.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* CARDS */
 .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px}
 .card-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+
+/* PROGRESS */
 .prog-bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:4px}
 .prog-fill{height:100%;border-radius:3px;transition:width .4s ease}
+
+/* INPUTS */
 textarea,input[type=text],input[type=number],input[type=date],select{
   background:var(--surface);border:1px solid var(--border);border-radius:8px;
   color:var(--text);font-family:inherit;font-size:14px;padding:9px 12px;width:100%;
   outline:none;transition:border-color .2s}
 textarea:focus,input:focus,select:focus{border-color:var(--purple)}
 textarea{resize:none;line-height:1.6}
+
+/* BUTTONS */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;
   padding:9px 16px;border-radius:8px;font-size:13px;font-weight:600;border:none;
   cursor:pointer;transition:opacity .15s,transform .1s;-webkit-tap-highlight-color:transparent}
@@ -56,6 +68,8 @@ textarea{resize:none;line-height:1.6}
 .btn-ghost{background:transparent;color:var(--muted);font-size:12px;padding:5px 10px}
 .btn-sm{padding:6px 12px;font-size:12px}
 .btn-full{width:100%}
+
+/* CHECKLIST */
 .check-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
 .check-row:last-child{border-bottom:none}
 .check-box{width:22px;height:22px;border:2px solid var(--border);border-radius:6px;flex-shrink:0;
@@ -65,14 +79,28 @@ textarea{resize:none;line-height:1.6}
 .check-box.done::after{content:'✓';color:#fff;font-size:13px;font-weight:700}
 .check-label{font-size:14px;flex:1}
 .check-label.done{text-decoration:line-through;color:var(--muted)}
+
+/* OUTREACH DOTS */
+.o-dots{display:flex;gap:10px;justify-content:center;padding:8px 0}
+.o-dot{width:46px;height:46px;border-radius:50%;border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:all .2s;-webkit-tap-highlight-color:transparent;font-size:20px}
+.o-dot.done{background:var(--purple);border-color:var(--purple)}
+.o-dot.done::after{content:'✓';color:#fff;font-size:16px;font-weight:700}
+
+/* VENTURE ROWS */
 .vent-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .vent-name{font-size:12px;min-width:100px;flex-shrink:0}
 .vent-pct{font-size:12px;color:var(--muted);min-width:32px;text-align:right;flex-shrink:0}
+
+/* MOVES */
 .move-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border)}
 .move-item:last-child{border-bottom:none}
 .move-num{width:24px;height:24px;border-radius:50%;background:var(--purple);color:#fff;
   font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;
   flex-shrink:0;margin-top:2px}
+
+/* PIPELINE */
 .stage-section{margin-bottom:14px}
 .stage-hdr{display:flex;align-items:center;justify-content:space-between;padding:4px 0;margin-bottom:6px}
 .stage-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
@@ -81,6 +109,8 @@ textarea{resize:none;line-height:1.6}
 .contact-name{font-size:14px;font-weight:600;margin-bottom:2px}
 .contact-meta{font-size:12px;color:var(--muted);margin-bottom:8px}
 .contact-actions{display:flex;gap:6px;flex-wrap:wrap}
+
+/* FOCUS TIMER */
 .dur-btns{display:flex;gap:8px;margin-bottom:14px}
 .dur-btn{flex:1;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--surface);
   color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;
@@ -92,6 +122,8 @@ textarea{resize:none;line-height:1.6}
 .timer-time.running{color:var(--purple-l)}
 .timer-label{font-size:11px;color:var(--muted);margin-top:6px;letter-spacing:.1em;text-transform:uppercase}
 .timer-controls{display:flex;gap:8px;justify-content:center;margin-top:14px}
+
+/* TASK ROUTER */
 .router-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 .router-btn{padding:14px 8px;border-radius:10px;border:1px solid var(--border);background:var(--surface);
   color:var(--text);font-size:13px;font-weight:600;cursor:pointer;text-align:center;
@@ -101,6 +133,8 @@ textarea{resize:none;line-height:1.6}
 .router-btn.delegate{border-color:var(--blue);color:var(--blue)}
 .router-btn.automate{border-color:var(--purple);color:var(--purple)}
 .router-btn.delete{border-color:var(--red);color:var(--red)}
+
+/* SLIDERS */
 .slider-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .slider-lbl{font-size:13px;color:var(--muted);min-width:55px}
 .slider-val{font-size:14px;font-weight:700;min-width:20px;text-align:center}
@@ -108,10 +142,14 @@ input[type=range]{flex:1;-webkit-appearance:none;height:4px;background:var(--bor
   border-radius:2px;outline:none;padding:0;border:none}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;
   border-radius:50%;background:var(--purple);cursor:pointer}
+
+/* WEEK GRID */
 .week-grid{display:grid;gap:6px}
 .week-day{display:flex;gap:8px;align-items:flex-start}
 .day-lbl{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);min-width:28px;padding-top:11px}
 .day-lbl.today{color:var(--purple-l)}
+
+/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;
   align-items:flex-end;justify-content:center}
 .modal-overlay.open{display:flex}
@@ -120,6 +158,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 .modal-title{font-size:16px;font-weight:700;margin-bottom:14px}
 .field{margin-bottom:10px}
 .field label{display:block;font-size:11px;color:var(--muted);margin-bottom:3px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+
+/* BOTTOM NAV */
 #nav{background:var(--surface);border-top:1px solid var(--border);display:flex;
   flex-shrink:0;padding-bottom:var(--sb)}
 .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -128,6 +168,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
   text-transform:uppercase;letter-spacing:.05em;transition:color .2s}
 .nav-btn.active{color:var(--purple-l)}
 .nav-icon{font-size:20px;line-height:1.1}
+
+/* UTILS */
 .chip{background:var(--surface);border:1px solid var(--border);border-radius:100px;
   font-size:11px;padding:2px 10px;color:var(--muted)}
 .chip.on{background:var(--purple);border-color:var(--purple);color:#fff}
@@ -145,13 +187,23 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
   transition:opacity .2s;pointer-events:none;white-space:nowrap}
 .flash.show{opacity:1}
 .divider{height:1px;background:var(--border);margin:10px 0}
-.t-muted{color:var(--muted)}.t-sm{font-size:13px}.t-xs{font-size:11px}.t-bold{font-weight:700}
-.mt2{margin-top:8px}.mt3{margin-top:12px}
-.flex{display:flex}.ai-c{align-items:center}.jb{justify-content:space-between}.g2{gap:8px}.w-full{width:100%}
+.t-muted{color:var(--muted)}
+.t-sm{font-size:13px}
+.t-xs{font-size:11px}
+.t-bold{font-weight:700}
+.mt2{margin-top:8px}
+.mt3{margin-top:12px}
+.flex{display:flex}
+.ai-c{align-items:center}
+.jb{justify-content:space-between}
+.g2{gap:8px}
+.w-full{width:100%}
 </style>
 </head>
 <body>
 <div id="app">
+
+<!-- HEADER -->
 <div id="hdr">
   <div class="hdr-row">
     <span class="hdr-title">Life OS</span>
@@ -163,17 +215,32 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
   </div>
   <div class="sprint-bar"><div id="sprint-fill" class="sprint-bar-fill" style="width:0%"></div></div>
 </div>
+
+<!-- MAIN -->
 <main id="main">
+
+<!-- TODAY -->
 <div id="tab-today" class="tab-pane active">
   <div class="stat-grid">
-    <div class="stat-box"><div id="stat-b20" class="stat-val" style="color:var(--amber)">…</div><div class="stat-lbl">To B20</div></div>
-    <div class="stat-box"><div id="stat-abroad" class="stat-val" style="color:var(--blue)">…</div><div class="stat-lbl">To Abroad</div></div>
-    <div class="stat-box"><div id="stat-pipeline" class="stat-val" style="color:var(--green)">$0</div><div class="stat-lbl">Pipeline</div></div>
+    <div class="stat-box">
+      <div id="stat-b20" class="stat-val" style="color:var(--amber)">…</div>
+      <div class="stat-lbl">To B20</div>
+    </div>
+    <div class="stat-box">
+      <div id="stat-abroad" class="stat-val" style="color:var(--blue)">…</div>
+      <div class="stat-lbl">To Abroad</div>
+    </div>
+    <div class="stat-box">
+      <div id="stat-pipeline" class="stat-val" style="color:var(--green)">$0</div>
+      <div class="stat-lbl">Pipeline</div>
+    </div>
   </div>
+
   <div class="card">
     <div class="card-title">Identity</div>
     <textarea id="identity-input" rows="2" placeholder="I am becoming…"></textarea>
   </div>
+
   <div class="card">
     <div class="flex ai-c jb" style="margin-bottom:10px">
       <span class="card-title" style="margin-bottom:0">Morning Routine</span>
@@ -181,6 +248,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     </div>
     <div id="morning-list"></div>
   </div>
+
   <div class="card">
     <div class="flex ai-c jb" style="margin-bottom:10px">
       <span class="card-title" style="margin-bottom:0">Top 3 Today</span>
@@ -188,6 +256,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     </div>
     <div id="top3-list"></div>
   </div>
+
   <div class="card">
     <div class="flex ai-c jb" style="margin-bottom:10px">
       <span class="card-title" style="margin-bottom:0">Content Today</span>
@@ -195,16 +264,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     </div>
     <div id="content-today-list"></div>
   </div>
+
   <div class="card">
     <div class="card-title">Ventures</div>
     <div id="vent-snap"></div>
   </div>
 </div>
+
+<!-- GOALS -->
 <div id="tab-goals" class="tab-pane">
   <div class="card">
     <div class="card-title">12-Week Sprint</div>
     <div id="sprint-detail"></div>
   </div>
+
   <div class="card">
     <div class="flex ai-c jb" style="margin-bottom:10px">
       <span class="card-title" style="margin-bottom:0">@yakjatama · Watch Hours</span>
@@ -214,9 +287,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
       <input type="number" id="watch-hours-input" placeholder="1800" style="max-width:100px" />
       <span class="t-xs t-muted">/ 4,000 hrs to monetize</span>
     </div>
-    <div class="prog-bar" style="height:8px"><div class="prog-fill" id="watch-hours-fill" style="background:var(--blue)"></div></div>
+    <div class="prog-bar" style="height:8px">
+      <div class="prog-fill" id="watch-hours-fill" style="background:var(--blue)"></div>
+    </div>
     <div id="watch-hours-lbl" class="t-xs t-muted" style="margin-top:6px"></div>
   </div>
+
   <div class="card">
     <div class="flex ai-c jb" style="margin-bottom:10px">
       <span class="card-title" style="margin-bottom:0">Next 5 Moves</span>
@@ -224,6 +300,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     </div>
     <div id="moves-list"></div>
   </div>
+
   <div class="card">
     <div class="flex ai-c jb" style="margin-bottom:10px">
       <span class="card-title" style="margin-bottom:0">Ventures</span>
@@ -231,12 +308,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     </div>
     <div id="vent-goals"></div>
   </div>
+
   <div class="card">
     <div class="card-title">This Week's Intention</div>
     <textarea id="week-intention" rows="3" placeholder="What does winning this week look like?"></textarea>
     <button class="btn btn-primary btn-sm btn-full mt2" onclick="saveIntention()">Save</button>
   </div>
 </div>
+
+<!-- PIPELINE -->
 <div id="tab-pipeline" class="tab-pane">
   <div class="flex ai-c jb" style="margin-bottom:12px">
     <div>
@@ -247,6 +327,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
   </div>
   <div id="pipeline-board"></div>
 </div>
+
+<!-- FOCUS -->
 <div id="tab-focus" class="tab-pane">
   <div class="card">
     <div class="dur-btns">
@@ -260,13 +342,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     </div>
     <div class="field">
       <label>Working on</label>
-      <input type="text" id="focus-task" placeholder="e.g. Film TikTok · Edit YouTube · Build app" />
+      <input type="text" id="focus-task" placeholder="e.g. Film TikTok · Edit YouTube · Plan content" />
     </div>
     <div class="timer-controls">
       <button id="timer-btn" class="btn btn-primary" onclick="timerToggle()">Start</button>
       <button class="btn btn-secondary" onclick="timerReset()">Reset</button>
     </div>
   </div>
+
   <div class="card">
     <div class="card-title">Task Router</div>
     <input type="text" id="router-input" placeholder="Enter a task to decide what to do with it…" style="margin-bottom:10px" />
@@ -277,6 +360,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
       <button class="router-btn delete" onclick="routeTask('ELIMINATE')">🗑 Eliminate<br/><span style="font-size:10px;font-weight:400;color:var(--muted)">Not essential</span></button>
     </div>
   </div>
+
   <div class="card">
     <div class="flex ai-c jb" style="margin-bottom:8px">
       <span class="card-title" style="margin-bottom:0">Session Log</span>
@@ -285,6 +369,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     <div id="focus-log"></div>
   </div>
 </div>
+
+<!-- REFLECT -->
 <div id="tab-reflect" class="tab-pane">
   <div class="card">
     <div class="card-title">Mood &amp; Energy</div>
@@ -299,22 +385,26 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
       <span class="slider-val" id="energy-v">7</span>
     </div>
   </div>
+
   <div class="card">
     <div class="card-title">3 Wins Today</div>
     <div class="field"><input type="text" id="win1" placeholder="Win #1" /></div>
     <div class="field"><input type="text" id="win2" placeholder="Win #2" /></div>
     <div class="field"><input type="text" id="win3" placeholder="Win #3" /></div>
   </div>
+
   <div class="card">
     <div class="card-title">Gratitude</div>
     <div class="field"><input type="text" id="grat1" placeholder="I'm grateful for…" /></div>
     <div class="field"><input type="text" id="grat2" placeholder="I'm grateful for…" /></div>
     <div class="field"><input type="text" id="grat3" placeholder="I'm grateful for…" /></div>
   </div>
+
   <div class="card">
     <div class="card-title">Reflection</div>
     <textarea id="reflect-content" rows="4" placeholder="What happened today? What did I learn? What would I do differently?"></textarea>
   </div>
+
   <div class="card" style="border-color:rgba(239,68,68,.3)">
     <div class="card-title" style="color:var(--red)">Did I push past my limit today?</div>
     <div class="flex g2 mt2">
@@ -323,31 +413,44 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     </div>
     <textarea id="limit-note" rows="2" placeholder="What did that feel like?" style="margin-top:8px"></textarea>
   </div>
+
   <button class="btn btn-primary btn-full" style="margin-bottom:10px" onclick="saveReflect()">Save Reflection</button>
+
   <div class="card">
     <div class="card-title">Past Entries</div>
     <div id="reflect-history"></div>
   </div>
 </div>
+
+<!-- PLAN -->
 <div id="tab-plan" class="tab-pane">
   <div class="card">
     <div class="card-title">My Content Brand</div>
     <textarea id="offer-text" rows="4" placeholder="My brand is about [TOPIC]. I create content for [WHO]. My unique angle is [WHAT MAKES ME DIFFERENT]. My goal is [VISION]."></textarea>
     <button class="btn btn-primary btn-sm btn-full mt2" onclick="saveOffer()">Save</button>
   </div>
+
   <div class="card">
     <div class="card-title">This Week's Plan</div>
     <div class="week-grid" id="week-grid"></div>
   </div>
+
   <div class="card">
     <div class="card-title">Sprint Win Condition</div>
     <textarea id="sprint-win" rows="3" placeholder="What must be true by end of sprint to call it a win?"></textarea>
     <button class="btn btn-primary btn-sm btn-full mt2" onclick="saveSprintWin()">Save</button>
   </div>
+
   <div class="card">
     <div class="card-title">School Fund Target</div>
-    <div class="field"><label>Saved so far ($)</label><input type="number" id="fund-saved" placeholder="0" oninput="updateFund()" /></div>
-    <div class="field"><label>Target ($)</label><input type="number" id="fund-target" placeholder="20000" oninput="updateFund()" /></div>
+    <div class="field">
+      <label>Saved so far ($)</label>
+      <input type="number" id="fund-saved" placeholder="0" oninput="updateFund()" />
+    </div>
+    <div class="field">
+      <label>Target ($)</label>
+      <input type="number" id="fund-target" placeholder="20000" oninput="updateFund()" />
+    </div>
     <div id="fund-bar-wrap" style="margin-top:4px">
       <div class="flex ai-c jb" style="margin-bottom:4px">
         <span class="t-xs t-muted" id="fund-lbl">$0 of $20,000</span>
@@ -357,7 +460,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     </div>
   </div>
 </div>
+
 </main>
+
+<!-- BOTTOM NAV -->
 <nav id="nav">
   <button class="nav-btn active" onclick="switchTab('today',this)"><span class="nav-icon">☀️</span>Today</button>
   <button class="nav-btn" onclick="switchTab('goals',this)"><span class="nav-icon">🎯</span>Goals</button>
@@ -367,6 +473,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
   <button class="nav-btn" onclick="switchTab('plan',this)"><span class="nav-icon">🗓</span>Plan</button>
 </nav>
 </div>
+
+<!-- ADD LEAD MODAL -->
 <div class="modal-overlay" id="contact-modal">
   <div class="modal-sheet">
     <div class="modal-title">Add Lead</div>
@@ -380,6 +488,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     </div>
   </div>
 </div>
+
+<!-- EDIT MOVES MODAL -->
 <div class="modal-overlay" id="moves-modal">
   <div class="modal-sheet">
     <div class="modal-title">Edit Next 5 Moves</div>
@@ -390,6 +500,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     </div>
   </div>
 </div>
+
+<!-- EDIT VENTURES MODAL -->
 <div class="modal-overlay" id="vent-modal">
   <div class="modal-sheet">
     <div class="modal-title">Update Venture Progress</div>
@@ -400,22 +512,32 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
     </div>
   </div>
 </div>
+
 <div id="flash" class="flash">Saved ✓</div>
+
 <script>
+// ── CONSTANTS ────────────────────────────────────────────────────────────────
 const SPRINT_START = new Date('2026-05-09T00:00:00')
 const B20_DL       = new Date('2026-11-02T00:00:00')
 const ABROAD_DL    = new Date('2026-09-01T00:00:00')
 const SPRINT_WEEKS = 12
+
 const VENTURES = [
-  { id:'tiktok', name:'TikTok',       note:'Philosophy · Psychology',             col:'#7c3aed' },
-  { id:'evren',  name:'YouTube EN',   note:'@evren-updated · Beauty · Glow Up',   col:'#e11d48' },
-  { id:'yakja',  name:'YouTube TH',   note:'@yakjatama · Thai Storytelling',       col:'#3b82f6' },
-  { id:'app',    name:'App / Product',note:'Build · Launch · Subscription MRR',   col:'#10b981' },
+  { id:'tiktok', name:'TikTok',       note:'Philosophy · Psychology',              col:'#7c3aed' },
+  { id:'evren',  name:'YouTube EN',   note:'@evren-updated · Beauty · Glow Up',    col:'#e11d48' },
+  { id:'yakja',  name:'YouTube TH',   note:'@yakjatama · Thai Storytelling',        col:'#3b82f6' },
+  { id:'app',    name:'App / Product',note:'Build · Launch · Subscription MRR',    col:'#10b981' },
 ]
+
 const MORNING = [
-  'Wake up on time','Cold shower','30 min exercise',
-  'Review goals & channel stats','Plan today\'s content','Journal / reflect',
+  'Wake up on time',
+  'Cold shower',
+  '30 min exercise',
+  'Review goals & channel stats',
+  'Plan today\'s content',
+  'Journal / reflect',
 ]
+
 const MOVES_DEFAULTS = [
   'Post content daily — document the journey publicly',
   'Reactivate @evren-updated — publish first video',
@@ -423,154 +545,189 @@ const MOVES_DEFAULTS = [
   'Ship first digital product or app MVP',
   'Reach first $1,000 month from content + product',
 ]
+
 const CONTENT_CHECKS = [
   { id:'tiktok', label:'TikTok posted' },
   { id:'evren',  label:'YouTube EN worked on' },
   { id:'yakja',  label:'YouTube TH worked on' },
   { id:'app',    label:'App / product worked on' },
 ]
+
 const WATCH_HOURS_GOAL = 4000
 const WATCH_HOURS_START = 1800
+
 const STAGES = ['Prospect','Messaged','Replied','Proposal','Closed']
 const STAGE_COLORS = { Prospect:'#7c3aed', Messaged:'#3b82f6', Replied:'#f59e0b', Proposal:'#ea580c', Closed:'#10b981' }
+
+// ── STORAGE ──────────────────────────────────────────────────────────────────
 const S = {
-  get(k,d=null){try{const v=localStorage.getItem('lfs_'+k);return v!==null?JSON.parse(v):d}catch{return d}},
-  set(k,v){try{localStorage.setItem('lfs_'+k,JSON.stringify(v))}catch{}},
+  get(k, d=null) { try { const v=localStorage.getItem('lfs_'+k); return v!==null?JSON.parse(v):d } catch{return d} },
+  set(k, v)      { try { localStorage.setItem('lfs_'+k, JSON.stringify(v)) } catch{} },
 }
 const today  = () => new Date().toISOString().slice(0,10)
 const dayDiff= (a,b) => Math.ceil((a-b)/86400000)
-let _ft=null
-function flash(msg='Saved ✓'){
-  const el=document.getElementById('flash')
-  el.textContent=msg;el.classList.add('show')
-  clearTimeout(_ft);_ft=setTimeout(()=>el.classList.remove('show'),2000)
+
+// ── UI HELPERS ───────────────────────────────────────────────────────────────
+let _ft = null
+function flash(msg='Saved ✓') {
+  const el = document.getElementById('flash')
+  el.textContent = msg; el.classList.add('show')
+  clearTimeout(_ft); _ft = setTimeout(()=>el.classList.remove('show'), 2000)
 }
-function switchTab(name,btn){
+
+function switchTab(name, btn) {
   document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'))
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'))
   document.getElementById('tab-'+name).classList.add('active')
   btn.classList.add('active')
-  if(name==='pipeline') renderPipeline()
-  if(name==='reflect')  renderReflectHistory()
-  if(name==='goals')    renderGoals()
-  if(name==='plan')     renderPlan()
+  if (name==='pipeline') renderPipeline()
+  if (name==='reflect')  renderReflectHistory()
+  if (name==='goals')    renderGoals()
+  if (name==='plan')     renderPlan()
 }
-function openModal(id){document.getElementById(id).classList.add('open')}
-function closeModal(id){document.getElementById(id).classList.remove('open')}
-function renderHeader(){
-  const now=new Date()
-  const b20d=dayDiff(B20_DL,now)
-  const sprintDay=Math.max(0,Math.floor((now-SPRINT_START)/86400000))
-  const sprintTotal=SPRINT_WEEKS*7
-  const pct=Math.min(100,(sprintDay/sprintTotal)*100)
-  const wk=Math.min(SPRINT_WEEKS,Math.ceil(sprintDay/7))||1
-  document.getElementById('hdr-badge').textContent=b20d+'d to B20'
-  document.getElementById('sprint-lbl').textContent='Sprint W'+wk
-  document.getElementById('sprint-days').textContent='Day '+sprintDay+' / '+sprintTotal
-  document.getElementById('sprint-fill').style.width=pct+'%'
-  document.getElementById('stat-b20').textContent=b20d+'d'
-  document.getElementById('stat-abroad').textContent=Math.max(0,dayDiff(ABROAD_DL,now))+'d'
+
+function openModal(id)  { document.getElementById(id).classList.add('open') }
+function closeModal(id) { document.getElementById(id).classList.remove('open') }
+
+// ── HEADER ───────────────────────────────────────────────────────────────────
+function renderHeader() {
+  const now = new Date()
+  const b20d = dayDiff(B20_DL, now)
+  const sprintDay = Math.max(0, Math.floor((now-SPRINT_START)/86400000))
+  const sprintTotal = SPRINT_WEEKS*7
+  const pct = Math.min(100, (sprintDay/sprintTotal)*100)
+  const wk  = Math.min(SPRINT_WEEKS, Math.ceil(sprintDay/7))||1
+
+  document.getElementById('hdr-badge').textContent  = b20d+'d to B20'
+  document.getElementById('sprint-lbl').textContent = 'Sprint W'+wk
+  document.getElementById('sprint-days').textContent= 'Day '+sprintDay+' / '+sprintTotal
+  document.getElementById('sprint-fill').style.width= pct+'%'
+  document.getElementById('stat-b20').textContent   = b20d+'d'
+  document.getElementById('stat-abroad').textContent= Math.max(0,dayDiff(ABROAD_DL,now))+'d'
 }
-function renderToday(){
-  const id_el=document.getElementById('identity-input')
-  id_el.value=S.get('identity','')
-  id_el.onblur=e=>S.set('identity',e.target.value)
-  renderMorning();renderTop3();renderContentToday();renderVentSnap()
+
+// ── TODAY ────────────────────────────────────────────────────────────────────
+function renderToday() {
+  const id_el = document.getElementById('identity-input')
+  id_el.value = S.get('identity','')
+  id_el.onblur = e => S.set('identity', e.target.value)
+
+  renderMorning()
+  renderTop3()
+  renderContentToday()
+  renderVentSnap()
 }
-function renderMorning(){
-  const key='morning_'+today()
-  const done=S.get(key,Array(MORNING.length).fill(false))
-  const list=document.getElementById('morning-list')
-  list.innerHTML=''
+
+function renderMorning() {
+  const key  = 'morning_'+today()
+  const done = S.get(key, Array(MORNING.length).fill(false))
+  const list = document.getElementById('morning-list')
+  list.innerHTML = ''
   MORNING.forEach((item,i)=>{
-    const row=document.createElement('div')
-    row.className='check-row'
-    row.innerHTML=`<div class="check-box${done[i]?' done':''}" onclick="toggleMorning(${i})"></div>
+    const row = document.createElement('div')
+    row.className = 'check-row'
+    row.innerHTML = `<div class="check-box${done[i]?' done':''}" onclick="toggleMorning(${i})"></div>
       <span class="check-label${done[i]?' done':''}">${item}</span>`
     list.appendChild(row)
   })
-  const n=done.filter(Boolean).length
-  const chip=document.getElementById('morning-chip')
-  chip.textContent=n+'/6';chip.className='chip'+(n===6?' on':'')
+  const n = done.filter(Boolean).length
+  const chip = document.getElementById('morning-chip')
+  chip.textContent = n+'/6'
+  chip.className = 'chip'+(n===6?' on':'')
 }
-function toggleMorning(i){
-  const key='morning_'+today()
-  const done=S.get(key,Array(MORNING.length).fill(false))
-  done[i]=!done[i];S.set(key,done);renderMorning()
+
+function toggleMorning(i) {
+  const key  = 'morning_'+today()
+  const done = S.get(key, Array(MORNING.length).fill(false))
+  done[i] = !done[i]; S.set(key, done); renderMorning()
 }
-function renderTop3(){
-  const key='top3_'+today()
-  const blank=[{text:'',done:false},{text:'',done:false},{text:'',done:false}]
-  const tasks=S.get(key,blank)
-  const list=document.getElementById('top3-list')
-  list.innerHTML=''
+
+function renderTop3() {
+  const key   = 'top3_'+today()
+  const blank = [{text:'',done:false},{text:'',done:false},{text:'',done:false}]
+  const tasks = S.get(key, blank)
+  const list  = document.getElementById('top3-list')
+  list.innerHTML = ''
   tasks.forEach((t,i)=>{
-    const row=document.createElement('div')
-    row.className='check-row'
-    row.innerHTML=`<div class="check-box${t.done?' done':''}" onclick="toggleTop3(${i})"></div>
+    const row = document.createElement('div')
+    row.className = 'check-row'
+    row.innerHTML = `<div class="check-box${t.done?' done':''}" onclick="toggleTop3(${i})"></div>
       <input type="text" value="${t.text.replace(/"/g,'&quot;')}" placeholder="Task ${i+1}"
         style="background:transparent;border:none;padding:0;font-size:14px;${t.done?'text-decoration:line-through;opacity:.5':''}"
         onblur="saveTop3(${i},this.value)" />`
     list.appendChild(row)
   })
 }
-function toggleTop3(i){
-  const key='top3_'+today()
-  const blank=[{text:'',done:false},{text:'',done:false},{text:'',done:false}]
-  const tasks=S.get(key,blank);tasks[i].done=!tasks[i].done;S.set(key,tasks);renderTop3()
+
+function toggleTop3(i) {
+  const key   = 'top3_'+today()
+  const blank = [{text:'',done:false},{text:'',done:false},{text:'',done:false}]
+  const tasks = S.get(key, blank); tasks[i].done=!tasks[i].done; S.set(key,tasks); renderTop3()
 }
-function saveTop3(i,val){
-  const key='top3_'+today()
-  const blank=[{text:'',done:false},{text:'',done:false},{text:'',done:false}]
-  const tasks=S.get(key,blank);tasks[i].text=val;S.set(key,tasks)
+
+function saveTop3(i, val) {
+  const key   = 'top3_'+today()
+  const blank = [{text:'',done:false},{text:'',done:false},{text:'',done:false}]
+  const tasks = S.get(key, blank); tasks[i].text=val; S.set(key,tasks)
 }
-function renderContentToday(){
-  const key='content_'+today()
-  const done=S.get(key,{})
-  const list=document.getElementById('content-today-list')
-  list.innerHTML=''
+
+function renderContentToday() {
+  const key  = 'content_'+today()
+  const done = S.get(key, {})
+  const list = document.getElementById('content-today-list')
+  list.innerHTML = ''
   CONTENT_CHECKS.forEach(c=>{
-    const row=document.createElement('div')
-    row.className='check-row'
-    row.innerHTML=`<div class="check-box${done[c.id]?' done':''}" onclick="toggleContent('${c.id}')"></div>
+    const row = document.createElement('div')
+    row.className = 'check-row'
+    row.innerHTML = `<div class="check-box${done[c.id]?' done':''}" onclick="toggleContent('${c.id}')"></div>
       <span class="check-label${done[c.id]?' done':''}">${c.label}</span>`
     list.appendChild(row)
   })
-  const n=Object.values(done).filter(Boolean).length
-  const chip=document.getElementById('content-chip')
-  chip.textContent=n+'/4';chip.className='chip'+(n===4?' on':'')
+  const n = Object.values(done).filter(Boolean).length
+  const chip = document.getElementById('content-chip')
+  chip.textContent = n+'/4'
+  chip.className = 'chip'+(n===4?' on':'')
 }
-function toggleContent(id){
-  const key='content_'+today()
-  const done=S.get(key,{})
-  done[id]=!done[id];S.set(key,done);renderContentToday()
+
+function toggleContent(id) {
+  const key  = 'content_'+today()
+  const done = S.get(key, {})
+  done[id] = !done[id]
+  S.set(key, done); renderContentToday()
 }
-function renderVentSnap(){
-  const pcts=S.get('vent_pct',{})
-  document.getElementById('vent-snap').innerHTML=VENTURES.map(v=>{
-    const p=pcts[v.id]||0
+
+function renderVentSnap() {
+  const pcts = S.get('vent_pct', {})
+  document.getElementById('vent-snap').innerHTML = VENTURES.map(v=>{
+    const p = pcts[v.id]||0
     return `<div class="vent-row">
       <span class="vent-name">${v.name}</span>
       <div class="prog-bar" style="flex:1"><div class="prog-fill" style="width:${p}%;background:${v.col}"></div></div>
       <span class="vent-pct">${p}%</span>
     </div>`
   }).join('')
-  const closed=S.get('pipeline',[]).filter(c=>c.stage==='Closed')
-  const total=closed.reduce((s,c)=>s+(c.value||0),0)
-  document.getElementById('stat-pipeline').textContent='$'+total.toLocaleString()
+  const closed = S.get('pipeline',[]).filter(c=>c.stage==='Closed')
+  const total  = closed.reduce((s,c)=>s+(c.value||0),0)
+  document.getElementById('stat-pipeline').textContent = '$'+total.toLocaleString()
 }
-function renderGoals(){
-  renderSprintDetail();renderWatchHours();renderMoves();renderVentGoals()
-  document.getElementById('week-intention').value=S.get('week_intention','')
+
+// ── GOALS ────────────────────────────────────────────────────────────────────
+function renderGoals() {
+  renderSprintDetail()
+  renderWatchHours()
+  renderMoves()
+  renderVentGoals()
+  document.getElementById('week-intention').value = S.get('week_intention','')
 }
-function renderSprintDetail(){
-  const now=new Date()
-  const sprintDay=Math.max(0,Math.floor((now-SPRINT_START)/86400000))
-  const total=SPRINT_WEEKS*7
-  const pct=Math.min(100,(sprintDay/total)*100).toFixed(0)
-  const wk=Math.min(SPRINT_WEEKS,Math.ceil(sprintDay/7))||1
-  const left=Math.max(0,total-sprintDay)
-  document.getElementById('sprint-detail').innerHTML=`
+
+function renderSprintDetail() {
+  const now       = new Date()
+  const sprintDay = Math.max(0, Math.floor((now-SPRINT_START)/86400000))
+  const total     = SPRINT_WEEKS*7
+  const pct       = Math.min(100,(sprintDay/total)*100).toFixed(0)
+  const wk        = Math.min(SPRINT_WEEKS,Math.ceil(sprintDay/7))||1
+  const left      = Math.max(0, total-sprintDay)
+  document.getElementById('sprint-detail').innerHTML = `
     <div class="flex ai-c jb" style="margin-bottom:8px">
       <span class="t-sm t-bold">Week ${wk} of ${SPRINT_WEEKS}</span>
       <span class="chip">${left}d left</span>
@@ -579,18 +736,20 @@ function renderSprintDetail(){
     <div class="t-xs t-muted" style="margin-top:6px">Day ${sprintDay} of ${total} · ${pct}% complete</div>
     <div class="t-xs t-muted" style="margin-top:3px">May 9 → Aug 1, 2026</div>`
 }
-function renderMoves(){
-  const moves=S.get('moves',MOVES_DEFAULTS)
-  document.getElementById('moves-list').innerHTML=moves.map((m,i)=>`
+
+function renderMoves() {
+  const moves = S.get('moves', MOVES_DEFAULTS)
+  document.getElementById('moves-list').innerHTML = moves.map((m,i)=>`
     <div class="move-item">
       <div class="move-num">${i+1}</div>
       <div class="t-sm">${m}</div>
     </div>`).join('')
 }
-function renderVentGoals(){
-  const pcts=S.get('vent_pct',{})
-  document.getElementById('vent-goals').innerHTML=VENTURES.map(v=>{
-    const p=pcts[v.id]||0
+
+function renderVentGoals() {
+  const pcts = S.get('vent_pct',{})
+  document.getElementById('vent-goals').innerHTML = VENTURES.map(v=>{
+    const p = pcts[v.id]||0
     return `<div style="margin-bottom:14px">
       <div class="flex ai-c jb" style="margin-bottom:3px">
         <span class="t-sm t-bold">${v.name}</span>
@@ -601,176 +760,218 @@ function renderVentGoals(){
     </div>`
   }).join('')
 }
-function editMoves(){
-  const moves=S.get('moves',MOVES_DEFAULTS)
-  document.getElementById('moves-edit-fields').innerHTML=moves.map((m,i)=>`
+
+function editMoves() {
+  const moves = S.get('moves', MOVES_DEFAULTS)
+  document.getElementById('moves-edit-fields').innerHTML = moves.map((m,i)=>`
     <div class="field"><label>Move ${i+1}</label>
     <input type="text" id="me-${i}" value="${m.replace(/"/g,'&quot;')}" /></div>`).join('')
   openModal('moves-modal')
 }
-function saveMoves(){
-  const moves=MOVES_DEFAULTS.map((_,i)=>document.getElementById('me-'+i).value.trim()||MOVES_DEFAULTS[i])
-  S.set('moves',moves);closeModal('moves-modal');renderMoves();flash()
+
+function saveMoves() {
+  const moves = MOVES_DEFAULTS.map((_,i)=>document.getElementById('me-'+i).value.trim()||MOVES_DEFAULTS[i])
+  S.set('moves', moves); closeModal('moves-modal'); renderMoves(); flash()
 }
-function editVentures(){
-  const pcts=S.get('vent_pct',{})
-  document.getElementById('vent-edit-fields').innerHTML=VENTURES.map(v=>`
+
+function editVentures() {
+  const pcts = S.get('vent_pct',{})
+  document.getElementById('vent-edit-fields').innerHTML = VENTURES.map(v=>`
     <div class="field"><label>${v.name} (%)</label>
     <input type="number" id="ve-${v.id}" value="${pcts[v.id]||0}" min="0" max="100" /></div>`).join('')
   openModal('vent-modal')
 }
-function saveVentures(){
-  const pcts={}
-  VENTURES.forEach(v=>{pcts[v.id]=Math.min(100,Math.max(0,parseInt(document.getElementById('ve-'+v.id).value)||0))})
-  S.set('vent_pct',pcts);closeModal('vent-modal');renderVentSnap();renderVentGoals();flash()
+
+function saveVentures() {
+  const pcts = {}
+  VENTURES.forEach(v=>{ pcts[v.id]=Math.min(100,Math.max(0,parseInt(document.getElementById('ve-'+v.id).value)||0)) })
+  S.set('vent_pct',pcts); closeModal('vent-modal')
+  renderVentSnap(); renderVentGoals(); flash()
 }
-function saveIntention(){S.set('week_intention',document.getElementById('week-intention').value);flash()}
-function renderWatchHours(){
-  const hrs=S.get('watch_hours',WATCH_HOURS_START)
-  const pct=Math.min(100,(hrs/WATCH_HOURS_GOAL)*100)
-  const left=Math.max(0,WATCH_HOURS_GOAL-hrs)
-  const el=document.getElementById('watch-hours-input')
-  if(el) el.value=hrs
-  const fill=document.getElementById('watch-hours-fill')
-  if(fill) fill.style.width=pct+'%'
-  const lbl=document.getElementById('watch-hours-lbl')
-  if(lbl) lbl.textContent=hrs>=WATCH_HOURS_GOAL?'✓ Monetization unlocked!':left+' hours left · '+pct.toFixed(0)+'% there'
+
+function saveIntention() { S.set('week_intention', document.getElementById('week-intention').value); flash() }
+
+function renderWatchHours() {
+  const hrs  = S.get('watch_hours', WATCH_HOURS_START)
+  const pct  = Math.min(100, (hrs / WATCH_HOURS_GOAL) * 100)
+  const left = Math.max(0, WATCH_HOURS_GOAL - hrs)
+  const el   = document.getElementById('watch-hours-input')
+  if (el) el.value = hrs
+  const fill = document.getElementById('watch-hours-fill')
+  if (fill) fill.style.width = pct + '%'
+  const lbl = document.getElementById('watch-hours-lbl')
+  if (lbl) lbl.textContent = hrs >= WATCH_HOURS_GOAL
+    ? '✓ Monetization unlocked!'
+    : left + ' hours left · ' + pct.toFixed(0) + '% there'
 }
-function saveWatchHours(){
-  const val=parseInt(document.getElementById('watch-hours-input').value)||WATCH_HOURS_START
-  S.set('watch_hours',val);renderWatchHours();flash('Watch hours updated ✓')
+
+function saveWatchHours() {
+  const val = parseInt(document.getElementById('watch-hours-input').value) || WATCH_HOURS_START
+  S.set('watch_hours', val); renderWatchHours(); flash('Watch hours updated ✓')
 }
-function renderPipeline(){
-  const contacts=S.get('pipeline',[])
-  const board=document.getElementById('pipeline-board')
-  board.innerHTML=''
+
+// ── PIPELINE ─────────────────────────────────────────────────────────────────
+function renderPipeline() {
+  const contacts = S.get('pipeline',[])
+  const board    = document.getElementById('pipeline-board')
+  board.innerHTML = ''
   STAGES.forEach(stage=>{
-    const items=contacts.filter(c=>c.stage===stage)
-    const sec=document.createElement('div')
-    sec.className='stage-section'
-    sec.innerHTML=`<div class="stage-hdr">
+    const items = contacts.filter(c=>c.stage===stage)
+    const sec   = document.createElement('div')
+    sec.className = 'stage-section'
+    sec.innerHTML = `<div class="stage-hdr">
       <span class="stage-label" style="color:${STAGE_COLORS[stage]}">${stage}</span>
       <span class="stage-count">${items.length}</span>
     </div>`
-    if(!items.length) sec.innerHTML+=`<div class="t-xs t-muted" style="padding:6px 0 10px">No leads here yet</div>`
+    if(!items.length) sec.innerHTML += `<div class="t-xs t-muted" style="padding:6px 0 10px">No leads here yet</div>`
     items.forEach(c=>{
-      const nextStage=STAGES[STAGES.indexOf(c.stage)+1]
-      const card=document.createElement('div')
-      card.className='contact-card'
-      card.innerHTML=`<div class="contact-name">${c.name}</div>
+      const nextStage = STAGES[STAGES.indexOf(c.stage)+1]
+      const card = document.createElement('div')
+      card.className = 'contact-card'
+      card.innerHTML = `<div class="contact-name">${c.name}</div>
         <div class="contact-meta">${c.service}${c.value?` · $${c.value.toLocaleString()}`:''}${c.notes?' · '+c.notes:''}</div>
         <div class="contact-actions">
-          ${nextStage?`<button class="btn btn-primary btn-sm" onclick="advanceContact('${c.id}')">→ ${nextStage}</button>`:'<span class="chip on">Won ✓</span>'}
+          ${nextStage
+            ?`<button class="btn btn-primary btn-sm" onclick="advanceContact('${c.id}')">→ ${nextStage}</button>`
+            :'<span class="chip on">Won ✓</span>'}
           <button class="btn btn-ghost btn-sm" style="color:var(--red)" onclick="removeContact('${c.id}')">Remove</button>
         </div>`
       sec.appendChild(card)
     })
     board.appendChild(sec)
   })
-  const total=contacts.filter(c=>c.stage==='Closed').reduce((s,c)=>s+(c.value||0),0)
-  document.getElementById('pipeline-total').textContent='$'+total.toLocaleString()
-  document.getElementById('stat-pipeline').textContent='$'+total.toLocaleString()
+  const total = contacts.filter(c=>c.stage==='Closed').reduce((s,c)=>s+(c.value||0),0)
+  document.getElementById('pipeline-total').textContent = '$'+total.toLocaleString()
+  document.getElementById('stat-pipeline').textContent  = '$'+total.toLocaleString()
 }
-function addContact(){
-  const name=document.getElementById('c-name').value.trim();if(!name) return
-  const contacts=S.get('pipeline',[])
+
+function addContact() {
+  const name = document.getElementById('c-name').value.trim()
+  if(!name) return
+  const contacts = S.get('pipeline',[])
   contacts.push({
-    id:Date.now().toString(),name,
-    service:document.getElementById('c-service').value.trim(),
-    value:parseFloat(document.getElementById('c-value').value)||0,
-    notes:document.getElementById('c-notes').value.trim(),
-    stage:'Prospect',createdAt:new Date().toISOString(),
+    id: Date.now().toString(), name,
+    service: document.getElementById('c-service').value.trim(),
+    value:   parseFloat(document.getElementById('c-value').value)||0,
+    notes:   document.getElementById('c-notes').value.trim(),
+    stage:   'Prospect',
+    createdAt: new Date().toISOString(),
   })
-  S.set('pipeline',contacts)
+  S.set('pipeline', contacts)
   ;['c-name','c-service','c-value','c-notes'].forEach(id=>document.getElementById(id).value='')
-  closeModal('contact-modal');renderPipeline();flash('Lead added ✓')
+  closeModal('contact-modal'); renderPipeline(); flash('Lead added ✓')
 }
-function advanceContact(id){
-  const contacts=S.get('pipeline',[])
-  const c=contacts.find(x=>x.id===id);if(!c) return
-  const idx=STAGES.indexOf(c.stage)
-  if(idx<STAGES.length-1){c.stage=STAGES[idx+1];S.set('pipeline',contacts);renderPipeline();flash('→ '+c.stage+' ✓')}
+
+function advanceContact(id) {
+  const contacts = S.get('pipeline',[])
+  const c = contacts.find(x=>x.id===id); if(!c) return
+  const idx = STAGES.indexOf(c.stage)
+  if(idx<STAGES.length-1) { c.stage=STAGES[idx+1]; S.set('pipeline',contacts); renderPipeline(); flash('→ '+c.stage+' ✓') }
 }
-function removeContact(id){S.set('pipeline',S.get('pipeline',[]).filter(x=>x.id!==id));renderPipeline()}
-let tDur=25,tSec=25*60,tRunning=false,tInterval=null
-function setDur(min,btn){
+
+function removeContact(id) {
+  S.set('pipeline', S.get('pipeline',[]).filter(x=>x.id!==id)); renderPipeline()
+}
+
+// ── FOCUS TIMER ──────────────────────────────────────────────────────────────
+let tDur=25, tSec=25*60, tRunning=false, tInterval=null
+
+function setDur(min, btn) {
   if(tRunning) return
-  tDur=min;tSec=min*60
+  tDur=min; tSec=min*60
   document.querySelectorAll('.dur-btn').forEach(b=>b.classList.remove('active'))
-  btn.classList.add('active');renderTimerDisplay()
-}
-function renderTimerDisplay(){
-  const m=String(Math.floor(tSec/60)).padStart(2,'0')
-  const s=String(tSec%60).padStart(2,'0')
-  const el=document.getElementById('timer-time')
-  el.textContent=m+':'+s;el.className='timer-time'+(tRunning?' running':'')
-  document.getElementById('timer-lbl').textContent=tRunning?'Focus…':(tSec===0?'Done! 🎯':'Ready')
-  document.getElementById('timer-btn').textContent=tRunning?'Pause':'Start'
-}
-function timerToggle(){
-  if(tSec===0){timerReset();return}
-  tRunning=!tRunning
-  if(tRunning){
-    tInterval=setInterval(()=>{
-      tSec--;renderTimerDisplay()
-      if(tSec===0){tRunning=false;clearInterval(tInterval);logSession();if('vibrate' in navigator)navigator.vibrate([200,100,200]);flash('Session done! 🎯')}
-    },1000)
-  } else {clearInterval(tInterval)}
+  btn.classList.add('active')
   renderTimerDisplay()
 }
-function timerReset(){clearInterval(tInterval);tRunning=false;tSec=tDur*60;renderTimerDisplay()}
-function logSession(task){
-  task=task||document.getElementById('focus-task').value.trim()||'Deep work'
-  const log=S.get('focus_log',[])
-  log.unshift({task,dur:tDur,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),date:today()})
-  S.set('focus_log',log.slice(0,25));renderFocusLog()
+
+function renderTimerDisplay() {
+  const m = String(Math.floor(tSec/60)).padStart(2,'0')
+  const s = String(tSec%60).padStart(2,'0')
+  const el = document.getElementById('timer-time')
+  el.textContent = m+':'+s
+  el.className = 'timer-time'+(tRunning?' running':'')
+  document.getElementById('timer-lbl').textContent = tRunning?'Focus…':(tSec===0?'Done! 🎯':'Ready')
+  document.getElementById('timer-btn').textContent = tRunning?'Pause':'Start'
 }
-function renderFocusLog(){
-  const log=S.get('focus_log',[])
-  const el=document.getElementById('focus-log')
-  if(!log.length){el.innerHTML='<div class="t-xs t-muted">No sessions yet — start your first!</div>';return}
-  el.innerHTML=log.slice(0,8).map(l=>`<div class="log-item">
+
+function timerToggle() {
+  if(tSec===0){ timerReset(); return }
+  tRunning=!tRunning
+  if(tRunning) {
+    tInterval = setInterval(()=>{
+      tSec--; renderTimerDisplay()
+      if(tSec===0){
+        tRunning=false; clearInterval(tInterval)
+        logSession(); if('vibrate' in navigator) navigator.vibrate([200,100,200])
+        flash('Session done! 🎯')
+      }
+    },1000)
+  } else { clearInterval(tInterval) }
+  renderTimerDisplay()
+}
+
+function timerReset() { clearInterval(tInterval); tRunning=false; tSec=tDur*60; renderTimerDisplay() }
+
+function logSession(task) {
+  task = task||document.getElementById('focus-task').value.trim()||'Deep work'
+  const log = S.get('focus_log',[])
+  log.unshift({ task, dur:tDur, time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}), date:today() })
+  S.set('focus_log', log.slice(0,25)); renderFocusLog()
+}
+
+function renderFocusLog() {
+  const log = S.get('focus_log',[])
+  const el  = document.getElementById('focus-log')
+  if(!log.length){ el.innerHTML='<div class="t-xs t-muted">No sessions yet — start your first!</div>'; return }
+  el.innerHTML = log.slice(0,8).map(l=>`<div class="log-item">
     <span>${l.task}</span>
     <span class="t-xs t-muted">${l.dur?l.dur+'m · ':''}${l.time}</span>
   </div>`).join('')
 }
-function clearLog(){S.set('focus_log',[]);renderFocusLog()}
-function routeTask(action){
-  const task=document.getElementById('router-input').value.trim();if(!task) return
-  const log=S.get('focus_log',[])
-  log.unshift({task:'['+action+'] '+task,dur:0,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),date:today()})
-  S.set('focus_log',log.slice(0,25))
-  document.getElementById('router-input').value='';renderFocusLog();flash('Routed: '+action+' ✓')
+
+function clearLog() { S.set('focus_log',[]); renderFocusLog() }
+
+function routeTask(action) {
+  const task = document.getElementById('router-input').value.trim(); if(!task) return
+  const log  = S.get('focus_log',[])
+  log.unshift({ task:'['+action+'] '+task, dur:0, time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}), date:today() })
+  S.set('focus_log', log.slice(0,25))
+  document.getElementById('router-input').value=''; renderFocusLog(); flash('Routed: '+action+' ✓')
 }
-let _limitPushed=null
-function setLimit(val){
-  _limitPushed=val
-  const y=document.getElementById('limit-yes'),n=document.getElementById('limit-no')
-  y.style.cssText=val?'background:var(--red);color:#fff;border-color:var(--red)':''
-  n.style.cssText=!val?'background:var(--surface);border-color:var(--border)':''
+
+// ── REFLECT ──────────────────────────────────────────────────────────────────
+let _limitPushed = null
+
+function setLimit(val) {
+  _limitPushed = val
+  const y=document.getElementById('limit-yes'), n=document.getElementById('limit-no')
+  y.style.cssText = val?'background:var(--red);color:#fff;border-color:var(--red)':''
+  n.style.cssText = !val?'background:var(--surface);border-color:var(--border)':''
 }
-function saveReflect(){
-  const entry={
-    date:today(),
-    mood:parseInt(document.getElementById('mood-s').value),
-    energy:parseInt(document.getElementById('energy-s').value),
-    wins:[1,2,3].map(n=>document.getElementById('win'+n).value.trim()).filter(Boolean),
-    gratitude:[1,2,3].map(n=>document.getElementById('grat'+n).value.trim()).filter(Boolean),
-    content:document.getElementById('reflect-content').value.trim(),
-    limitPushed:_limitPushed,
-    limitNote:document.getElementById('limit-note').value.trim(),
-    savedAt:new Date().toISOString(),
+
+function saveReflect() {
+  const entry = {
+    date: today(),
+    mood:   parseInt(document.getElementById('mood-s').value),
+    energy: parseInt(document.getElementById('energy-s').value),
+    wins: [1,2,3].map(n=>document.getElementById('win'+n).value.trim()).filter(Boolean),
+    gratitude: [1,2,3].map(n=>document.getElementById('grat'+n).value.trim()).filter(Boolean),
+    content: document.getElementById('reflect-content').value.trim(),
+    limitPushed: _limitPushed,
+    limitNote: document.getElementById('limit-note').value.trim(),
+    savedAt: new Date().toISOString(),
   }
-  const entries=S.get('reflections',[])
-  const idx=entries.findIndex(e=>e.date===today())
+  const entries = S.get('reflections',[])
+  const idx = entries.findIndex(e=>e.date===today())
   if(idx>=0) entries[idx]=entry; else entries.unshift(entry)
-  S.set('reflections',entries.slice(0,90));flash('Reflection saved ✓');renderReflectHistory()
+  S.set('reflections', entries.slice(0,90)); flash('Reflection saved ✓'); renderReflectHistory()
 }
-function renderReflectHistory(){
-  const entries=S.get('reflections',[])
-  const el=document.getElementById('reflect-history')
-  if(!entries.length){el.innerHTML='<div class="t-xs t-muted">No entries yet</div>';return}
-  el.innerHTML=entries.slice(0,5).map(e=>`<div class="log-item" style="flex-direction:column;align-items:flex-start;gap:4px">
+
+function renderReflectHistory() {
+  const entries = S.get('reflections',[])
+  const el = document.getElementById('reflect-history')
+  if(!entries.length){ el.innerHTML='<div class="t-xs t-muted">No entries yet</div>'; return }
+  el.innerHTML = entries.slice(0,5).map(e=>`<div class="log-item" style="flex-direction:column;align-items:flex-start;gap:4px">
     <div class="flex ai-c jb w-full">
       <span class="t-sm t-bold">${e.date}</span>
       <span class="t-xs t-muted">Mood ${e.mood}/10 · Energy ${e.energy}/10</span>
@@ -779,31 +980,36 @@ function renderReflectHistory(){
     ${e.limitPushed!==null?`<div class="t-xs" style="color:${e.limitPushed?'var(--red)':'var(--muted)'}">${e.limitPushed?'Pushed past limit':'Did not push'}</div>`:''}
   </div>`).join('')
 }
-function loadTodayReflect(){
-  const entry=(S.get('reflections',[])||[]).find(e=>e.date===today());if(!entry) return
-  document.getElementById('mood-s').value=entry.mood
-  document.getElementById('mood-v').textContent=entry.mood
-  document.getElementById('energy-s').value=entry.energy
-  document.getElementById('energy-v').textContent=entry.energy
-  ;['win1','win2','win3'].forEach((id,i)=>{if(entry.wins[i])document.getElementById(id).value=entry.wins[i]})
-  ;['grat1','grat2','grat3'].forEach((id,i)=>{if(entry.gratitude[i])document.getElementById(id).value=entry.gratitude[i]})
-  document.getElementById('reflect-content').value=entry.content||''
-  document.getElementById('limit-note').value=entry.limitNote||''
+
+function loadTodayReflect() {
+  const entry = (S.get('reflections',[])||[]).find(e=>e.date===today()); if(!entry) return
+  document.getElementById('mood-s').value = entry.mood
+  document.getElementById('mood-v').textContent = entry.mood
+  document.getElementById('energy-s').value = entry.energy
+  document.getElementById('energy-v').textContent = entry.energy
+  ;['win1','win2','win3'].forEach((id,i)=>{ if(entry.wins[i]) document.getElementById(id).value=entry.wins[i] })
+  ;['grat1','grat2','grat3'].forEach((id,i)=>{ if(entry.gratitude[i]) document.getElementById(id).value=entry.gratitude[i] })
+  document.getElementById('reflect-content').value = entry.content||''
+  document.getElementById('limit-note').value = entry.limitNote||''
   if(entry.limitPushed!==null) setLimit(entry.limitPushed)
 }
-function renderPlan(){
-  document.getElementById('offer-text').value=S.get('my_offer','')
-  document.getElementById('sprint-win').value=S.get('sprint_win','')
-  const fs=S.get('fund_saved',0),ft=S.get('fund_target',20000)
-  document.getElementById('fund-saved').value=fs||''
-  document.getElementById('fund-target').value=ft||''
-  updateFundDisplay(fs,ft);renderWeekGrid()
+
+// ── PLAN ─────────────────────────────────────────────────────────────────────
+function renderPlan() {
+  document.getElementById('offer-text').value   = S.get('my_offer','')
+  document.getElementById('sprint-win').value   = S.get('sprint_win','')
+  const fs = S.get('fund_saved',0), ft = S.get('fund_target',20000)
+  document.getElementById('fund-saved').value   = fs||''
+  document.getElementById('fund-target').value  = ft||''
+  updateFundDisplay(fs, ft)
+  renderWeekGrid()
 }
-function renderWeekGrid(){
-  const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
-  const plan=S.get('week_plan',{})
-  const dow=(new Date().getDay()+6)%7
-  document.getElementById('week-grid').innerHTML=days.map((d,i)=>`
+
+function renderWeekGrid() {
+  const days  = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+  const plan  = S.get('week_plan',{})
+  const dow   = (new Date().getDay()+6)%7
+  document.getElementById('week-grid').innerHTML = days.map((d,i)=>`
     <div class="week-day">
       <span class="day-lbl${i===dow?' today':''}">${d}</span>
       <input type="text" value="${(plan[d]||'').replace(/"/g,'&quot;')}"
@@ -811,29 +1017,42 @@ function renderWeekGrid(){
         onblur="saveDayPlan('${d}',this.value)" />
     </div>`).join('')
 }
-function saveDayPlan(day,val){const p=S.get('week_plan',{});p[day]=val;S.set('week_plan',p)}
-function saveOffer(){S.set('my_offer',document.getElementById('offer-text').value);flash()}
-function saveSprintWin(){S.set('sprint_win',document.getElementById('sprint-win').value);flash()}
-function updateFund(){
-  const fs=parseFloat(document.getElementById('fund-saved').value)||0
-  const ft=parseFloat(document.getElementById('fund-target').value)||20000
-  S.set('fund_saved',fs);S.set('fund_target',ft);updateFundDisplay(fs,ft)
+
+function saveDayPlan(day, val) { const p=S.get('week_plan',{}); p[day]=val; S.set('week_plan',p) }
+function saveOffer()     { S.set('my_offer',    document.getElementById('offer-text').value); flash() }
+function saveSprintWin() { S.set('sprint_win',  document.getElementById('sprint-win').value);  flash() }
+
+function updateFund() {
+  const fs = parseFloat(document.getElementById('fund-saved').value)||0
+  const ft = parseFloat(document.getElementById('fund-target').value)||20000
+  S.set('fund_saved',fs); S.set('fund_target',ft); updateFundDisplay(fs,ft)
 }
-function updateFundDisplay(fs,ft){
-  const pct=ft>0?Math.min(100,(fs/ft)*100):0
-  document.getElementById('fund-lbl').textContent='$'+fs.toLocaleString()+' of $'+ft.toLocaleString()
-  document.getElementById('fund-pct').textContent=pct.toFixed(0)+'%'
-  document.getElementById('fund-fill').style.width=pct+'%'
+
+function updateFundDisplay(fs,ft) {
+  const pct = ft>0?Math.min(100,(fs/ft)*100):0
+  document.getElementById('fund-lbl').textContent = '$'+fs.toLocaleString()+' of $'+ft.toLocaleString()
+  document.getElementById('fund-pct').textContent = pct.toFixed(0)+'%'
+  document.getElementById('fund-fill').style.width = pct+'%'
 }
-function init(){
-  renderHeader();renderToday();renderGoals();renderWatchHours()
-  renderFocusLog();loadTodayReflect();renderPlan()
-  setInterval(renderHeader,60000)
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+function init() {
+  renderHeader()
+  renderToday()
+  renderGoals()
+  renderWatchHours()
+  renderFocusLog()
+  loadTodayReflect()
+  renderPlan()
+  setInterval(renderHeader, 60000)
+
   document.querySelectorAll('.modal-overlay').forEach(m=>{
-    m.addEventListener('click',e=>{if(e.target===m)closeModal(m.id)})
+    m.addEventListener('click', e=>{ if(e.target===m) closeModal(m.id) })
   })
+
   if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{})
 }
+
 init()
 </script>
 </body>
