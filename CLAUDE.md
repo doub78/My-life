@@ -85,7 +85,7 @@ Pure HTML/CSS/JS. No frameworks, no npm. localStorage (lfs_ prefix). Offline via
 **6 tabs:** Today / Goals / Pipeline / Focus / Reflect / Plan
 
 **Key constants:**
-- SPRINT_START = May 9, 2026
+- SPRINT_START = May 11, 2026
 - B20_DL = Nov 2, 2026
 - ABROAD_DL = Sep 1, 2026
 - WATCH_HOURS_START = 1800, WATCH_HOURS_GOAL = 4000
