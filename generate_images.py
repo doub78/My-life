@@ -5,7 +5,7 @@ import time
 import urllib.parse
 from pathlib import Path
 
-POLLINATIONS_URL = "https://image.pollinations.ai/prompt/{prompt}?width=1344&height=768&model=flux&nologo=true&seed={seed}&negative={negative}"
+POLLINATIONS_URL = "https://image.pollinations.ai/prompt/{prompt}?width=1344&height=768&model=flux-realism&nologo=true&seed={seed}&negative={negative}"
 OUTPUT_DIR = "generated_images"
 PROGRESS_FILE = "progress.json"
 
