@@ -10,7 +10,7 @@ POLLINATIONS_URL = "https://image.pollinations.ai/prompt/{prompt}?width=1344&hei
 OUTPUT_DIR = "generated_images"
 PROGRESS_FILE = "progress.json"
 
-STYLE_PREFIX = "2D flat animation, Extra History YouTube video art style, simple round cartoon characters with minimal facial features, thick dark outlines, flat muted colors with subtle shading, simple but detailed backgrounds, 16:9 widescreen, "
+STYLE_PREFIX = "2D flat cartoon animation, HeyHistorically YouTube style, characters with round white oval heads, tiny dot eyes and minimal line mouth, thick bold black outlines on every shape, flat solid colors absolutely no gradients no shading, clean flat simple background, very limited color palette, Flash animation aesthetic, no photorealism, no 3D rendering, no realistic textures, "
 
 PROMPTS = [
     # HOOK 001-018
