@@ -6,29 +6,21 @@ import urllib.parse
 from pathlib import Path
 
 # Pollinations.ai — free, no API key required
-POLLINATIONS_URL = "https://image.pollinations.ai/prompt/{prompt}?width=1344&height=768&model=flux-anime&nologo=true&seed={seed}"
+NEGATIVE = "photorealism, 3D render, shading, gradient, realistic, photograph, painting, watercolor, sketch, pencil, detailed texture, noise, grain, blur, anime, manga, chibi anime"
+POLLINATIONS_URL = "https://image.pollinations.ai/prompt/{prompt}?width=1344&height=768&model=turbo&nologo=true&seed={seed}&negative={negative}"
 OUTPUT_DIR = "generated_images"
 PROGRESS_FILE = "progress.json"
 
-# Style based on HeyHistorically / Extra History YouTube cartoon style:
-# - very large round white/cream oval heads, small body, big-head chibi proportions
-# - simple facial features: thin arched eyebrows, small oval or slit eyes, simple curved mouth
-# - thick bold black outlines on every shape and edge
-# - flat solid block colors, zero gradients, zero shading, zero textures
-# - limited palette (4-6 colors per scene), muted earthy tones
-# - flat simple backgrounds with clean geometric shapes
-# - 2D vector Flash cartoon aesthetic, like Homestar Runner or early Newgrounds
 STYLE_PREFIX = (
-    "2D vector cartoon illustration, HeyHistorically YouTube style, "
-    "characters with oversized round white oval head and small round body, "
-    "large head small body chibi proportions, "
-    "simple thin eyebrows, small oval eyes, simple curved line mouth, "
-    "thick bold black outlines on every single shape, "
-    "flat solid block colors with absolutely no gradients no shading no textures, "
-    "very limited muted color palette 4 to 6 colors only, "
-    "flat simple cartoon background with clean shapes, "
-    "2D Flash animation aesthetic, vector art style, "
-    "no photorealism, no 3D, no anime, no manga, no painting, "
+    "flat 2D cartoon illustration, Adventure Time cartoon style, "
+    "Cartoon Network animation style, "
+    "characters with large round heads and simple oval eyes and simple mouth, "
+    "thick bold black outlines on every shape, "
+    "flat solid colors with zero gradients zero shading zero texture, "
+    "limited color palette of 4 to 6 muted colors, "
+    "simple clean flat background, "
+    "vector art, cel-shaded, 2D animation still frame, "
+    "16:9 widescreen composition, "
 )
 
 PROMPTS = [
@@ -429,7 +421,8 @@ PROMPTS = [
 def generate_image(prompt, index):
     full_prompt = STYLE_PREFIX + prompt
     encoded = urllib.parse.quote(full_prompt)
-    url = POLLINATIONS_URL.format(prompt=encoded, seed=index * 42)
+    neg_encoded = urllib.parse.quote(NEGATIVE)
+    url = POLLINATIONS_URL.format(prompt=encoded, seed=index * 42, negative=neg_encoded)
 
     for attempt in range(4):
         try:
