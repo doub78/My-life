@@ -2,4 +2,7 @@ Total prompts: 379 | Already done: 0 | Remaining: 379
 Output dir: generated_images/
 
 [001/379] Generating... OK  (1/379 total done)
-[002/379] Generating... 
+[002/379] Generating... OK  (2/379 total done)
+[003/379] Generating... OK  (3/379 total done)
+[004/379] Generating... OK  (4/379 total done)
+[005/379] Generating... 
