@@ -8,6 +8,5 @@
 # local env files
 .env*.local
 footage/
-clips/
 packs/
 yakjatama_COMPLETE.zip
