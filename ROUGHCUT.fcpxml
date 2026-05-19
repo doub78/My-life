@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fcpxml>
+<fcpxml version="1.10">
+  <library><event name="10EvilCo"><project name="yakjatama">
+    <sequence duration="35000/25s" format="FFVideoFormat1080p25">
+      <spine>
+      <asset-clip name="NIKE_factory_workers" offset="0/25s" duration="200/25s" start="0/25s" note="HOOK|"/>
+      <asset-clip name="NIKE_factory_workers" offset="200/25s" duration="200/25s" start="750/25s" note="HOOK|"/>
+      <asset-clip name="PALANTIR_nsa_origin" offset="400/25s" duration="200/25s" start="125/25s" note="HOOK|"/>
+      <asset-clip name="DUPONT_99percent" offset="600/25s" duration="200/25s" start="0/25s" note="HOOK|"/>
+      <asset-clip name="FACEBOOK_zuckerberg_senate" offset="800/25s" duration="200/25s" start="0/25s" note="HOOK|G01_HOOK_title"/>
+      <asset-clip name="NIKE_factory_workers" offset="1000/25s" duration="500/25s" start="0/25s" note="NIKE|A01_NIKE_intro"/>
+      <asset-clip name="NIKE_factory_workers" offset="1500/25s" duration="750/25s" start="750/25s" note="NIKE|F01_NIKE_14cents"/>
+      <asset-clip name="NIKE_factory_workers" offset="2250/25s" duration="500/25s" start="2250/25s" note="NIKE|B01_NIKE_life_magazine"/>
+      <asset-clip name="NIKE_sweatshop_debate" offset="2750/25s" duration="750/25s" start="0/25s" note="NIKE|G02_NIKE_compare"/>
+      <asset-clip name="NIKE_sweatshop_debate" offset="3500/25s" duration="500/25s" start="750/25s" note="NIKE|"/>
+      <asset-clip name="COKE_sugar_science" offset="4000/25s" duration="500/25s" start="0/25s" note="COKE|A02_COKE_intro"/>
+      <asset-clip name="COKE_sugar_science" offset="4500/25s" duration="250/25s" start="1125/25s" note="COKE|G03_COKE_1886"/>
+      <asset-clip name="COKE_sugar_science" offset="4750/25s" duration="750/25s" start="1500/25s" note="COKE|C01_COKE_nyt_headline"/>
+      <asset-clip name="COKE_sugar_science" offset="5500/25s" duration="625/25s" start="2250/25s" note="COKE|"/>
+      <asset-clip name="COKE_corporate_greed" offset="6125/25s" duration="375/25s" start="0/25s" note="COKE|F06_COKE_2billion"/>
+      <asset-clip name="BOEING_factory_1966" offset="6500/25s" duration="500/25s" start="0/25s" note="BOEING|A03_BOEING_intro"/>
+      <asset-clip name="BOEING_factory_1966" offset="7000/25s" duration="500/25s" start="750/25s" note="BOEING|D01_BOEING_mcas_memo"/>
+      <asset-clip name="BOEING_crash_news" offset="7500/25s" duration="750/25s" start="0/25s" note="BOEING|C02_BOEING_nyt_headline"/>
+      <asset-clip name="BOEING_crash_news" offset="8250/25s" duration="500/25s" start="750/25s" note="BOEING|"/>
+      <asset-clip name="BOEING_tragedy_doc" offset="8750/25s" duration="750/25s" start="0/25s" note="BOEING|F02_BOEING_346"/>
+      <asset-clip name="BOEING_tragedy_doc" offset="9500/25s" duration="375/25s" start="1500/25s" note="BOEING|G04_BOEING_alaska"/>
+      <asset-clip name="BOEING_tragedy_doc" offset="9875/25s" duration="375/25s" start="2250/25s" note="BOEING|G05_BOEING_whistleblowers"/>
+      <asset-clip name="NESTLE_saleswomen" offset="10250/25s" duration="500/25s" start="0/25s" note="NESTLE|A04_NESTLE_intro"/>
+      <asset-clip name="NESTLE_contamination" offset="10750/25s" duration="500/25s" start="0/25s" note="NESTLE|"/>
+      <asset-clip name="NESTLE_saleswomen" offset="11250/25s" duration="1000/25s" start="750/25s" note="NESTLE|B03_NESTLE_nurses_life"/>
+      <asset-clip name="NESTLE_saleswomen" offset="12250/25s" duration="750/25s" start="1750/25s" note="NESTLE|"/>
+      <asset-clip name="NESTLE_contamination" offset="13000/25s" duration="500/25s" start="1500/25s" note="NESTLE|F03_NESTLE_10M"/>
+      <asset-clip name="NESTLE_water" offset="13500/25s" duration="500/25s" start="0/25s" note="NESTLE|G06_NESTLE_water"/>
+      <asset-clip name="FACEBOOK_zuckerberg_senate" offset="14000/25s" duration="500/25s" start="0/25s" note="FB|A05_FACEBOOK_intro"/>
+      <asset-clip name="FACEBOOK_myanmar_rohingya" offset="14500/25s" duration="750/25s" start="0/25s" note="FB|C05_FACEBOOK_un_headline"/>
+      <asset-clip name="FACEBOOK_myanmar_rohingya" offset="15250/25s" duration="750/25s" start="1500/25s" note="FB|D04_FACEBOOK_internal_memo"/>
+      <asset-clip name="FACEBOOK_UN" offset="16000/25s" duration="500/25s" start="0/25s" note="FB|"/>
+      <asset-clip name="FACEBOOK_spin" offset="16500/25s" duration="500/25s" start="0/25s" note="FB|"/>
+      <asset-clip name="PALANTIR_nsa_origin" offset="17000/25s" duration="625/25s" start="0/25s" note="PAL|A06_PALANTIR_intro"/>
+      <asset-clip name="PALANTIR_nsa_origin" offset="17625/25s" duration="625/25s" start="750/25s" note="PAL|"/>
+      <asset-clip name="PALANTIR_surveillance_doc" offset="18250/25s" duration="500/25s" start="0/25s" note="PAL|C07_PALANTIR_wired_headline"/>
+      <asset-clip name="PALANTIR_ice_tracking" offset="18750/25s" duration="750/25s" start="0/25s" note="PAL|G07_PALANTIR_ceo"/>
+      <asset-clip name="PALANTIR_karp_interview" offset="19500/25s" duration="500/25s" start="0/25s" note="PAL|"/>
+      <asset-clip name="PURDUE_sackler_oxy" offset="20000/25s" duration="625/25s" start="0/25s" note="PUR|A07_PURDUE_intro"/>
+      <asset-clip name="PURDUE_sackler_oxy" offset="20625/25s" duration="1125/25s" start="750/25s" note="PUR|D03_PURDUE_sackler_email"/>
+      <asset-clip name="PURDUE_dw" offset="21750/25s" duration="750/25s" start="0/25s" note="PUR|C04_PURDUE_nyt_headline"/>
+      <asset-clip name="PURDUE_dw" offset="22500/25s" duration="625/25s" start="1500/25s" note="PUR|F04_PURDUE_500K"/>
+      <asset-clip name="PURDUE_sackler_oxy" offset="23125/25s" duration="500/25s" start="3000/25s" note="PUR|G08_PURDUE_mckinsey"/>
+      <asset-clip name="PURDUE_families" offset="23625/25s" duration="500/25s" start="0/25s" note="PUR|"/>
+      <asset-clip name="PURDUE_street" offset="24125/25s" duration="500/25s" start="0/25s" note="PUR|"/>
+      <asset-clip name="EXXON_valdez_cbs" offset="24625/25s" duration="500/25s" start="0/25s" note="EXX|A08_EXXON_intro"/>
+      <asset-clip name="EXXON_climate" offset="25125/25s" duration="750/25s" start="0/25s" note="EXX|D02_EXXON_climate_memo"/>
+      <asset-clip name="EXXON_climate" offset="25875/25s" duration="750/25s" start="1500/25s" note="EXX|C03_EXXON_nyt_headline"/>
+      <asset-clip name="EXXON_valdez_cbs" offset="26625/25s" duration="500/25s" start="750/25s" note="EXX|E01_EXXON_cbs_breaking"/>
+      <asset-clip name="EXXON_deepwater" offset="27125/25s" duration="500/25s" start="0/25s" note="EXX|"/>
+      <asset-clip name="DUTCH_amsterdam" offset="27625/25s" duration="625/25s" start="0/25s" note="DUT|A09_DUTCH_intro"/>
+      <asset-clip name="DUTCH_amsterdam" offset="28250/25s" duration="625/25s" start="750/25s" note="DUT|"/>
+      <asset-clip name="DUTCH_voc" offset="28875/25s" duration="875/25s" start="0/25s" note="DUT|G11_DUTCH_banda"/>
+      <asset-clip name="DUTCH_indonesia" offset="29750/25s" duration="875/25s" start="0/25s" note="DUT|G12_DUTCH_opium"/>
+      <asset-clip name="DUPONT_history" offset="30625/25s" duration="500/25s" start="0/25s" note="DUP|A10_DUPONT_intro"/>
+      <asset-clip name="DUPONT_westvirginia" offset="31125/25s" duration="500/25s" start="0/25s" note="DUP|C06_DUPONT_nyt_headline"/>
+      <asset-clip name="DUPONT_pollution" offset="31625/25s" duration="625/25s" start="0/25s" note="DUP|G09_DUPONT_quote"/>
+      <asset-clip name="DUPONT_bilott" offset="32250/25s" duration="750/25s" start="0/25s" note="DUP|G10_DUPONT_110k"/>
+      <asset-clip name="DUPONT_99percent" offset="33000/25s" duration="1000/25s" start="0/25s" note="DUP|F05_DUPONT_99pct"/>
+      <asset-clip name="NIKE_factory_workers" offset="34000/25s" duration="50/25s" start="750/25s" note="OUT|"/>
+      <asset-clip name="BOEING_crash_news" offset="34050/25s" duration="50/25s" start="1500/25s" note="OUT|"/>
+      <asset-clip name="COKE_sugar_science" offset="34100/25s" duration="50/25s" start="3000/25s" note="OUT|"/>
+      <asset-clip name="NESTLE_saleswomen" offset="34150/25s" duration="50/25s" start="1125/25s" note="OUT|"/>
+      <asset-clip name="FACEBOOK_zuckerberg_senate" offset="34200/25s" duration="50/25s" start="2250/25s" note="OUT|"/>
+      <asset-clip name="PALANTIR_ice_tracking" offset="34250/25s" duration="50/25s" start="1500/25s" note="OUT|"/>
+      <asset-clip name="PURDUE_sackler_oxy" offset="34300/25s" duration="50/25s" start="4500/25s" note="OUT|"/>
+      <asset-clip name="EXXON_valdez_cbs" offset="34350/25s" duration="50/25s" start="2250/25s" note="OUT|"/>
+      <asset-clip name="DUTCH_voc" offset="34400/25s" duration="50/25s" start="750/25s" note="OUT|"/>
+      <asset-clip name="DUPONT_99percent" offset="34450/25s" duration="50/25s" start="1500/25s" note="OUT|"/>
+      <asset-clip name="DUPONT_99percent" offset="34500/25s" duration="500/25s" start="2250/25s" note="OUT|G13_OUTRO_subscribe"/>
+      </spine>
+    </sequence>
+  </project></event></library>
+</fcpxml>
