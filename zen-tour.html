@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>ZEN TOUR — ခရီးသွား ဝန်ဆောင်မှု</title>
-  <meta name="description" content="Myanmar traveler's trusted partner. Private tours, visa, flights across Asia." />
-  <meta name="theme-color" content="#DC2626" />
+  <title>ZEN TOUR — Private Tour Myanmar</title>
+  <meta name="description" content="Myanmar's trusted private tour service. Visa, flights, hotels & custom itineraries across Asia." />
+  <meta name="theme-color" content="#0F172A" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,28 +13,28 @@
 
   <style>
     :root {
-      --red:        #DC2626;
-      --red-2:      #B91C1C;
-      --red-3:      #991B1B;
-      --red-4:      #7F1D1D;
-      --red-light:  #FEF2F2;
-      --red-mid:    #FECACA;
-      --orange:     #F97316;
-      --dark:       #111827;
-      --gray-700:   #374151;
-      --gray-500:   #6B7280;
-      --gray-300:   #D1D5DB;
-      --gray-100:   #F3F4F6;
+      --blue:       #1D4ED8;
+      --blue-2:     #1E40AF;
+      --blue-3:     #1E3A8A;
+      --blue-light: #EFF6FF;
+      --blue-mid:   #BFDBFE;
+      --black:      #0F0F0F;
+      --dark:       #0F172A;
+      --dark-2:     #1E293B;
+      --gray-600:   #475569;
+      --gray-400:   #94A3B8;
+      --gray-200:   #E2E8F0;
+      --gray-100:   #F1F5F9;
       --white:      #FFFFFF;
       --font-my:    'Noto Sans Myanmar', 'Poppins', sans-serif;
       --font-en:    'Poppins', sans-serif;
-      --grad:       linear-gradient(135deg, #EF4444 0%, #DC2626 40%, #991B1B 100%);
-      --grad-h:     linear-gradient(160deg, #EF4444 0%, #DC2626 50%, #7F1D1D 100%);
+      --grad-blue:  linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 60%, #2563EB 100%);
+      --grad-dark:  linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
       --radius-sm:  8px;
       --radius:     14px;
-      --radius-lg:  20px;
-      --shadow:     0 2px 16px rgba(0,0,0,.08);
-      --shadow-md:  0 4px 24px rgba(0,0,0,.12);
+      --shadow:     0 2px 12px rgba(0,0,0,.07);
+      --shadow-md:  0 4px 24px rgba(0,0,0,.1);
+      --shadow-blue: 0 4px 20px rgba(29,78,216,.25);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,159 +45,237 @@
       color: var(--dark);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: 80px;
+      padding-bottom: 88px;
     }
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
 
-    /* ─── TOP HEADER ─────────────────────────────────── */
+    /* ─── HEADER ─────────────────────────────────────── */
     .header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: var(--grad);
-      padding: 0 16px;
-      height: 56px;
-      display: flex; align-items: center; gap: 10px;
+      background: var(--black);
+      height: 58px;
+      display: flex; align-items: center;
+      padding: 0 16px; gap: 12px;
     }
     .header-burger {
       background: none; border: none; cursor: pointer;
-      color: var(--white); font-size: 22px; padding: 4px;
+      color: var(--white); font-size: 20px; padding: 4px;
+      flex-shrink: 0; display: flex; align-items: center;
+    }
+    .header-logo {
+      display: flex; align-items: center; gap: 9px;
       flex-shrink: 0;
     }
+    .logo-circle {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; overflow: hidden;
+    }
+    .logo-circle svg { width: 20px; height: 20px; }
+    .logo-name {
+      font-family: var(--font-en); font-weight: 800; font-size: 1rem;
+      color: var(--white); letter-spacing: -.3px;
+    }
+    .logo-name span { color: #60A5FA; }
     .header-search {
       flex: 1;
-      background: rgba(255,255,255,.2);
-      border: none; border-radius: 100px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 100px;
       height: 36px; padding: 0 14px;
       display: flex; align-items: center; gap: 8px;
-      color: rgba(255,255,255,.8);
-      font-size: .85rem; font-family: var(--font-my);
-      cursor: pointer;
+      color: rgba(255,255,255,.5);
+      font-size: .82rem; cursor: pointer;
     }
-    .header-search span { flex: 1; }
-    .header-icon {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: rgba(255,255,255,.2);
+    .header-action {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.12);
       display: flex; align-items: center; justify-content: center;
-      color: var(--white); font-size: 18px; flex-shrink: 0;
-      cursor: pointer;
+      color: var(--white); font-size: 16px;
+      cursor: pointer; flex-shrink: 0;
     }
 
     /* ─── DRAWER ─────────────────────────────────────── */
     .drawer-overlay {
       position: fixed; inset: 0; z-index: 200;
-      background: rgba(0,0,0,.5);
-      display: none; opacity: 0;
-      transition: opacity .25s;
+      background: rgba(0,0,0,.6);
+      display: none; opacity: 0; transition: opacity .25s;
     }
     .drawer-overlay.open { display: block; opacity: 1; }
     .drawer {
       position: fixed; top: 0; left: 0; bottom: 0; z-index: 201;
-      width: 280px; background: var(--white);
+      width: 272px; background: var(--white);
       transform: translateX(-100%);
-      transition: transform .28s ease;
-      display: flex; flex-direction: column;
-      overflow-y: auto;
+      transition: transform .28s cubic-bezier(.4,0,.2,1);
+      display: flex; flex-direction: column; overflow-y: auto;
     }
     .drawer.open { transform: translateX(0); }
     .drawer-head {
-      background: var(--grad);
-      padding: 40px 20px 24px;
+      background: var(--dark);
+      padding: 48px 20px 24px;
       display: flex; align-items: center; gap: 14px;
     }
-    .drawer-logo-box {
-      width: 52px; height: 52px; border-radius: 14px;
-      background: rgba(255,255,255,.25);
+    .drawer-logo-circle {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--blue);
       display: flex; align-items: center; justify-content: center;
-      font-size: 28px;
+      flex-shrink: 0;
     }
-    .drawer-logo-text { color: var(--white); }
-    .drawer-logo-text strong { display: block; font-size: 1.2rem; font-weight: 800; font-family: var(--font-en); }
-    .drawer-logo-text span { font-size: .75rem; opacity: .8; }
+    .drawer-logo-circle svg { width: 30px; height: 30px; }
+    .drawer-brand strong {
+      display: block; font-size: 1.2rem; font-weight: 800;
+      color: var(--white); font-family: var(--font-en);
+    }
+    .drawer-brand span {
+      font-size: .75rem; color: rgba(255,255,255,.5);
+    }
     .drawer-menu { flex: 1; padding: 8px 0; }
     .drawer-item {
       display: flex; align-items: center; gap: 14px;
-      padding: 14px 20px;
-      font-size: .95rem; font-weight: 500;
-      cursor: pointer; transition: background .15s;
+      padding: 13px 20px; font-size: .92rem; font-weight: 500;
+      cursor: pointer; transition: background .15s; color: var(--dark-2);
     }
     .drawer-item:hover { background: var(--gray-100); }
-    .drawer-item.active { color: var(--red); background: var(--red-light); }
+    .drawer-item.active { color: var(--blue); background: var(--blue-light); }
     .drawer-item-icon {
-      width: 38px; height: 38px; border-radius: 10px;
+      width: 36px; height: 36px; border-radius: 9px;
       background: var(--gray-100);
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px; flex-shrink: 0;
+      font-size: 17px; flex-shrink: 0;
     }
-    .drawer-item.active .drawer-item-icon { background: var(--red-light); }
-    .drawer-footer {
-      padding: 16px 20px 32px;
-      border-top: 1px solid var(--gray-100);
-    }
-    .drawer-telegram {
+    .drawer-item.active .drawer-item-icon { background: var(--blue-light); }
+    .drawer-footer { padding: 16px 20px 32px; border-top: 1px solid var(--gray-200); }
+    .drawer-tg-btn {
       display: flex; align-items: center; justify-content: center; gap: 8px;
-      background: var(--grad); color: var(--white);
+      background: var(--blue); color: var(--white);
       padding: 13px; border-radius: var(--radius-sm);
-      font-weight: 700; font-size: .95rem;
+      font-weight: 700; font-size: .9rem;
     }
 
     /* ─── MAIN ───────────────────────────────────────── */
-    main { padding-top: 56px; }
+    main { padding-top: 58px; }
 
     /* ─── HERO ───────────────────────────────────────── */
     .hero {
-      background: var(--grad-h);
-      padding: 28px 20px 36px;
+      background: var(--grad-blue);
+      padding: 32px 20px 40px;
       display: flex; flex-direction: column; align-items: center;
-      text-align: center; gap: 4px;
+      text-align: center; position: relative; overflow: hidden;
     }
-    .hero-mascot {
-      width: 110px; height: 110px; border-radius: 50%;
-      background: rgba(255,255,255,.18);
-      border: 3px solid rgba(255,255,255,.3);
+    .hero::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 220px; height: 220px; border-radius: 50%;
+      background: rgba(255,255,255,.05);
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -40px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: rgba(255,255,255,.04);
+    }
+    .hero-logo-wrap {
+      width: 100px; height: 100px; border-radius: 50%;
+      background: var(--blue-2);
+      border: 3px solid rgba(255,255,255,.25);
       display: flex; align-items: center; justify-content: center;
-      font-size: 56px; margin-bottom: 12px;
-      box-shadow: 0 8px 32px rgba(0,0,0,.2);
+      margin-bottom: 18px; position: relative; z-index: 1;
+      box-shadow: 0 8px 32px rgba(0,0,0,.3);
     }
+    .hero-logo-wrap svg { width: 58px; height: 58px; }
     .hero-brand {
-      font-size: 2.2rem; font-weight: 900; color: var(--white);
-      font-family: var(--font-en); letter-spacing: -1px; line-height: 1;
+      font-size: 2rem; font-weight: 900; color: var(--white);
+      font-family: var(--font-en); letter-spacing: -1px;
+      line-height: 1; position: relative; z-index: 1;
+    }
+    .hero-tagline {
+      font-size: .78rem; color: rgba(255,255,255,.6);
+      font-family: var(--font-en); font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase;
+      margin: 4px 0 14px; position: relative; z-index: 1;
     }
     .hero-sub {
-      font-size: .95rem; color: rgba(255,255,255,.85);
-      margin: 8px 0 20px; line-height: 1.6;
+      font-size: .92rem; color: rgba(255,255,255,.85);
+      line-height: 1.7; margin-bottom: 22px;
+      position: relative; z-index: 1; max-width: 320px;
     }
     .hero-cta {
-      background: var(--white); color: var(--red);
-      padding: 13px 32px; border-radius: 100px;
-      font-weight: 800; font-size: 1rem; font-family: var(--font-my);
-      box-shadow: 0 4px 20px rgba(0,0,0,.2);
+      background: var(--white); color: var(--blue-2);
+      padding: 13px 30px; border-radius: 100px;
+      font-weight: 800; font-size: .95rem;
       display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.25);
+      position: relative; z-index: 1;
+      font-family: var(--font-my);
     }
     .hero-chips {
-      display: flex; gap: 8px; flex-wrap: wrap;
-      justify-content: center; margin-top: 20px;
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 8px; margin-top: 20px; position: relative; z-index: 1;
     }
     .hero-chip {
-      background: rgba(255,255,255,.18);
-      border: 1px solid rgba(255,255,255,.3);
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
       color: var(--white);
-      padding: 6px 14px; border-radius: 100px;
-      font-size: .78rem; font-family: var(--font-en); font-weight: 500;
+      padding: 5px 13px; border-radius: 100px;
+      font-size: .75rem; font-family: var(--font-en); font-weight: 500;
     }
 
-    /* ─── SECTION WRAPPER ─────────────────────────────── */
-    .section { background: var(--white); margin-top: 10px; padding: 20px 16px; }
+    /* ─── SOCIAL CONNECT ─────────────────────────────── */
+    .social-bar {
+      background: var(--white);
+      padding: 16px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .social-divider {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .social-divider::before, .social-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--gray-200);
+    }
+    .social-divider-text {
+      font-size: .75rem; color: var(--gray-400);
+      font-family: var(--font-en); white-space: nowrap; font-weight: 500;
+    }
+    .social-btns {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    }
+    .social-btn {
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      padding: 11px 6px; border-radius: var(--radius-sm);
+      border: 1.5px solid var(--gray-200);
+      font-size: .8rem; font-weight: 600; cursor: pointer;
+      font-family: var(--font-en); transition: all .15s;
+    }
+    .social-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .soc-tg  { color: #0088CC; }
+    .soc-tg:hover  { background: #F0F9FF; border-color: #0088CC; }
+    .soc-vb  { color: #7C3AED; }
+    .soc-vb:hover  { background: #F5F3FF; border-color: #7C3AED; }
+    .soc-fb  { color: #1877F2; }
+    .soc-fb:hover  { background: #EFF6FF; border-color: #1877F2; }
+
+    /* ─── SECTION ────────────────────────────────────── */
+    .section { background: var(--white); margin-top: 8px; padding: 18px 16px; }
     .section-head {
       display: flex; align-items: center; justify-content: space-between;
       margin-bottom: 16px;
     }
     .section-title {
-      font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 8px;
+      font-size: .95rem; font-weight: 700;
+      display: flex; align-items: center; gap: 7px; color: var(--dark);
     }
-    .section-title-icon { font-size: 18px; }
+    .section-icon {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: var(--blue-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+    }
     .see-all {
-      font-size: .8rem; color: var(--red); font-weight: 600;
-      font-family: var(--font-en); display: flex; align-items: center; gap: 3px;
+      font-size: .78rem; color: var(--blue);
+      font-weight: 600; font-family: var(--font-en);
     }
 
     /* ─── QUICK ACTIONS ──────────────────────────────── */
@@ -205,383 +283,315 @@
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
     }
     .quick-item {
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      cursor: pointer;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 6px; cursor: pointer;
     }
     .quick-icon {
-      width: 52px; height: 52px; border-radius: var(--radius-sm);
-      background: var(--red-light);
+      width: 54px; height: 54px; border-radius: 14px;
+      background: var(--blue-light);
       display: flex; align-items: center; justify-content: center;
-      font-size: 24px;
-      transition: transform .15s;
+      font-size: 22px; transition: transform .15s;
+      border: 1px solid transparent;
     }
-    .quick-item:hover .quick-icon { transform: scale(1.05); }
+    .quick-item:active .quick-icon { transform: scale(.93); }
     .quick-label {
-      font-size: .72rem; text-align: center; color: var(--gray-700);
-      line-height: 1.3; font-weight: 500;
+      font-size: .68rem; text-align: center; color: var(--gray-600);
+      font-weight: 600; line-height: 1.3;
     }
 
-    /* ─── PROMO BANNER ───────────────────────────────── */
-    .promo-banner {
-      margin: 10px 0 0;
-      background: var(--grad);
+    /* ─── PROMO ──────────────────────────────────────── */
+    .promo {
+      margin-top: 16px;
+      background: var(--dark);
       border-radius: var(--radius);
       padding: 18px 20px;
-      display: flex; align-items: center; gap: 16px;
+      display: flex; align-items: center; gap: 14px;
       overflow: hidden; position: relative;
     }
-    .promo-bg-circle {
-      position: absolute; right: -20px; top: -30px;
-      width: 140px; height: 140px; border-radius: 50%;
-      background: rgba(255,255,255,.1);
+    .promo-glow {
+      position: absolute; right: -30px; top: 50%; transform: translateY(-50%);
+      width: 120px; height: 120px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(29,78,216,.4), transparent 70%);
     }
-    .promo-bg-circle-2 {
-      position: absolute; right: 60px; bottom: -40px;
-      width: 100px; height: 100px; border-radius: 50%;
-      background: rgba(255,255,255,.07);
+    .promo-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--blue); flex-shrink: 0; z-index: 1;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
     }
-    .promo-emoji { font-size: 40px; z-index: 1; flex-shrink: 0; }
     .promo-text { z-index: 1; }
-    .promo-tag {
-      background: rgba(255,255,255,.25); color: var(--white);
-      font-size: .68rem; font-weight: 700; font-family: var(--font-en);
-      padding: 2px 10px; border-radius: 100px; letter-spacing: .5px;
-      display: inline-block; margin-bottom: 6px;
+    .promo-badge {
+      background: rgba(96,165,250,.2); color: #93C5FD;
+      font-size: .65rem; font-weight: 700; font-family: var(--font-en);
+      padding: 2px 9px; border-radius: 100px; letter-spacing: .5px;
+      display: inline-block; margin-bottom: 5px;
     }
     .promo-title {
-      font-size: 1rem; font-weight: 800; color: var(--white); line-height: 1.3;
+      font-size: .95rem; font-weight: 800; color: var(--white); line-height: 1.3;
     }
     .promo-sub {
-      font-size: .78rem; color: rgba(255,255,255,.8); margin-top: 3px;
-      font-family: var(--font-en);
+      font-size: .75rem; color: rgba(255,255,255,.5);
+      margin-top: 2px; font-family: var(--font-en);
     }
 
     /* ─── PACKAGES ───────────────────────────────────── */
     .pkg-scroll {
-      display: flex; gap: 12px;
-      overflow-x: auto; padding-bottom: 4px;
+      display: flex; gap: 12px; overflow-x: auto; padding-bottom: 4px;
       scrollbar-width: none;
     }
     .pkg-scroll::-webkit-scrollbar { display: none; }
     .pkg-card {
-      flex: 0 0 160px;
+      flex: 0 0 155px; border-radius: var(--radius);
       background: var(--white);
-      border: 1.5px solid var(--gray-300);
-      border-radius: var(--radius);
-      overflow: hidden;
-      cursor: pointer;
+      border: 1.5px solid var(--gray-200);
+      overflow: hidden; cursor: pointer;
       transition: border-color .2s, box-shadow .2s;
     }
-    .pkg-card:hover { border-color: var(--red); box-shadow: 0 4px 16px rgba(220,38,38,.15); }
-    .pkg-img {
-      width: 100%; height: 100px; object-fit: cover;
-      background: var(--gray-100);
-    }
+    .pkg-card:hover { border-color: var(--blue); box-shadow: var(--shadow-blue); }
+    .pkg-img { width: 100%; height: 95px; object-fit: cover; background: var(--gray-200); }
     .pkg-body { padding: 10px; }
-    .pkg-flag { font-size: 1.2rem; }
-    .pkg-name { font-size: .82rem; font-weight: 700; margin: 4px 0 2px; line-height: 1.3; }
-    .pkg-duration {
-      font-size: .7rem; color: var(--gray-500);
-      font-family: var(--font-en);
+    .pkg-flag { font-size: 1.1rem; }
+    .pkg-name { font-size: .8rem; font-weight: 700; margin: 4px 0 2px; line-height: 1.35; color: var(--dark); }
+    .pkg-days { font-size: .68rem; color: var(--gray-400); font-family: var(--font-en); }
+    .pkg-cta {
+      display: inline-block; margin-top: 8px;
+      font-size: .68rem; font-weight: 700; font-family: var(--font-en);
+      color: var(--blue); background: var(--blue-light);
+      padding: 3px 9px; border-radius: 100px;
     }
-    .pkg-price {
-      font-size: .8rem; font-weight: 700; color: var(--red);
-      margin-top: 6px; font-family: var(--font-en);
-    }
-    .pkg-price span { font-size: .65rem; font-weight: 400; color: var(--gray-500); }
 
     /* ─── DESTINATIONS ────────────────────────────────── */
-    .dest-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
-    }
+    .dest-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .dest-card {
       position: relative; border-radius: var(--radius-sm);
-      overflow: hidden; aspect-ratio: 3/2; cursor: pointer;
-      background: var(--gray-300);
+      overflow: hidden; aspect-ratio: 3/2;
+      cursor: pointer; background: var(--gray-200);
     }
-    .dest-card.big { grid-column: span 2; aspect-ratio: 16/7; }
-    .dest-img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform .4s;
-    }
+    .dest-card.wide { grid-column: span 2; aspect-ratio: 16/7; }
+    .dest-img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
     .dest-card:hover .dest-img { transform: scale(1.06); }
     .dest-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 60%);
+      background: linear-gradient(to top, rgba(15,23,42,.75) 0%, transparent 55%);
     }
     .dest-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 12px; }
-    .dest-name { font-size: .95rem; font-weight: 700; color: var(--white); }
-    .dest-card.big .dest-name { font-size: 1.2rem; }
-    .dest-en { font-size: .65rem; color: rgba(255,255,255,.7); font-family: var(--font-en); }
+    .dest-name { font-size: .9rem; font-weight: 700; color: var(--white); }
+    .dest-card.wide .dest-name { font-size: 1.1rem; }
+    .dest-en { font-size: .62rem; color: rgba(255,255,255,.6); font-family: var(--font-en); margin-top: 1px; }
     .dest-badge {
       position: absolute; top: 8px; left: 8px;
-      background: var(--red); color: var(--white);
-      font-size: .62rem; font-weight: 700; font-family: var(--font-en);
+      background: var(--blue); color: var(--white);
+      font-size: .6rem; font-weight: 700; font-family: var(--font-en);
       padding: 2px 8px; border-radius: 100px; letter-spacing: .5px;
     }
 
     /* ─── HOW IT WORKS ────────────────────────────────── */
-    .steps { display: flex; flex-direction: column; gap: 2px; }
+    .steps { display: flex; flex-direction: column; }
     .step {
-      display: flex; align-items: flex-start; gap: 14px;
-      padding: 16px 0;
+      display: flex; gap: 14px; padding: 14px 0;
       border-bottom: 1px solid var(--gray-100);
     }
     .step:last-child { border-bottom: none; }
-    .step-num-box {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: var(--red-light); color: var(--red);
-      font-size: 1.1rem; font-weight: 900; font-family: var(--font-en);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+    .step-num {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--blue-light); color: var(--blue);
+      font-size: 1rem; font-weight: 900; font-family: var(--font-en);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .step-content {}
-    .step-title { font-size: .92rem; font-weight: 700; margin-bottom: 4px; }
-    .step-desc { font-size: .82rem; color: var(--gray-500); line-height: 1.6; }
+    .step-title { font-size: .88rem; font-weight: 700; margin-bottom: 3px; }
+    .step-desc { font-size: .8rem; color: var(--gray-600); line-height: 1.6; }
 
-    /* ─── TRUST STATS ─────────────────────────────────── */
-    .trust-section {
-      background: var(--grad);
-      margin-top: 10px; padding: 24px 16px;
+    /* ─── WHY US ─────────────────────────────────────── */
+    .why-section {
+      background: var(--dark); margin-top: 8px; padding: 24px 16px;
     }
-    .trust-label {
-      text-align: center; color: rgba(255,255,255,.7);
-      font-size: .8rem; font-family: var(--font-en); letter-spacing: .5px;
-      text-transform: uppercase; margin-bottom: 20px;
+    .why-label {
+      text-align: center; color: rgba(255,255,255,.4);
+      font-size: .72rem; font-family: var(--font-en); letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 18px;
     }
-    .trust-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+    .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .why-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius-sm); padding: 16px 14px;
+      display: flex; align-items: flex-start; gap: 12px;
     }
-    .trust-card {
-      background: rgba(255,255,255,.15);
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: var(--radius-sm);
-      padding: 16px 14px;
-      display: flex; align-items: center; gap: 12px;
+    .why-card-icon {
+      width: 38px; height: 38px; border-radius: 9px;
+      background: rgba(29,78,216,.35);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
     }
-    .trust-card-icon { font-size: 26px; flex-shrink: 0; }
-    .trust-card-text strong {
-      display: block; font-size: .9rem; font-weight: 700; color: var(--white);
-      line-height: 1.3;
-    }
-    .trust-card-text span {
-      font-size: .72rem; color: rgba(255,255,255,.65);
-    }
+    .why-card-title { font-size: .82rem; font-weight: 700; color: var(--white); line-height: 1.3; }
+    .why-card-sub { font-size: .7rem; color: rgba(255,255,255,.45); margin-top: 2px; }
 
     /* ─── CONTACT ─────────────────────────────────────── */
-    .contact-cards { display: flex; flex-direction: column; gap: 10px; }
-    .contact-card {
+    .contact-list { display: flex; flex-direction: column; gap: 8px; }
+    .contact-row {
       display: flex; align-items: center; gap: 14px;
-      background: var(--white); border: 1.5px solid var(--gray-300);
-      border-radius: var(--radius-sm); padding: 16px;
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm); padding: 14px 16px;
       cursor: pointer; transition: border-color .2s;
     }
-    .contact-card:hover { border-color: var(--red); }
-    .contact-card-icon {
-      width: 46px; height: 46px; border-radius: 12px;
+    .contact-row:hover { border-color: var(--blue); }
+    .contact-row-icon {
+      width: 42px; height: 42px; border-radius: 11px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 22px; flex-shrink: 0;
+      font-size: 20px; flex-shrink: 0;
     }
-    .c-tg { background: #E0F2FE; }
-    .c-fb { background: #EEF2FF; }
-    .c-web { background: var(--red-light); }
-    .contact-card-label {
-      font-size: .7rem; color: var(--gray-500);
-      font-family: var(--font-en); font-weight: 500;
-      text-transform: uppercase; letter-spacing: .4px;
-    }
-    .contact-card-name { font-size: .95rem; font-weight: 700; margin-top: 1px; }
-    .contact-card-sub { font-size: .75rem; color: var(--gray-500); font-family: var(--font-en); }
-    .contact-arrow {
-      margin-left: auto; color: var(--gray-300);
-      font-size: 1.1rem; flex-shrink: 0;
-    }
+    .ci-tg { background: #E0F2FE; }
+    .ci-vb { background: #F5F3FF; }
+    .ci-fb { background: #EFF6FF; }
+    .ci-web { background: var(--blue-light); }
+    .contact-row-label { font-size: .68rem; color: var(--gray-400); font-family: var(--font-en); font-weight: 500; text-transform: uppercase; letter-spacing: .4px; }
+    .contact-row-name { font-size: .9rem; font-weight: 700; margin-top: 1px; }
+    .contact-row-sub { font-size: .72rem; color: var(--gray-400); font-family: var(--font-en); }
+    .contact-row-arrow { margin-left: auto; color: var(--gray-200); font-size: 1.1rem; flex-shrink: 0; }
 
     /* ─── INQUIRY FORM ────────────────────────────────── */
-    .form-wrap {
+    .form-card {
       background: var(--gray-100); border-radius: var(--radius);
       padding: 18px; margin-top: 12px;
     }
-    .form-wrap h3 { font-size: .95rem; font-weight: 700; margin-bottom: 14px; }
-    .fgroup { margin-bottom: 12px; }
-    .fgroup label {
-      display: block; font-size: .75rem; font-weight: 600;
-      color: var(--gray-700); margin-bottom: 5px;
-      font-family: var(--font-en);
-    }
-    .fgroup input,
-    .fgroup select,
-    .fgroup textarea {
+    .form-card h3 { font-size: .92rem; font-weight: 700; margin-bottom: 14px; color: var(--dark); }
+    .fg { margin-bottom: 11px; }
+    .fg label { display: block; font-size: .72rem; font-weight: 600; color: var(--gray-600); margin-bottom: 5px; font-family: var(--font-en); }
+    .fg input, .fg select, .fg textarea {
       width: 100%; padding: 11px 14px;
-      border: 1.5px solid var(--gray-300); border-radius: var(--radius-sm);
+      border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm);
       font-family: var(--font-my); font-size: .875rem;
-      background: var(--white); outline: none;
-      transition: border-color .15s; color: var(--dark);
-      -webkit-appearance: none;
+      background: var(--white); outline: none; color: var(--dark);
+      transition: border-color .15s; -webkit-appearance: none;
     }
-    .fgroup input:focus,
-    .fgroup select:focus,
-    .fgroup textarea:focus { border-color: var(--red); }
-    .fgroup textarea { resize: vertical; min-height: 90px; }
-    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .btn-submit-full {
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--blue); }
+    .fg textarea { resize: vertical; min-height: 88px; }
+    .frow2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .btn-submit {
       width: 100%; padding: 14px;
-      background: var(--grad); color: var(--white);
+      background: var(--blue); color: var(--white);
       border: none; border-radius: var(--radius-sm);
-      font-family: var(--font-my); font-size: .95rem; font-weight: 700;
+      font-family: var(--font-my); font-size: .92rem; font-weight: 700;
       cursor: pointer; margin-top: 4px;
+      transition: background .15s;
     }
+    .btn-submit:hover { background: var(--blue-2); }
     .form-success {
-      display: none; text-align: center; padding: 16px;
-      border-radius: var(--radius-sm); background: var(--red-light);
-      color: var(--red-2); font-weight: 600; font-size: .9rem;
+      display: none; text-align: center; padding: 14px;
+      border-radius: var(--radius-sm); background: var(--blue-light);
+      color: var(--blue-2); font-weight: 600; font-size: .88rem;
       margin-top: 10px;
     }
 
-    /* ─── SOCIAL CONNECT ─────────────────────────────── */
-    .social-connect {
-      background: var(--white); padding: 20px 16px;
-      margin-top: 0; border-bottom: 1px solid var(--gray-100);
-    }
-    .social-divider {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 16px;
-    }
-    .social-divider::before, .social-divider::after {
-      content: ''; flex: 1; height: 1px; background: var(--gray-300);
-    }
-    .social-divider-text {
-      font-size: .78rem; color: var(--gray-500);
-      font-family: var(--font-en); white-space: nowrap;
-    }
-    .social-btns {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-    }
-    .social-btn {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 12px 8px; border-radius: var(--radius-sm);
-      border: 1.5px solid var(--gray-300);
-      font-size: .82rem; font-weight: 600;
-      cursor: pointer; transition: border-color .15s, background .15s;
-      font-family: var(--font-en);
-    }
-    .social-btn:hover { border-color: currentColor; }
-    .social-btn-icon { font-size: 20px; }
-    .soc-tg  { color: #0088CC; }
-    .soc-tg:hover  { background: #F0FAFF; }
-    .soc-vb  { color: #7C529E; }
-    .soc-vb:hover  { background: #F5F0FF; }
-    .soc-fb  { color: #1877F2; }
-    .soc-fb:hover  { background: #EEF2FF; }
-
     /* ─── FOOTER ──────────────────────────────────────── */
     .footer {
-      background: #111;
-      padding: 28px 20px 20px;
-      margin-top: 10px; margin-bottom: 0;
+      background: var(--black); padding: 28px 16px 20px;
+      margin-top: 8px;
     }
     .footer-logo {
-      display: flex; align-items: center; gap: 10px;
-      color: var(--white); margin-bottom: 12px;
+      display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
     }
-    .footer-logo-box {
-      width: 36px; height: 36px; border-radius: 9px;
-      background: var(--red); display: flex; align-items: center;
-      justify-content: center; font-size: 18px;
+    .footer-logo-circle {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--blue); display: flex; align-items: center; justify-content: center;
     }
-    .footer-logo-text { font-size: 1.1rem; font-weight: 800; font-family: var(--font-en); }
-    .footer-desc {
-      font-size: .8rem; color: rgba(255,255,255,.45);
-      line-height: 1.7; margin-bottom: 20px;
-    }
-    .footer-links {
-      display: flex; gap: 16px; flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-    .footer-links a {
-      font-size: .8rem; color: rgba(255,255,255,.5);
-      font-family: var(--font-en); transition: color .15s;
-    }
-    .footer-links a:hover { color: var(--white); }
-    .footer-copy {
-      font-size: .75rem; color: rgba(255,255,255,.25);
-      font-family: var(--font-en); border-top: 1px solid rgba(255,255,255,.08);
-      padding-top: 16px;
-    }
+    .footer-logo-circle svg { width: 20px; height: 20px; }
+    .footer-logo-text { font-size: 1rem; font-weight: 800; color: var(--white); font-family: var(--font-en); }
+    .footer-desc { font-size: .78rem; color: rgba(255,255,255,.35); line-height: 1.7; margin-bottom: 18px; }
+    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+    .footer-links a { font-size: .78rem; color: rgba(255,255,255,.4); font-family: var(--font-en); transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,.8); }
+    .footer-copy { font-size: .72rem; color: rgba(255,255,255,.2); font-family: var(--font-en); border-top: 1px solid rgba(255,255,255,.07); padding-top: 14px; }
 
     /* ─── BOTTOM NAV ──────────────────────────────────── */
     .bottom-nav {
-      position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+      position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
       z-index: 100;
       background: var(--white);
       border-radius: 100px;
-      box-shadow: 0 4px 32px rgba(0,0,0,.18), 0 1px 4px rgba(0,0,0,.08);
+      box-shadow: 0 4px 30px rgba(0,0,0,.15), 0 1px 4px rgba(0,0,0,.06);
       display: flex; align-items: center;
-      padding: 6px 8px;
-      gap: 4px;
-      white-space: nowrap;
+      padding: 5px 6px; gap: 2px;
     }
     .bnav-item {
       display: flex; flex-direction: column; align-items: center; gap: 2px;
-      padding: 6px 14px; border-radius: 100px;
-      cursor: pointer; transition: background .15s;
-      -webkit-tap-highlight-color: transparent;
+      padding: 7px 14px; border-radius: 100px;
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
+      transition: background .15s;
     }
-    .bnav-item.active { background: var(--red-light); }
-    .bnav-icon { font-size: 20px; line-height: 1; }
-    .bnav-label {
-      font-size: .62rem; font-weight: 600;
-      color: var(--gray-500); font-family: var(--font-en);
-    }
-    .bnav-item.active .bnav-label { color: var(--red); }
+    .bnav-item.active { background: var(--blue-light); }
+    .bnav-icon { font-size: 19px; line-height: 1; }
+    .bnav-label { font-size: .6rem; font-weight: 600; color: var(--gray-400); font-family: var(--font-en); }
+    .bnav-item.active .bnav-label { color: var(--blue); }
 
-    /* ─── FADE-IN ─────────────────────────────────────── */
-    .fade-in {
-      opacity: 0; transform: translateY(20px);
-      transition: opacity .45s ease, transform .45s ease;
-    }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    /* ─── FADE IN ─────────────────────────────────────── */
+    .fi { opacity: 0; transform: translateY(18px); transition: opacity .45s ease, transform .45s ease; }
+    .fi.v { opacity: 1; transform: translateY(0); }
 
-    /* ─── DESKTOP ADJUST ──────────────────────────────── */
-    @media (min-width: 640px) {
-      body { max-width: 480px; margin: 0 auto; padding-bottom: 80px; }
+    /* ─── DESKTOP ─────────────────────────────────────── */
+    @media (min-width: 600px) {
+      body { max-width: 480px; margin: 0 auto; }
       .bottom-nav { width: calc(100% - 32px); max-width: 448px; }
+      .header { max-width: 480px; left: 50%; transform: translateX(-50%); right: auto; width: 100%; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ── HEADER ─────────────────────────────────────── -->
+  <!-- HEADER -->
   <header class="header">
-    <button class="header-burger" id="burgerBtn">☰</button>
-    <div class="header-search">
-      <span>🔍</span>
-      <span>ခရီးစဉ် ရှာဖွေရန်...</span>
+    <button class="header-burger" id="burgerBtn">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div class="header-logo">
+      <div class="logo-circle">
+        <!-- Dog silhouette matching ZEN logo -->
+        <svg viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.5 3.5C4 4.5 3.5 6 4 7.5C3 8 2.5 9 2.5 10C2.5 12.5 4 14 6 14.5V17C6 18.1 6.9 19 8 19H16C17.1 19 18 18.1 18 17V14.5C20 14 21.5 12.5 21.5 10C21.5 9 21 8 20 7.5C20.5 6 20 4.5 19.5 3.5C18.5 4 17 5 16 6.5C14.5 6 13 5.5 12 5.5C11 5.5 9.5 6 8 6.5C7 5 5.5 4 4.5 3.5Z"/>
+          <circle cx="9" cy="11" r="1.2" fill="#1D4ED8"/>
+          <circle cx="15" cy="11" r="1.2" fill="#1D4ED8"/>
+        </svg>
+      </div>
+      <div class="logo-name">ZEN <span>TOUR</span></div>
     </div>
-    <a href="https://t.me/ZenTourServices" target="_blank" class="header-icon" title="Telegram">✈</a>
-    <div class="header-icon" id="userBtn">👤</div>
+    <div class="header-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      ရှာဖွေရန်...
+    </div>
+    <a href="https://t.me/ZenTourServices" target="_blank" class="header-action" title="Telegram">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8-1.7 8.02c-.13.58-.47.72-.95.45l-2.63-1.94-1.27 1.22c-.14.14-.26.26-.53.26l.19-2.68 4.84-4.37c.21-.19-.05-.29-.32-.1L7.9 14.16l-2.57-.8c-.56-.18-.57-.56.12-.83l10.03-3.87c.46-.17.87.11.71.83z"/></svg>
+    </a>
   </header>
 
-  <!-- ── DRAWER ─────────────────────────────────────── -->
+  <!-- DRAWER -->
   <div class="drawer-overlay" id="drawerOverlay"></div>
   <nav class="drawer" id="drawer">
     <div class="drawer-head">
-      <div class="drawer-logo-box">✈</div>
-      <div class="drawer-logo-text">
+      <div class="drawer-logo-circle">
+        <svg viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.5 3.5C4 4.5 3.5 6 4 7.5C3 8 2.5 9 2.5 10C2.5 12.5 4 14 6 14.5V17C6 18.1 6.9 19 8 19H16C17.1 19 18 18.1 18 17V14.5C20 14 21.5 12.5 21.5 10C21.5 9 21 8 20 7.5C20.5 6 20 4.5 19.5 3.5C18.5 4 17 5 16 6.5C14.5 6 13 5.5 12 5.5C11 5.5 9.5 6 8 6.5C7 5 5.5 4 4.5 3.5Z"/>
+          <circle cx="9" cy="11" r="1.2" fill="#1D4ED8"/>
+          <circle cx="15" cy="11" r="1.2" fill="#1D4ED8"/>
+        </svg>
+      </div>
+      <div class="drawer-brand">
         <strong>ZEN TOUR</strong>
         <span>ခရီးသွား ဝန်ဆောင်မှု</span>
       </div>
     </div>
     <div class="drawer-menu">
       <a href="#" class="drawer-item active" onclick="closeDrawer()">
-        <div class="drawer-item-icon">🏠</div> หน้าแรก
+        <div class="drawer-item-icon">🏠</div> Home
       </a>
       <a href="#destinations" class="drawer-item" onclick="closeDrawer()">
         <div class="drawer-item-icon">🌏</div> ခရီးစဉ်များ
       </a>
       <a href="#packages" class="drawer-item" onclick="closeDrawer()">
-        <div class="drawer-item-icon">🎒</div> Package များ
+        <div class="drawer-item-icon">🎒</div> Package Tour
       </a>
       <a href="#services" class="drawer-item" onclick="closeDrawer()">
         <div class="drawer-item-icon">📋</div> ဝန်ဆောင်မှုများ
@@ -594,22 +604,28 @@
       </a>
     </div>
     <div class="drawer-footer">
-      <a href="https://t.me/ZenTourServices" target="_blank" class="drawer-telegram">
+      <a href="https://t.me/ZenTourServices" target="_blank" class="drawer-tg-btn">
         ✈ Telegram မှ မေးမြန်းရန်
       </a>
     </div>
   </nav>
 
-  <!-- ── MAIN ───────────────────────────────────────── -->
   <main>
 
     <!-- HERO -->
-    <section class="hero">
-      <div class="hero-mascot">✈</div>
+    <section class="hero" id="top">
+      <div class="hero-logo-wrap">
+        <svg viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.5 3.5C4 4.5 3.5 6 4 7.5C3 8 2.5 9 2.5 10C2.5 12.5 4 14 6 14.5V17C6 18.1 6.9 19 8 19H16C17.1 19 18 18.1 18 17V14.5C20 14 21.5 12.5 21.5 10C21.5 9 21 8 20 7.5C20.5 6 20 4.5 19.5 3.5C18.5 4 17 5 16 6.5C14.5 6 13 5.5 12 5.5C11 5.5 9.5 6 8 6.5C7 5 5.5 4 4.5 3.5Z"/>
+          <circle cx="9" cy="11" r="1.3" fill="#1D4ED8"/>
+          <circle cx="15" cy="11" r="1.3" fill="#1D4ED8"/>
+        </svg>
+      </div>
       <div class="hero-brand">ZEN TOUR</div>
+      <div class="hero-tagline">Private Tour Myanmar</div>
       <p class="hero-sub">
-        ခရီးသည်များ၏ ယုံကြည်ရသော တစ်ရပ်<br/>
-        ဗီဇာ · လေယာဉ် · Private Tour
+        ဗီဇာ · လေယာဉ် · ဟိုတယ် · Custom Itinerary<br/>
+        အာရှနိုင်ငံများသို့ လုံးဝ ကြိုတင်စီစဉ်ပေး
       </p>
       <a href="https://t.me/ZenTourServices" target="_blank" class="hero-cta">
         ✉ ယနေ့ပင် မေးမြန်းပါ
@@ -624,31 +640,32 @@
     </section>
 
     <!-- SOCIAL CONNECT -->
-    <div class="social-connect">
+    <div class="social-bar fi">
       <div class="social-divider">
-        <span class="social-divider-text">ဆက်သွယ်ရန် / Connect via</span>
+        <span class="social-divider-text">Quick Contact</span>
       </div>
       <div class="social-btns">
         <a href="https://t.me/ZenTourServices" target="_blank" class="social-btn soc-tg">
-          <span class="social-btn-icon">✈</span>
-          <span>Telegram</span>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8-1.7 8.02c-.13.58-.47.72-.95.45l-2.63-1.94-1.27 1.22c-.14.14-.26.26-.53.26l.19-2.68 4.84-4.37c.21-.19-.05-.29-.32-.1L7.9 14.16l-2.57-.8c-.56-.18-.57-.56.12-.83l10.03-3.87c.46-.17.87.11.71.83z"/></svg>
+          Telegram
         </a>
         <a href="viber://chat?number=%2B95000000000" class="social-btn soc-vb">
-          <span class="social-btn-icon">📲</span>
-          <span>Viber</span>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.4 2c-5.2.3-9 4.4-9.1 9.6 0 1.8.5 3.6 1.4 5.1L3 21l4.5-.8c1.4.8 3 1.2 4.6 1.2h.1c5.4 0 9.8-4.4 9.8-9.8 0-2.6-1-5-2.9-6.8-1.8-1.8-4.3-2.8-6.7-2.8zm3.7 13.6c-.3.8-1.5 1.5-2.1 1.6-.5.1-1.2.1-3.8-1.1-3.2-1.5-5.2-4.7-5.4-5-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 1-2.4.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .6l-.5.6c-.1.1-.2.3-.1.5.3.5.9 1.5 1.7 2.2.9.9 1.7 1.2 2.3 1.5.2.1.4 0 .5-.1l.5-.6c.2-.2.4-.3.6-.2l2 .9c.2.1.4.2.4.4.1.2.1.8-.3 1.8z"/></svg>
+          Viber
         </a>
         <a href="https://m.me/zentourservice" target="_blank" class="social-btn soc-fb">
-          <span class="social-btn-icon">💬</span>
-          <span>Facebook</span>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.936 1.469 5.556 3.768 7.28V22l3.444-1.892c.92.255 1.893.392 2.9.392C17.523 20.5 22 16.355 22 11.257S17.523 2 12 2zm1.2 12.5-2.4-2.6L5.7 14.5l5.6-5.9 2.4 2.6 5.1-2.6-5.6 5.9z"/></svg>
+          Facebook
         </a>
       </div>
     </div>
 
     <!-- QUICK ACTIONS -->
-    <section class="section fade-in" id="services">
+    <section class="section fi" id="services">
       <div class="section-head">
         <div class="section-title">
-          <span class="section-title-icon">⚡</span> ဝန်ဆောင်မှုများ
+          <div class="section-icon">⚡</div>
+          ဝန်ဆောင်မှုများ
         </div>
       </div>
       <div class="quick-grid">
@@ -666,15 +683,15 @@
         </a>
         <a href="https://t.me/ZenTourServices" target="_blank" class="quick-item">
           <div class="quick-icon">🏨</div>
-          <div class="quick-label">ဟိုတယ် ကြိုတင်မှာ</div>
+          <div class="quick-label">ဟိုတယ် မှာ</div>
         </a>
         <a href="#destinations" class="quick-item">
           <div class="quick-icon">🇨🇳</div>
-          <div class="quick-label">တရုတ်နိုင်ငံ</div>
+          <div class="quick-label">တရုတ်</div>
         </a>
         <a href="#destinations" class="quick-item">
           <div class="quick-icon">🇯🇵</div>
-          <div class="quick-label">ဂျပန်နိုင်ငံ</div>
+          <div class="quick-label">ဂျပန်</div>
         </a>
         <a href="#destinations" class="quick-item">
           <div class="quick-icon">🇰🇷</div>
@@ -686,92 +703,86 @@
         </a>
       </div>
 
-      <!-- Promo Banner -->
-      <div class="promo-banner fade-in">
-        <div class="promo-bg-circle"></div>
-        <div class="promo-bg-circle-2"></div>
-        <div class="promo-emoji">🎉</div>
+      <div class="promo fi">
+        <div class="promo-glow"></div>
+        <div class="promo-icon">✈</div>
         <div class="promo-text">
-          <span class="promo-tag">FREE</span>
-          <div class="promo-title">FREE Consultation !</div>
-          <div class="promo-sub">Telegram မှ message ပေးပါ — ဒီနေ့ပင် ကူညီပါမည်</div>
+          <span class="promo-badge">FREE</span>
+          <div class="promo-title">Free Consultation</div>
+          <div class="promo-sub">Telegram — message ပေးလိုက်ပါ</div>
         </div>
       </div>
     </section>
 
     <!-- PACKAGES -->
-    <section class="section fade-in" id="packages">
+    <section class="section fi" id="packages">
       <div class="section-head">
         <div class="section-title">
-          <span class="section-title-icon">🎒</span> ရေပန်း စားသော Package များ
+          <div class="section-icon">🎒</div>
+          Package Tour များ
         </div>
         <a href="https://t.me/ZenTourServices" target="_blank" class="see-all">အားလုံး →</a>
       </div>
       <div class="pkg-scroll">
-
         <a href="https://t.me/ZenTourServices" target="_blank" class="pkg-card">
-          <img class="pkg-img" src="https://images.unsplash.com/photo-1508804185872-b3bc76af6e28?auto=format&fit=crop&w=400&q=80" alt="China" loading="lazy" />
+          <img class="pkg-img" src="https://images.unsplash.com/photo-1508804185872-b3bc76af6e28?auto=format&fit=crop&w=400&q=80" alt="China" loading="lazy"/>
           <div class="pkg-body">
             <div class="pkg-flag">🇨🇳</div>
             <div class="pkg-name">Beijing + Zhangjiajie</div>
-            <div class="pkg-duration">7 Days 6 Nights</div>
-            <div class="pkg-price">ဆက်သွယ်ရန် <span>for price</span></div>
+            <div class="pkg-days">7 Days 6 Nights</div>
+            <span class="pkg-cta">Inquire →</span>
           </div>
         </a>
-
         <a href="https://t.me/ZenTourServices" target="_blank" class="pkg-card">
-          <img class="pkg-img" src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=400&q=80" alt="Japan" loading="lazy" />
+          <img class="pkg-img" src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=400&q=80" alt="Japan" loading="lazy"/>
           <div class="pkg-body">
             <div class="pkg-flag">🇯🇵</div>
             <div class="pkg-name">Tokyo + Osaka + Kyoto</div>
-            <div class="pkg-duration">7 Days 6 Nights</div>
-            <div class="pkg-price">ဆက်သွယ်ရန် <span>for price</span></div>
+            <div class="pkg-days">7 Days 6 Nights</div>
+            <span class="pkg-cta">Inquire →</span>
           </div>
         </a>
-
         <a href="https://t.me/ZenTourServices" target="_blank" class="pkg-card">
-          <img class="pkg-img" src="https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=400&q=80" alt="Korea" loading="lazy" />
+          <img class="pkg-img" src="https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=400&q=80" alt="Korea" loading="lazy"/>
           <div class="pkg-body">
             <div class="pkg-flag">🇰🇷</div>
             <div class="pkg-name">Seoul + Busan + Jeju</div>
-            <div class="pkg-duration">6 Days 5 Nights</div>
-            <div class="pkg-price">ဆက်သွယ်ရန် <span>for price</span></div>
+            <div class="pkg-days">6 Days 5 Nights</div>
+            <span class="pkg-cta">Inquire →</span>
           </div>
         </a>
-
         <a href="https://t.me/ZenTourServices" target="_blank" class="pkg-card">
-          <img class="pkg-img" src="https://images.unsplash.com/photo-1538485393148-9f456cfbf3d5?auto=format&fit=crop&w=400&q=80" alt="Singapore" loading="lazy" />
+          <img class="pkg-img" src="https://images.unsplash.com/photo-1538485393148-9f456cfbf3d5?auto=format&fit=crop&w=400&q=80" alt="Singapore" loading="lazy"/>
           <div class="pkg-body">
             <div class="pkg-flag">🇸🇬</div>
             <div class="pkg-name">Singapore Explorer</div>
-            <div class="pkg-duration">4 Days 3 Nights</div>
-            <div class="pkg-price">ဆက်သွယ်ရန် <span>for price</span></div>
+            <div class="pkg-days">4 Days 3 Nights</div>
+            <span class="pkg-cta">Inquire →</span>
           </div>
         </a>
-
         <a href="https://t.me/ZenTourServices" target="_blank" class="pkg-card">
-          <img class="pkg-img" src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=400&q=80" alt="Thailand" loading="lazy" />
+          <img class="pkg-img" src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=400&q=80" alt="Thailand" loading="lazy"/>
           <div class="pkg-body">
             <div class="pkg-flag">🇹🇭</div>
             <div class="pkg-name">Bangkok + Chiang Mai</div>
-            <div class="pkg-duration">5 Days 4 Nights</div>
-            <div class="pkg-price">ဆက်သွယ်ရန် <span>for price</span></div>
+            <div class="pkg-days">5 Days 4 Nights</div>
+            <span class="pkg-cta">Inquire →</span>
           </div>
         </a>
-
       </div>
     </section>
 
     <!-- DESTINATIONS -->
-    <section class="section fade-in" id="destinations">
+    <section class="section fi" id="destinations">
       <div class="section-head">
         <div class="section-title">
-          <span class="section-title-icon">🌏</span> ခရီးစဉ်များ
+          <div class="section-icon">🌏</div>
+          ခရီးစဉ်များ
         </div>
       </div>
       <div class="dest-grid">
-        <a href="https://t.me/ZenTourServices" target="_blank" class="dest-card big">
-          <img class="dest-img" src="https://images.unsplash.com/photo-1508804185872-b3bc76af6e28?auto=format&fit=crop&w=800&q=80" alt="China" loading="lazy" />
+        <a href="https://t.me/ZenTourServices" target="_blank" class="dest-card wide">
+          <img class="dest-img" src="https://images.unsplash.com/photo-1508804185872-b3bc76af6e28?auto=format&fit=crop&w=800&q=80" alt="China" loading="lazy"/>
           <div class="dest-overlay"></div>
           <span class="dest-badge">POPULAR</span>
           <div class="dest-info">
@@ -780,7 +791,7 @@
           </div>
         </a>
         <a href="https://t.me/ZenTourServices" target="_blank" class="dest-card">
-          <img class="dest-img" src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=400&q=80" alt="Japan" loading="lazy" />
+          <img class="dest-img" src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=400&q=80" alt="Japan" loading="lazy"/>
           <div class="dest-overlay"></div>
           <span class="dest-badge">HOT</span>
           <div class="dest-info">
@@ -789,7 +800,7 @@
           </div>
         </a>
         <a href="https://t.me/ZenTourServices" target="_blank" class="dest-card">
-          <img class="dest-img" src="https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=400&q=80" alt="Korea" loading="lazy" />
+          <img class="dest-img" src="https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=400&q=80" alt="Korea" loading="lazy"/>
           <div class="dest-overlay"></div>
           <div class="dest-info">
             <div class="dest-name">ကိုရီးယား</div>
@@ -797,15 +808,15 @@
           </div>
         </a>
         <a href="https://t.me/ZenTourServices" target="_blank" class="dest-card">
-          <img class="dest-img" src="https://images.unsplash.com/photo-1538485393148-9f456cfbf3d5?auto=format&fit=crop&w=400&q=80" alt="Singapore" loading="lazy" />
+          <img class="dest-img" src="https://images.unsplash.com/photo-1538485393148-9f456cfbf3d5?auto=format&fit=crop&w=400&q=80" alt="Singapore" loading="lazy"/>
           <div class="dest-overlay"></div>
           <div class="dest-info">
             <div class="dest-name">စင်ကာပူ</div>
             <div class="dest-en">Singapore</div>
           </div>
         </a>
-        <a href="https://t.me/ZenTourServices" target="_blank" class="dest-card big" style="grid-column:span 2; aspect-ratio:16/6;">
-          <img class="dest-img" src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=800&q=80" alt="Thailand" loading="lazy" />
+        <a href="https://t.me/ZenTourServices" target="_blank" class="dest-card wide" style="aspect-ratio:16/6;">
+          <img class="dest-img" src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=800&q=80" alt="Thailand" loading="lazy"/>
           <div class="dest-overlay"></div>
           <div class="dest-info">
             <div class="dest-name">ထိုင်းနိုင်ငံ</div>
@@ -816,124 +827,134 @@
     </section>
 
     <!-- HOW IT WORKS -->
-    <section class="section fade-in" id="how">
+    <section class="section fi" id="how">
       <div class="section-head">
         <div class="section-title">
-          <span class="section-title-icon">📝</span> လုပ်ဆောင်ပုံ
+          <div class="section-icon">📝</div>
+          လုပ်ဆောင်ပုံ — ၃ ဆင့်သာ
         </div>
       </div>
       <div class="steps">
         <div class="step">
-          <div class="step-num-box">01</div>
-          <div class="step-content">
-            <div class="step-title">Telegram မှ ဆက်သွယ်ပါ</div>
-            <div class="step-desc">@ZenTourServices သို့ message ပေးပါ။ သွားချင်သောနိုင်ငံ၊ ရက်ပေါင်း၊ ဘတ်ဂျက်ကို ပြောပြပါ။</div>
+          <div class="step-num">01</div>
+          <div>
+            <div class="step-title">Telegram / Viber မှ ဆက်သွယ်ပါ</div>
+            <div class="step-desc">@ZenTourServices သို့ message ပေးပါ။ သွားချင်သောနိုင်ငံ၊ ရက်ပေါင်း၊ ဘတ်ဂျက် ပြောပြပါ။</div>
           </div>
         </div>
         <div class="step">
-          <div class="step-num-box">02</div>
-          <div class="step-content">
-            <div class="step-title">ကျွန်ုပ်တို့ စီမံကိန်း ချပေးမည်</div>
-            <div class="step-desc">ဗီဇာ၊ လေယာဉ်၊ ဟိုတယ်၊ itinerary — အားလုံးကို ကြိုတင်ပြင်ဆင်ပေးပါမည်။</div>
+          <div class="step-num">02</div>
+          <div>
+            <div class="step-title">ကျွန်ုပ်တို့ အားလုံး စီစဉ်ပေးမည်</div>
+            <div class="step-desc">ဗီဇာ၊ လေယာဉ်၊ ဟိုတယ်၊ itinerary — ကြိုတင်ပြင်ဆင်မှု အားလုံး ဆောင်ရွက်ပေးပါမည်။</div>
           </div>
         </div>
         <div class="step">
-          <div class="step-num-box">03</div>
-          <div class="step-content">
+          <div class="step-num">03</div>
+          <div>
             <div class="step-title">စိတ်ချ ခရီးထွက်ပါ</div>
-            <div class="step-desc">Background မှ ကူညီနေမည်ဖြစ်ပြီး ဘာမှ ပူစရာ မလိုတော့ — ခရီးကို ကျက်သရေကျကျ ခံစားပါ။</div>
+            <div class="step-desc">ပူပင်စရာ မလို — ကျွန်ုပ်တို့ background မှ ကူညီနေမည်။ ခရီးကို ကျက်သရေကျကျ ခံစားပါ။</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TRUST -->
-    <section class="trust-section fade-in">
-      <div class="trust-label">WHY ZEN TOUR?</div>
-      <div class="trust-grid">
-        <div class="trust-card">
-          <div class="trust-card-icon">🇲🇲</div>
-          <div class="trust-card-text">
-            <strong>Myanmar ပိုင်</strong>
-            <span>Myanmar-owned & run</span>
+    <!-- WHY ZEN TOUR -->
+    <section class="why-section fi">
+      <div class="why-label">WHY ZEN TOUR</div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-card-icon">🇲🇲</div>
+          <div>
+            <div class="why-card-title">Myanmar ပိုင် / Myanmar Run</div>
+            <div class="why-card-sub">Myanmar-owned & operated</div>
           </div>
         </div>
-        <div class="trust-card">
-          <div class="trust-card-icon">🤝</div>
-          <div class="trust-card-text">
-            <strong>ကိုယ်ချင်းစာ ဝန်ဆောင်မှု</strong>
-            <span>Personalized service</span>
+        <div class="why-card">
+          <div class="why-card-icon">🤝</div>
+          <div>
+            <div class="why-card-title">Personalized Service</div>
+            <div class="why-card-sub">ကိုယ်ပိုင် ခရီးစဉ်</div>
           </div>
         </div>
-        <div class="trust-card">
-          <div class="trust-card-icon">💸</div>
-          <div class="trust-card-text">
-            <strong>Transparent ဈေးနှုန်း</strong>
-            <span>No hidden fees</span>
+        <div class="why-card">
+          <div class="why-card-icon">💸</div>
+          <div>
+            <div class="why-card-title">Transparent Pricing</div>
+            <div class="why-card-sub">ဝှက်ငွေ မရှိ</div>
           </div>
         </div>
-        <div class="trust-card">
-          <div class="trust-card-icon">📞</div>
-          <div class="trust-card-text">
-            <strong>24/7 ကူညီမှု</strong>
-            <span>Always available</span>
+        <div class="why-card">
+          <div class="why-card-icon">📞</div>
+          <div>
+            <div class="why-card-title">24/7 Support</div>
+            <div class="why-card-sub">Always available</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section class="section fade-in" id="contact">
+    <section class="section fi" id="contact">
       <div class="section-head">
         <div class="section-title">
-          <span class="section-title-icon">💬</span> ဆက်သွယ်ရန်
+          <div class="section-icon">💬</div>
+          ဆက်သွယ်ရန်
         </div>
       </div>
-      <div class="contact-cards">
-        <a href="https://t.me/ZenTourServices" target="_blank" class="contact-card">
-          <div class="contact-card-icon c-tg">📱</div>
+      <div class="contact-list">
+        <a href="https://t.me/ZenTourServices" target="_blank" class="contact-row">
+          <div class="contact-row-icon ci-tg">📱</div>
           <div>
-            <div class="contact-card-label">Telegram · Fastest</div>
-            <div class="contact-card-name">@ZenTourServices</div>
-            <div class="contact-card-sub">2 hr အတွင်း ပြန်ကြားပါမည်</div>
+            <div class="contact-row-label">Telegram · Fastest</div>
+            <div class="contact-row-name">@ZenTourServices</div>
+            <div class="contact-row-sub">2 hr အတွင်း ပြန်ကြားပါမည်</div>
           </div>
-          <div class="contact-arrow">›</div>
+          <div class="contact-row-arrow">›</div>
         </a>
-        <a href="https://www.facebook.com/zentourservice" target="_blank" class="contact-card">
-          <div class="contact-card-icon c-fb">📘</div>
+        <a href="viber://chat?number=%2B95000000000" class="contact-row">
+          <div class="contact-row-icon ci-vb">📲</div>
           <div>
-            <div class="contact-card-label">Facebook Page</div>
-            <div class="contact-card-name">ZEN TOUR Services</div>
-            <div class="contact-card-sub">Facebook မှလည်း မေးမြန်းနိုင်ပါသည်</div>
+            <div class="contact-row-label">Viber (+95)</div>
+            <div class="contact-row-name">ZEN TOUR Services</div>
+            <div class="contact-row-sub">Myanmar number</div>
           </div>
-          <div class="contact-arrow">›</div>
+          <div class="contact-row-arrow">›</div>
         </a>
-        <a href="https://zentourservice.netlify.app" target="_blank" class="contact-card">
-          <div class="contact-card-icon c-web">🌐</div>
+        <a href="https://m.me/zentourservice" target="_blank" class="contact-row">
+          <div class="contact-row-icon ci-fb">💬</div>
           <div>
-            <div class="contact-card-label">Website</div>
-            <div class="contact-card-name">zentourservice.netlify.app</div>
-            <div class="contact-card-sub">ခရီးစဉ် အချက်အလက်များ</div>
+            <div class="contact-row-label">Facebook Messenger</div>
+            <div class="contact-row-name">ZEN TOUR Services</div>
+            <div class="contact-row-sub">Facebook page မှ မေးနိုင်ပါသည်</div>
           </div>
-          <div class="contact-arrow">›</div>
+          <div class="contact-row-arrow">›</div>
+        </a>
+        <a href="https://zentourservice.netlify.app" target="_blank" class="contact-row">
+          <div class="contact-row-icon ci-web">🌐</div>
+          <div>
+            <div class="contact-row-label">Website</div>
+            <div class="contact-row-name">zentourservice.netlify.app</div>
+            <div class="contact-row-sub">ခရီးစဉ် အချက်အလက်များ</div>
+          </div>
+          <div class="contact-row-arrow">›</div>
         </a>
       </div>
 
-      <!-- Inquiry form -->
-      <div class="form-wrap">
+      <div class="form-card">
         <h3>📋 ခရီးစဉ် တောင်းဆိုမှု</h3>
         <form id="inquiryForm">
-          <div class="frow">
-            <div class="fgroup">
+          <div class="frow2">
+            <div class="fg">
               <label>နာမည်</label>
-              <input type="text" placeholder="သင်၏ နာမည်" required />
+              <input type="text" placeholder="သင်၏ နာမည်" required/>
             </div>
-            <div class="fgroup">
-              <label>Telegram / ဖုန်း</label>
-              <input type="text" placeholder="@username" required />
+            <div class="fg">
+              <label>Telegram / Viber</label>
+              <input type="text" placeholder="@username" required/>
             </div>
           </div>
-          <div class="fgroup">
+          <div class="fg">
             <label>သွားချင်သောနိုင်ငံ</label>
             <select required>
               <option value="">— ရွေးချယ်ပါ —</option>
@@ -945,12 +966,12 @@
               <option>အခြား (Other)</option>
             </select>
           </div>
-          <div class="frow">
-            <div class="fgroup">
+          <div class="frow2">
+            <div class="fg">
               <label>ထွက်ခွာရက်</label>
-              <input type="date" />
+              <input type="date"/>
             </div>
-            <div class="fgroup">
+            <div class="fg">
               <label>ဦးရေ</label>
               <select>
                 <option>၁ ဦး</option>
@@ -960,11 +981,11 @@
               </select>
             </div>
           </div>
-          <div class="fgroup">
+          <div class="fg">
             <label>မေးလိုသည်များ</label>
-            <textarea placeholder="ဗီဇာ လိုသလား? ဟိုတယ် ပါလိုသလား?..."></textarea>
+            <textarea placeholder="ဗီဇာ လိုသလား? ဟိုတယ် ပါချင်သလား?..."></textarea>
           </div>
-          <button type="submit" class="btn-submit-full">✈ တောင်းဆိုမှု ပေးပို့ရန်</button>
+          <button type="submit" class="btn-submit">✈ တောင်းဆိုမှု ပေးပို့ရန်</button>
         </form>
         <div class="form-success" id="formSuccess">
           ✅ ကျေးဇူးပါ! Telegram @ZenTourServices မှ ချက်ချင်း ဆက်သွယ်ပါမည်
@@ -975,12 +996,14 @@
     <!-- FOOTER -->
     <footer class="footer">
       <div class="footer-logo">
-        <div class="footer-logo-box">✈</div>
+        <div class="footer-logo-circle">
+          <svg viewBox="0 0 24 24" fill="#fff" width="20" height="20">
+            <path d="M4.5 3.5C4 4.5 3.5 6 4 7.5C3 8 2.5 9 2.5 10C2.5 12.5 4 14 6 14.5V17C6 18.1 6.9 19 8 19H16C17.1 19 18 18.1 18 17V14.5C20 14 21.5 12.5 21.5 10C21.5 9 21 8 20 7.5C20.5 6 20 4.5 19.5 3.5C18.5 4 17 5 16 6.5C14.5 6 13 5.5 12 5.5C11 5.5 9.5 6 8 6.5C7 5 5.5 4 4.5 3.5Z"/>
+          </svg>
+        </div>
         <div class="footer-logo-text">ZEN TOUR</div>
       </div>
-      <p class="footer-desc">
-        Myanmar-owned private tour service. Visa, flights, hotels & custom itineraries across Asia. Transparent pricing, personal service.
-      </p>
+      <p class="footer-desc">Myanmar-owned private tour service. Visa, flights, hotels & custom itineraries across Asia. Transparent pricing, personal service.</p>
       <div class="footer-links">
         <a href="https://t.me/ZenTourServices" target="_blank">Telegram</a>
         <a href="https://www.tiktok.com/@zentourservice" target="_blank">TikTok</a>
@@ -992,21 +1015,21 @@
 
   </main>
 
-  <!-- ── BOTTOM NAV ──────────────────────────────────── -->
-  <nav class="bottom-nav" id="bottomNav">
-    <div class="bnav-item active" onclick="scrollTo('#hero')">
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <div class="bnav-item active" id="bn-home" onclick="navTo('top', 'bn-home')">
       <div class="bnav-icon">🏠</div>
       <div class="bnav-label">Home</div>
     </div>
-    <div class="bnav-item" onclick="scrollTo('#destinations')">
+    <div class="bnav-item" id="bn-dest" onclick="navTo('destinations', 'bn-dest')">
       <div class="bnav-icon">🌏</div>
       <div class="bnav-label">Dest</div>
     </div>
-    <div class="bnav-item" onclick="scrollTo('#packages')">
+    <div class="bnav-item" id="bn-pkg" onclick="navTo('packages', 'bn-pkg')">
       <div class="bnav-icon">🎒</div>
       <div class="bnav-label">Pkgs</div>
     </div>
-    <div class="bnav-item" onclick="scrollTo('#contact')">
+    <div class="bnav-item" id="bn-contact" onclick="navTo('contact', 'bn-contact')">
       <div class="bnav-icon">💬</div>
       <div class="bnav-label">Contact</div>
     </div>
@@ -1026,31 +1049,27 @@
       overlay.classList.remove('open');
     }
 
-    // Smooth scroll helper
-    function scrollTo(selector) {
-      const el = document.querySelector(selector);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    // Bottom nav
+    function navTo(id, btnId) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
       document.querySelectorAll('.bnav-item').forEach(i => i.classList.remove('active'));
-      event.currentTarget.classList.add('active');
+      document.getElementById(btnId).classList.add('active');
     }
 
-    // IntersectionObserver fade-in
+    // Fade in on scroll
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          io.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('v'); io.unobserve(e.target); }
       });
     }, { threshold: 0.08 });
-    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+    document.querySelectorAll('.fi').forEach(el => io.observe(el));
 
     // Form
     document.getElementById('inquiryForm').addEventListener('submit', function(e) {
       e.preventDefault();
       document.getElementById('formSuccess').style.display = 'block';
       this.style.display = 'none';
-      setTimeout(() => window.open('https://t.me/ZenTourServices', '_blank'), 1000);
+      setTimeout(() => window.open('https://t.me/ZenTourServices', '_blank'), 900);
     });
   </script>
 
