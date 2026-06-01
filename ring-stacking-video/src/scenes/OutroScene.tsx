@@ -1,15 +1,9 @@
 import React from 'react';
-import {
-  AbsoluteFill,
-  interpolate,
-  spring,
-  useCurrentFrame,
-  useVideoConfig,
-} from 'remotion';
+import {AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Ring} from '../components/Ring';
-import {SfxPop} from '../components/SfxPop';
 import {WordCaption, CaptionWord} from '../components/WordCaption';
 import {Particles} from '../components/Particles';
+import {SfxPop} from '../components/SfxPop';
 
 const line1Words: CaptionWord[] = [
   {text: 'ดังนั้น', startFrame: 5},
@@ -42,6 +36,7 @@ const PhoneSVG: React.FC<{scale: number}> = ({scale}) => (
       transformOrigin: 'top right',
     }}
   >
+    {/* Phone body */}
     <rect x="5" y="5" width="210" height="390" rx="30" fill="#222" />
     <rect x="10" y="10" width="200" height="380" rx="28" fill="#111" />
     {/* Screen */}
@@ -51,10 +46,10 @@ const PhoneSVG: React.FC<{scale: number}> = ({scale}) => (
     <rect x="170" y="25" width="25" height="6" rx="3" fill="#333" />
     {/* Notch */}
     <rect x="80" y="18" width="60" height="20" rx="10" fill="#000" />
-    {/* Feed item */}
+    {/* Post header */}
     <rect x="30" y="60" width="160" height="12" rx="6" fill="#333" />
     <rect x="30" y="80" width="100" height="10" rx="5" fill="#222" />
-    {/* Photo */}
+    {/* Photo area */}
     <rect x="18" y="105" width="184" height="180" fill="#1a3060" />
     <text x="110" y="200" textAnchor="middle" fontSize="60" fill="#FFE566">
       💍
@@ -66,7 +61,7 @@ const PhoneSVG: React.FC<{scale: number}> = ({scale}) => (
     <text x="30" y="335" fontSize="18" fill="#fff">
       💬 234
     </text>
-    <text x="30" y="360" fontSize="12" fill="#888">
+    <text x="30" y="360" fontSize="14" fill="#888">
       Ring Stacking is everything ✨
     </text>
     {/* Home bar */}
@@ -87,14 +82,28 @@ export const OutroScene: React.FC = () => {
 
   const phoneScale = spring({frame, fps, config: {damping: 12, stiffness: 100}});
 
+  // Ring spring animations
   const r1 = spring({frame: frame - 15, fps, config: {damping: 8, stiffness: 200}});
   const r2 = spring({frame: frame - 25, fps, config: {damping: 8, stiffness: 200}});
   const r3 = spring({frame: frame - 35, fps, config: {damping: 8, stiffness: 200}});
   const r4 = spring({frame: frame - 45, fps, config: {damping: 8, stiffness: 200}});
 
+  // Year counter animation
   const yearCount = Math.round(
-    interpolate(frame, [60, 150], [0, 3000], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'})
+    interpolate(frame, [60, 150], [0, 3000], {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    }),
   );
+
+  const counterOpacity = interpolate(frame, [55, 75], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+  const subtitleOpacity = interpolate(frame, [80, 100], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
 
   const ctaOpacity = interpolate(frame, [240, 255], [0, 1], {
     extrapolateLeft: 'clamp',
@@ -109,7 +118,7 @@ export const OutroScene: React.FC = () => {
         opacity,
       }}
     >
-      {/* Modern hand with rings */}
+      {/* Modern hand with stacked rings (left side) */}
       <svg
         viewBox="0 0 200 350"
         width={200}
@@ -120,13 +129,14 @@ export const OutroScene: React.FC = () => {
           d="M40 200 Q35 150 38 120 Q40 105 52 103 Q64 101 66 115 L67 175 L70 115 Q72 100 84 98 Q96 96 97 112 L98 175 L100 110 Q102 96 114 94 Q126 92 127 108 L127 175 L131 118 Q133 108 142 110 Q152 112 151 124 L147 200 Q155 230 148 260 Q140 285 115 295 Q95 302 75 295 Q50 285 45 260 Z"
           fill="#F5CBA7"
         />
+        {/* Thumb */}
         <path
           d="M40 200 Q25 192 18 178 Q10 160 18 147 Q26 136 38 140 L40 200Z"
           fill="#F5CBA7"
         />
       </svg>
 
-      {/* Rings on modern hand */}
+      {/* Rings on the modern hand */}
       {frame >= 15 && (
         <div style={{transform: `scale(${r1})`, transformOrigin: '103px 785px'}}>
           <Ring x={103} y={785} rx={38} ry={13} color="#D4A017" gemColor="#E91E63" />
@@ -160,10 +170,7 @@ export const OutroScene: React.FC = () => {
           top: 520,
           display: 'flex',
           justifyContent: 'center',
-          opacity: interpolate(frame, [55, 75], [0, 1], {
-            extrapolateLeft: 'clamp',
-            extrapolateRight: 'clamp',
-          }),
+          opacity: counterOpacity,
         }}
       >
         <div
@@ -186,30 +193,37 @@ export const OutroScene: React.FC = () => {
           top: 640,
           display: 'flex',
           justifyContent: 'center',
-          opacity: interpolate(frame, [80, 100], [0, 1], {
-            extrapolateLeft: 'clamp',
-            extrapolateRight: 'clamp',
-          }),
+          opacity: subtitleOpacity,
         }}
       >
-        <div style={{fontSize: 52, fontWeight: 800, color: '#fff', textShadow: '2px 2px 0 #000'}}>
+        <div
+          style={{
+            fontSize: 52,
+            fontWeight: 800,
+            color: '#fff',
+            textShadow: '2px 2px 0 #000',
+          }}
+        >
           ปีของประวัติศาสตร์
         </div>
       </div>
 
-      {/* Sparkle particles */}
-      {frame >= 15 && <Particles startFrame={15} cx={110} cy={785} count={10} radius={80} />}
+      {/* Burst particles when rings appear */}
+      {frame >= 15 && (
+        <Particles startFrame={15} cx={110} cy={785} count={10} radius={80} />
+      )}
       {frame >= 45 && (
         <Particles startFrame={45} cx={110} cy={820} count={8} radius={70} color="#4CAF50" />
       )}
 
+      {/* SFX pop */}
       <SfxPop text="👑 ICONIC!" x={350} y={860} startFrame={55} color="#FFE566" size={75} />
 
       {/* Captions */}
       <WordCaption words={line1Words} endFrame={65} y={1430} />
       <WordCaption words={line2Words} endFrame={245} y={1430} />
 
-      {/* Follow CTA */}
+      {/* Follow CTA button */}
       <div
         style={{
           position: 'absolute',
@@ -227,12 +241,19 @@ export const OutroScene: React.FC = () => {
           boxShadow: '0 8px 40px rgba(212,160,23,0.5)',
         }}
       >
-        <span style={{fontSize: 48, fontWeight: 900, color: '#000', letterSpacing: '-1px'}}>
+        <span
+          style={{
+            fontSize: 52,
+            fontWeight: 900,
+            color: '#000',
+            letterSpacing: '-1px',
+          }}
+        >
           กด Follow เพื่อดูตอนต่อไป! 👑
         </span>
       </div>
 
-      {/* Top label */}
+      {/* Top scene label */}
       <div
         style={{
           position: 'absolute',
