@@ -5,22 +5,24 @@ import {WordCaption, CaptionWord} from '../components/WordCaption';
 import {Particles} from '../components/Particles';
 import {SfxPop} from '../components/SfxPop';
 
+// Scene duration: 90 frames (3 s). All timings scaled from original 300-frame version (×0.3).
+
 const line1Words: CaptionWord[] = [
-  {text: 'ดังนั้น', startFrame: 5},
-  {text: 'ครั้งต่อไป', startFrame: 14},
-  {text: 'ที่คุณแมตช์แหวน', startFrame: 24, highlight: true},
-  {text: 'หลายๆ วง', startFrame: 36},
-  {text: 'เข้าด้วยกัน...', startFrame: 46},
+  {text: 'ดังนั้น', startFrame: 2},
+  {text: 'ครั้งต่อไป', startFrame: 5},
+  {text: 'ที่แมตช์แหวน', startFrame: 8, highlight: true},
+  {text: 'หลายวง', startFrame: 12},
+  {text: 'เข้าด้วยกัน...', startFrame: 16},
 ];
 
 const line2Words: CaptionWord[] = [
-  {text: 'จำไว้เลยว่า', startFrame: 70},
-  {text: 'คุณกำลัง', startFrame: 78},
-  {text: 'สืบทอด', startFrame: 84, highlight: true},
-  {text: 'จิตวิญญาณ', startFrame: 90, highlight: true},
-  {text: "'ความตัวมัม'", startFrame: 98, highlight: true},
-  {text: 'ของเศรษฐี', startFrame: 106},
-  {text: 'เมื่อพันปีที่แล้ว!', startFrame: 116, highlight: true},
+  {text: 'จำไว้เลยว่า', startFrame: 24},
+  {text: 'คุณกำลัง', startFrame: 27},
+  {text: 'สืบทอด', startFrame: 30, highlight: true},
+  {text: 'จิตวิญญาณ', startFrame: 33, highlight: true},
+  {text: "'ความตัวมัม'", startFrame: 36, highlight: true},
+  {text: 'ของเศรษฐี', startFrame: 39},
+  {text: 'เมื่อพันปีที่แล้ว!', startFrame: 43, highlight: true},
 ];
 
 const PhoneSVG: React.FC<{scale: number}> = ({scale}) => (
@@ -36,25 +38,18 @@ const PhoneSVG: React.FC<{scale: number}> = ({scale}) => (
       transformOrigin: 'top right',
     }}
   >
-    {/* Phone body */}
     <rect x="5" y="5" width="210" height="390" rx="30" fill="#222" />
     <rect x="10" y="10" width="200" height="380" rx="28" fill="#111" />
-    {/* Screen */}
     <rect x="18" y="18" width="184" height="364" rx="22" fill="#1a1a3e" />
-    {/* Status bar */}
     <rect x="30" y="25" width="60" height="6" rx="3" fill="#333" />
     <rect x="170" y="25" width="25" height="6" rx="3" fill="#333" />
-    {/* Notch */}
     <rect x="80" y="18" width="60" height="20" rx="10" fill="#000" />
-    {/* Post header */}
     <rect x="30" y="60" width="160" height="12" rx="6" fill="#333" />
     <rect x="30" y="80" width="100" height="10" rx="5" fill="#222" />
-    {/* Photo area */}
     <rect x="18" y="105" width="184" height="180" fill="#1a3060" />
     <text x="110" y="200" textAnchor="middle" fontSize="60" fill="#FFE566">
       💍
     </text>
-    {/* Engagement */}
     <text x="30" y="310" fontSize="18" fill="#fff">
       ❤️ 12.4K
     </text>
@@ -64,7 +59,6 @@ const PhoneSVG: React.FC<{scale: number}> = ({scale}) => (
     <text x="30" y="360" fontSize="14" fill="#888">
       Ring Stacking is everything ✨
     </text>
-    {/* Home bar */}
     <rect x="80" y="372" width="60" height="5" rx="3" fill="#444" />
   </svg>
 );
@@ -73,8 +67,8 @@ export const OutroScene: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
 
-  const sceneIn = interpolate(frame, [0, 20], [0, 1], {extrapolateRight: 'clamp'});
-  const sceneOut = interpolate(frame, [270, 300], [1, 0], {
+  const sceneIn = interpolate(frame, [0, 6], [0, 1], {extrapolateRight: 'clamp'});
+  const sceneOut = interpolate(frame, [81, 90], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
@@ -82,34 +76,32 @@ export const OutroScene: React.FC = () => {
 
   const phoneScale = spring({frame, fps, config: {damping: 12, stiffness: 100}});
 
-  // Ring spring animations
-  const r1 = spring({frame: frame - 15, fps, config: {damping: 8, stiffness: 200}});
-  const r2 = spring({frame: frame - 25, fps, config: {damping: 8, stiffness: 200}});
-  const r3 = spring({frame: frame - 35, fps, config: {damping: 8, stiffness: 200}});
-  const r4 = spring({frame: frame - 45, fps, config: {damping: 8, stiffness: 200}});
+  const r1 = spring({frame: frame - 5, fps, config: {damping: 8, stiffness: 200}});
+  const r2 = spring({frame: frame - 8, fps, config: {damping: 8, stiffness: 200}});
+  const r3 = spring({frame: frame - 11, fps, config: {damping: 8, stiffness: 200}});
+  const r4 = spring({frame: frame - 14, fps, config: {damping: 8, stiffness: 200}});
 
-  // Year counter animation
   const yearCount = Math.round(
-    interpolate(frame, [60, 150], [0, 3000], {
+    interpolate(frame, [18, 45], [0, 3000], {
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
     }),
   );
 
-  const counterOpacity = interpolate(frame, [55, 75], [0, 1], {
+  const counterOpacity = interpolate(frame, [17, 23], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
-  const subtitleOpacity = interpolate(frame, [80, 100], [0, 1], {
+  const subtitleOpacity = interpolate(frame, [24, 30], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  const ctaOpacity = interpolate(frame, [240, 255], [0, 1], {
+  const ctaOpacity = interpolate(frame, [68, 75], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
-  const ctaScale = spring({frame: frame - 240, fps, config: {damping: 8, stiffness: 150}});
+  const ctaScale = spring({frame: frame - 68, fps, config: {damping: 8, stiffness: 150}});
 
   return (
     <AbsoluteFill
@@ -118,7 +110,7 @@ export const OutroScene: React.FC = () => {
         opacity,
       }}
     >
-      {/* Modern hand with stacked rings (left side) */}
+      {/* Modern hand with stacked rings */}
       <svg
         viewBox="0 0 200 350"
         width={200}
@@ -129,39 +121,32 @@ export const OutroScene: React.FC = () => {
           d="M40 200 Q35 150 38 120 Q40 105 52 103 Q64 101 66 115 L67 175 L70 115 Q72 100 84 98 Q96 96 97 112 L98 175 L100 110 Q102 96 114 94 Q126 92 127 108 L127 175 L131 118 Q133 108 142 110 Q152 112 151 124 L147 200 Q155 230 148 260 Q140 285 115 295 Q95 302 75 295 Q50 285 45 260 Z"
           fill="#F5CBA7"
         />
-        {/* Thumb */}
-        <path
-          d="M40 200 Q25 192 18 178 Q10 160 18 147 Q26 136 38 140 L40 200Z"
-          fill="#F5CBA7"
-        />
+        <path d="M40 200 Q25 192 18 178 Q10 160 18 147 Q26 136 38 140 L40 200Z" fill="#F5CBA7" />
       </svg>
 
-      {/* Rings on the modern hand */}
-      {frame >= 15 && (
+      {frame >= 5 && (
         <div style={{transform: `scale(${r1})`, transformOrigin: '103px 785px'}}>
           <Ring x={103} y={785} rx={38} ry={13} color="#D4A017" gemColor="#E91E63" />
         </div>
       )}
-      {frame >= 25 && (
+      {frame >= 8 && (
         <div style={{transform: `scale(${r2})`, transformOrigin: '118px 778px'}}>
           <Ring x={118} y={778} rx={38} ry={13} gemColor="#2196F3" />
         </div>
       )}
-      {frame >= 35 && (
+      {frame >= 11 && (
         <div style={{transform: `scale(${r3})`, transformOrigin: '133px 783px'}}>
           <Ring x={133} y={783} rx={35} ry={12} color="#C0A060" />
         </div>
       )}
-      {frame >= 45 && (
+      {frame >= 14 && (
         <div style={{transform: `scale(${r4})`, transformOrigin: '103px 820px'}}>
           <Ring x={103} y={820} rx={37} ry={13} gemColor="#4CAF50" />
         </div>
       )}
 
-      {/* Phone */}
       <PhoneSVG scale={phoneScale} />
 
-      {/* Year counter */}
       <div
         style={{
           position: 'absolute',
@@ -196,34 +181,19 @@ export const OutroScene: React.FC = () => {
           opacity: subtitleOpacity,
         }}
       >
-        <div
-          style={{
-            fontSize: 52,
-            fontWeight: 800,
-            color: '#fff',
-            textShadow: '2px 2px 0 #000',
-          }}
-        >
+        <div style={{fontSize: 52, fontWeight: 800, color: '#fff', textShadow: '2px 2px 0 #000'}}>
           ปีของประวัติศาสตร์
         </div>
       </div>
 
-      {/* Burst particles when rings appear */}
-      {frame >= 15 && (
-        <Particles startFrame={15} cx={110} cy={785} count={10} radius={80} />
-      )}
-      {frame >= 45 && (
-        <Particles startFrame={45} cx={110} cy={820} count={8} radius={70} color="#4CAF50" />
-      )}
+      {frame >= 5 && <Particles startFrame={5} cx={110} cy={785} count={10} radius={80} />}
+      {frame >= 14 && <Particles startFrame={14} cx={110} cy={820} count={8} radius={70} color="#4CAF50" />}
 
-      {/* SFX pop */}
-      <SfxPop text="👑 ICONIC!" x={350} y={860} startFrame={55} color="#FFE566" size={75} />
+      <SfxPop text="👑 ICONIC!" x={350} y={860} startFrame={17} color="#FFE566" size={75} />
 
-      {/* Captions */}
-      <WordCaption words={line1Words} endFrame={65} y={1430} />
-      <WordCaption words={line2Words} endFrame={245} y={1430} />
+      <WordCaption words={line1Words} endFrame={23} y={1430} />
+      <WordCaption words={line2Words} endFrame={70} y={1430} />
 
-      {/* Follow CTA button */}
       <div
         style={{
           position: 'absolute',
@@ -241,19 +211,11 @@ export const OutroScene: React.FC = () => {
           boxShadow: '0 8px 40px rgba(212,160,23,0.5)',
         }}
       >
-        <span
-          style={{
-            fontSize: 52,
-            fontWeight: 900,
-            color: '#000',
-            letterSpacing: '-1px',
-          }}
-        >
+        <span style={{fontSize: 48, fontWeight: 900, color: '#000', letterSpacing: '-1px'}}>
           กด Follow เพื่อดูตอนต่อไป! 👑
         </span>
       </div>
 
-      {/* Top scene label */}
       <div
         style={{
           position: 'absolute',

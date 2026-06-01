@@ -11,41 +11,34 @@ import {SfxPop} from '../components/SfxPop';
 import {WordCaption, CaptionWord} from '../components/WordCaption';
 import {Particles} from '../components/Particles';
 
-const RING_APPEAR_FRAMES = [60, 78, 96, 114, 132, 150, 168, 186];
+// Scene duration: 90 frames (3 s). All timings scaled from original 600-frame version (×0.15).
+
+const RING_APPEAR_FRAMES = [9, 12, 14, 17, 20, 23, 25, 28];
 
 const line1Words: CaptionWord[] = [
-  {text: 'ย้อนกลับ', startFrame: 5},
-  {text: 'ไปใน', startFrame: 12},
-  {text: 'ยุค', startFrame: 18},
-  {text: 'อียิปต์', startFrame: 24, highlight: true},
-  {text: 'และ', startFrame: 30},
-  {text: 'โรมันโบราณ', startFrame: 36, highlight: true},
-  {text: 'เครื่องประดับ', startFrame: 50},
-  {text: 'ไม่ใช่แค่', startFrame: 60},
-  {text: 'ของแต่งตัว', startFrame: 70},
-  {text: 'แต่เป็น', startFrame: 82},
-  {text: "'สมุดบัญชี", startFrame: 90, highlight: true},
-  {text: "เคลื่อนที่'", startFrame: 100, highlight: true},
-  {text: 'ยิ่งใส่แหวนเยอะ', startFrame: 118},
-  {text: 'ยิ่งแปลว่า', startFrame: 132},
-  {text: 'รวยมาก!', startFrame: 142, highlight: true},
+  {text: 'ย้อนกลับ', startFrame: 1},
+  {text: 'ยุค', startFrame: 3},
+  {text: 'อียิปต์', startFrame: 4, highlight: true},
+  {text: 'และ', startFrame: 5},
+  {text: 'โรมันโบราณ', startFrame: 6, highlight: true},
+  {text: 'เครื่องประดับ', startFrame: 8},
+  {text: 'ไม่ใช่แค่', startFrame: 11},
+  {text: "'สมุดบัญชี", startFrame: 13, highlight: true},
+  {text: "เคลื่อนที่'", startFrame: 15, highlight: true},
+  {text: 'ยิ่งรวยมาก!', startFrame: 18, highlight: true},
 ];
 
 const line2Words: CaptionWord[] = [
-  {text: 'เศรษฐียุคนั้น', startFrame: 200},
-  {text: 'จะใส่แหวน', startFrame: 212},
-  {text: 'ทองเหลือง', startFrame: 222, highlight: true},
-  {text: 'ซ้อนกัน', startFrame: 232},
-  {text: 'ในทุก', startFrame: 242},
-  {text: 'ข้อนิ้ว', startFrame: 250, highlight: true},
-  {text: 'จน', startFrame: 260},
-  {text: 'บางคน', startFrame: 268},
-  {text: 'แทบจะงอ', startFrame: 276},
-  {text: 'นิ้วมือ', startFrame: 282},
-  {text: 'ไม่ได้เลย!', startFrame: 288, highlight: true},
-  {text: 'เพื่ออวด', startFrame: 310},
-  {text: 'สถานะ', startFrame: 318, highlight: true},
-  {text: 'ทางสังคม', startFrame: 326},
+  {text: 'เศรษฐียุคนั้น', startFrame: 30},
+  {text: 'ใส่แหวน', startFrame: 32},
+  {text: 'ทองเหลือง', startFrame: 33, highlight: true},
+  {text: 'ซ้อนกัน', startFrame: 35},
+  {text: 'ทุกข้อนิ้ว', startFrame: 37, highlight: true},
+  {text: 'งอนิ้ว', startFrame: 40},
+  {text: 'ไม่ได้เลย!', startFrame: 43, highlight: true},
+  {text: 'เพื่ออวด', startFrame: 47},
+  {text: 'สถานะ', startFrame: 49, highlight: true},
+  {text: 'ทางสังคม', startFrame: 51},
 ];
 
 const PILLAR_STYLE: React.CSSProperties = {
@@ -65,7 +58,6 @@ const RomanCharacterSVG: React.FC = () => (
     height={700}
     style={{position: 'absolute', left: 140, top: 200}}
   >
-    {/* Toga body */}
     <path
       d="M120 240 Q80 260 70 420 Q65 500 80 540 Q120 580 200 580 Q280 580 320 540 Q335 500 330 420 Q320 260 280 240 Z"
       fill="#F5F0E8"
@@ -73,57 +65,30 @@ const RomanCharacterSVG: React.FC = () => (
     <path d="M120 240 L80 420 Q85 480 150 500" fill="none" stroke="#DDD8CC" strokeWidth="2" />
     <path d="M200 290 L170 420 L190 500" fill="none" stroke="#DDD8CC" strokeWidth="2" />
     <path d="M280 240 L320 420 Q315 480 250 500" fill="none" stroke="#DDD8CC" strokeWidth="2" />
-    {/* Belt */}
     <rect x="110" y="340" width="180" height="18" rx="9" fill="#C4A017" opacity="0.8" />
-    {/* Left arm */}
     <path
       d="M120 280 Q90 330 85 380 Q82 400 95 410 Q105 415 115 400 Q125 350 130 300 Z"
       fill="#D4956A"
     />
-    {/* Right arm raised */}
     <path
       d="M280 270 Q310 220 340 180 Q360 155 370 165 Q385 175 375 195 Q355 215 330 240 Q300 275 285 310 Z"
       fill="#D4956A"
     />
-    {/* Right hand at top of raised arm */}
     <ellipse cx="372" cy="162" rx="22" ry="28" fill="#D4956A" />
-    {/* Fingers (stiff with rings) */}
     <rect x="358" y="128" width="10" height="35" rx="5" fill="#D4956A" />
     <rect x="370" y="122" width="10" height="38" rx="5" fill="#D4956A" />
     <rect x="382" y="126" width="10" height="35" rx="5" fill="#D4956A" />
     <rect x="392" y="135" width="9" height="28" rx="4" fill="#D4956A" />
-    {/* Head */}
     <circle cx="200" cy="160" r="70" fill="#D4956A" />
-    {/* Eyes */}
     <ellipse cx="185" cy="155" rx="7" ry="8" fill="#8B5E3C" />
     <ellipse cx="215" cy="155" rx="7" ry="8" fill="#8B5E3C" />
-    {/* Smile */}
-    <path
-      d="M185 185 Q200 195 215 185"
-      fill="none"
-      stroke="#8B5E3C"
-      strokeWidth="3"
-      strokeLinecap="round"
-    />
-    {/* Laurel crown */}
-    <path
-      d="M135 125 Q155 100 200 95 Q245 100 265 125"
-      fill="none"
-      stroke="#4A7C59"
-      strokeWidth="8"
-      strokeLinecap="round"
-    />
+    <path d="M185 185 Q200 195 215 185" fill="none" stroke="#8B5E3C" strokeWidth="3" strokeLinecap="round" />
+    <path d="M135 125 Q155 100 200 95 Q245 100 265 125" fill="none" stroke="#4A7C59" strokeWidth="8" strokeLinecap="round" />
     {[150, 170, 200, 230, 250].map((cx, i) => {
       const cy = [118, 108, 103, 108, 118][i];
       return <ellipse key={i} cx={cx} cy={cy} rx="10" ry="7" fill="#4A7C59" />;
     })}
-    {/* Chest armour */}
-    <path
-      d="M145 250 Q200 240 255 250 L265 290 Q200 280 135 290 Z"
-      fill="#C4A060"
-      opacity="0.6"
-    />
-    {/* Sandals */}
+    <path d="M145 250 Q200 240 255 250 L265 290 Q200 280 135 290 Z" fill="#C4A060" opacity="0.6" />
     <path d="M130 555 Q100 565 90 580 L120 585 Q145 570 155 555 Z" fill="#C4A060" />
     <path d="M270 555 Q300 565 310 580 L280 585 Q255 570 245 555 Z" fill="#C4A060" />
   </svg>
@@ -133,24 +98,23 @@ export const AncientScene: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
 
-  const sceneIn = interpolate(frame, [0, 30], [0, 1], {extrapolateRight: 'clamp'});
+  const sceneIn = interpolate(frame, [0, 5], [0, 1], {extrapolateRight: 'clamp'});
 
-  // Zoom into the ring area after 200 frames
-  const ringZoom = interpolate(frame, [200, 280], [1, 1.3], {
+  // Zoom into ring area after frame 30
+  const ringZoom = interpolate(frame, [30, 42], [1, 1.3], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
-  const ringOriginX = interpolate(frame, [200, 280], [500, 380], {
+  const ringOriginX = interpolate(frame, [30, 42], [500, 380], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
-  const ringOriginY = interpolate(frame, [200, 280], [300, 200], {
+  const ringOriginY = interpolate(frame, [30, 42], [300, 200], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  // Wobble when character tries to bend fingers
-  const wobble = frame > 280 ? Math.sin((frame - 280) * 0.15) * 4 : 0;
+  const wobble = frame > 42 ? Math.sin((frame - 42) * 0.15) * 4 : 0;
 
   const ringColors = ['#D4A017', '#C0A060', '#D4A017', '#8B6914', '#D4A017', '#C0A060', '#D4A017', '#8B6914'];
   const gemColors: (string | undefined)[] = [undefined, '#E040FB', undefined, '#2196F3', undefined, '#4CAF50', undefined, '#FF5722'];
@@ -162,27 +126,23 @@ export const AncientScene: React.FC = () => {
         opacity: sceneIn,
       }}
     >
-      {/* Sand texture overlay */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           backgroundImage:
-            'radial-gradient(ellipse 2px 2px at 20% 30%, rgba(255,255,255,0.08) 0%, transparent 100%), radial-gradient(ellipse 1px 1px at 60% 70%, rgba(255,255,255,0.05) 0%, transparent 100%)',
+            'radial-gradient(ellipse 2px 2px at 20% 30%, rgba(255,255,255,0.08) 0%, transparent 100%)',
           backgroundSize: '40px 40px',
         }}
       />
 
-      {/* Pillars */}
       <div style={{...PILLAR_STYLE, left: 50}} />
       <div style={{...PILLAR_STYLE, right: 50}} />
 
-      {/* Roman character with wobble */}
       <div style={{transform: `rotate(${wobble}deg)`, transformOrigin: '540px 900px'}}>
         <RomanCharacterSVG />
       </div>
 
-      {/* Rings on raised-hand fingers */}
       <div
         style={{
           transform: `scale(${ringZoom})`,
@@ -197,25 +157,18 @@ export const AncientScene: React.FC = () => {
           const rx = 358 + col * 12 + 540 - 200;
           const ry = 102 + row * 20 + (i % 7) * 8 + 200;
           return (
-            <div
-              key={i}
-              style={{transform: `scale(${sc})`, transformOrigin: `${rx}px ${ry}px`}}
-            >
+            <div key={i} style={{transform: `scale(${sc})`, transformOrigin: `${rx}px ${ry}px`}}>
               <Ring x={rx} y={ry} rx={20} ry={8} color={ringColors[i]} gemColor={gemColors[i]} />
             </div>
           );
         })}
       </div>
 
-      {/* SFX pops */}
-      <SfxPop text="CLANK!" x={100} y={500} startFrame={60} color="#FFE566" size={90} rotation={-12} />
-      <SfxPop text="CLINK!" x={600} y={480} startFrame={114} color="#FFE566" size={80} rotation={8} />
-      <SfxPop text="งอไม่ได้! 😤" x={200} y={400} startFrame={290} color="#FF5722" size={70} />
+      <SfxPop text="CLANK!" x={100} y={500} startFrame={9} color="#FFE566" size={90} rotation={-12} />
+      <SfxPop text="งอไม่ได้! 😤" x={200} y={400} startFrame={44} color="#FF5722" size={70} />
 
-      {/* Burst particles on first ring cluster */}
-      <Particles startFrame={60} cx={520} cy={300} count={12} radius={100} />
+      <Particles startFrame={9} cx={520} cy={300} count={12} radius={100} />
 
-      {/* Era label */}
       <div
         style={{
           position: 'absolute',
@@ -243,9 +196,8 @@ export const AncientScene: React.FC = () => {
         </div>
       </div>
 
-      {/* Captions */}
-      <WordCaption words={line1Words} endFrame={165} y={1440} />
-      <WordCaption words={line2Words} endFrame={590} y={1440} />
+      <WordCaption words={line1Words} endFrame={28} y={1440} />
+      <WordCaption words={line2Words} endFrame={89} y={1440} />
     </AbsoluteFill>
   );
 };

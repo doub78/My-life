@@ -6,7 +6,7 @@ export const Root: React.FC = () => (
   <Composition
     id="RingStacking"
     component={RingStackingVideo}
-    durationInFrames={1500}
+    durationInFrames={360}
     fps={30}
     width={1080}
     height={1920}

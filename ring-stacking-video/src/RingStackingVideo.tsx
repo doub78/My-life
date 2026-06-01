@@ -13,10 +13,10 @@ export const RingStackingVideo: React.FC = () => {
   const {fps} = useVideoConfig();
   return (
     <AbsoluteFill style={{background: '#000', fontFamily: 'Kanit, sans-serif'}}>
-      <Sequence from={0} durationInFrames={5 * fps}><HookScene /></Sequence>
-      <Sequence from={5 * fps} durationInFrames={20 * fps}><AncientScene /></Sequence>
-      <Sequence from={25 * fps} durationInFrames={15 * fps}><RenaissanceScene /></Sequence>
-      <Sequence from={40 * fps} durationInFrames={10 * fps}><OutroScene /></Sequence>
+      <Sequence from={0} durationInFrames={3 * fps}><HookScene /></Sequence>
+      <Sequence from={3 * fps} durationInFrames={3 * fps}><AncientScene /></Sequence>
+      <Sequence from={6 * fps} durationInFrames={3 * fps}><RenaissanceScene /></Sequence>
+      <Sequence from={9 * fps} durationInFrames={3 * fps}><OutroScene /></Sequence>
     </AbsoluteFill>
   );
 };
