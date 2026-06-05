@@ -1,18 +1,19 @@
 import React from 'react';
 import {AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Bokeh} from '../components/Bokeh';
+import {CountUp} from '../components/CountUp';
+import {GlassBadge} from '../components/GlassBadge';
 import {GrainOverlay} from '../components/GrainOverlay';
-import {Vignette} from '../components/Vignette';
 import {Particles} from '../components/Particles';
 import {Ring} from '../components/Ring';
 import {SfxPop} from '../components/SfxPop';
+import {Vignette} from '../components/Vignette';
 import {WordCaption, CaptionWord} from '../components/WordCaption';
 import {useKenBurns} from '../hooks/useKenBurns';
 import {useZoomPunch} from '../hooks/useZoomPunch';
 
-// SCENE: Modern hook — rings stacking on a hand → screech flash → gold bars
-// COLOR GRADE: Warm golden (glamour / TikTok aesthetic)
-// KEN BURNS: Slow push in, slight right pan
+// HOOK: Modern TikTok ring-stacking → history reveal
+// Style: premium dark + gold (TikTok aesthetic) + Kurzgesagt draw-on elements
 
 const line1Words: CaptionWord[] = [
   {text: 'คุณคิดว่า', startFrame: 3},
@@ -21,243 +22,234 @@ const line1Words: CaptionWord[] = [
   {text: 'บนนิ้วเดียว', startFrame: 18},
   {text: 'หรือ', startFrame: 23},
   {text: 'Ring Stacking', startFrame: 26, highlight: true},
-  {text: 'เป็นแค่', startFrame: 32},
-  {text: 'เทรนด์แฟชั่น', startFrame: 37},
-  {text: 'ยุคนี้', startFrame: 42},
-  {text: 'ใช่ไหม?', startFrame: 47},
+  {text: 'เป็นแค่เทรนด์?', startFrame: 32},
 ];
 
 const line2Words: CaptionWord[] = [
-  {text: 'แต่ความจริงแล้ว...', startFrame: 60},
-  {text: 'มันเริ่มมาจาก', startFrame: 65},
-  {text: "'ความขี้อวด'", startFrame: 69, highlight: true},
-  {text: 'ของคน', startFrame: 73},
-  {text: 'เมื่อหลายพัน', startFrame: 77},
-  {text: 'ปีก่อน!', startFrame: 81, highlight: true},
+  {text: 'แต่จริงๆ แล้ว...', startFrame: 58},
+  {text: 'มันเริ่มจาก', startFrame: 63},
+  {text: "'ความขี้อวด'", startFrame: 67, highlight: true},
+  {text: 'เมื่อหลายพันปีก่อน!', startFrame: 72, highlight: true},
 ];
 
-// Zoom punch frames = frames where highlighted words appear
-const PUNCH_FRAMES = [26, 69, 81];
+const PUNCH_FRAMES = [26, 67, 72];
 
-const HandSVG: React.FC<{opacity: number}> = ({opacity}) => (
-  <svg viewBox="0 0 300 500" width={300} height={500} style={{position: 'absolute', left: 390, top: 680, opacity}}>
-    {/* Shadow */}
-    <ellipse cx="160" cy="490" rx="100" ry="18" fill="rgba(0,0,0,0.3)" />
-    {/* Palm */}
-    <path
-      d="M60 280 Q50 200 55 160 Q58 140 75 138 Q92 136 95 155 L98 240 L105 160 Q108 136 126 134 Q144 132 146 155 L148 240 L150 155 Q152 132 170 130 Q188 128 190 152 L190 240 L194 165 Q196 150 210 152 Q226 154 226 172 L220 280 Q230 320 220 360 Q210 400 170 420 Q140 432 110 420 Q70 405 60 360 Z"
-      fill="url(#skin-grad)"
-    />
-    {/* Thumb */}
-    <path d="M60 280 Q40 270 30 250 Q18 225 28 205 Q38 188 55 192 L60 280Z" fill="url(#skin-grad)" />
-    {/* Subtle finger separators */}
-    <line x1="98" y1="240" x2="98" y2="285" stroke="#D4956A" strokeWidth="1.5" opacity="0.4" />
-    <line x1="148" y1="240" x2="148" y2="285" stroke="#D4956A" strokeWidth="1.5" opacity="0.4" />
-    <line x1="190" y1="240" x2="190" y2="285" stroke="#D4956A" strokeWidth="1.5" opacity="0.4" />
-    {/* Knuckle creases */}
-    <path d="M74 192 Q87 186 100 192" fill="none" stroke="#C8845A" strokeWidth="2" opacity="0.5" />
-    <path d="M118 188 Q133 182 147 188" fill="none" stroke="#C8845A" strokeWidth="2" opacity="0.5" />
-    <path d="M161 186 Q175 180 188 186" fill="none" stroke="#C8845A" strokeWidth="2" opacity="0.5" />
-    <path d="M198 194 Q210 189 222 195" fill="none" stroke="#C8845A" strokeWidth="2" opacity="0.5" />
-    {/* Nails */}
-    <ellipse cx="87" cy="147" rx="10" ry="8" fill="#FDDCC4" opacity="0.85" />
-    <ellipse cx="127" cy="144" rx="10" ry="8" fill="#FDDCC4" opacity="0.85" />
-    <ellipse cx="170" cy="140" rx="10" ry="8" fill="#FDDCC4" opacity="0.85" />
-    <ellipse cx="210" cy="159" rx="8" ry="6.5" fill="#FDDCC4" opacity="0.85" />
-    {/* Red nail polish */}
-    <ellipse cx="87" cy="147" rx="8" ry="6" fill="rgba(200,30,50,0.75)" />
-    <ellipse cx="127" cy="144" rx="8" ry="6" fill="rgba(200,30,50,0.75)" />
-    <ellipse cx="170" cy="140" rx="8" ry="6" fill="rgba(200,30,50,0.75)" />
-    <ellipse cx="210" cy="159" rx="6.5" ry="5" fill="rgba(200,30,50,0.75)" />
-    <defs>
-      <linearGradient id="skin-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stopColor="#F5CBA7" />
-        <stop offset="60%" stopColor="#EDB88A" />
-        <stop offset="100%" stopColor="#D4956A" />
-      </linearGradient>
-    </defs>
-  </svg>
-);
+// Hand drawn with SVG — cleaner Kurzgesagt flat design
+const FlatHand: React.FC<{opacity: number; frame: number; fps: number}> = ({opacity, frame, fps}) => {
+  // Each finger draws on staggered
+  const fingerScales = [0, 6, 12, 18, 24].map((delay) =>
+    spring({frame: frame - delay, fps, config: {damping: 10, stiffness: 200}})
+  );
 
-const GoldBar: React.FC<{x: number; y: number; scale: number; rotation: number}> = ({x, y, scale, rotation}) => (
-  <svg
-    width="130" height="65"
-    style={{
-      position: 'absolute', left: x, top: y,
-      transform: `scale(${scale}) rotate(${rotation}deg)`,
-      transformOrigin: 'center',
-      filter: 'drop-shadow(0 6px 12px rgba(0,0,0,0.5))',
-    }}
-  >
-    <defs>
-      <linearGradient id="bar-g" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#FFF176" />
-        <stop offset="35%" stopColor="#D4A017" />
-        <stop offset="100%" stopColor="#7A5500" />
-      </linearGradient>
-    </defs>
-    <rect x="4" y="14" width="122" height="42" rx="5" fill="url(#bar-g)" />
-    <rect x="4" y="14" width="122" height="14" rx="5" fill="rgba(255,255,255,0.25)" />
-    <text x="65" y="43" textAnchor="middle" fontSize="15" fontWeight="bold" fill="#6B4400" fontFamily="serif">AURUM</text>
-  </svg>
+  return (
+    <svg
+      viewBox="0 0 280 460"
+      width={280} height={460}
+      style={{position: 'absolute', left: 400, top: 700, opacity}}
+    >
+      {/* Drop shadow */}
+      <ellipse cx="150" cy="450" rx="90" ry="16" fill="rgba(0,0,0,0.4)" />
+
+      {/* Palm — flat coral skin tone */}
+      <path
+        d="M55 270 Q45 195 50 155 Q53 135 70 133 Q87 131 90 150 L93 230 L100 155 Q103 131 121 129 Q139 127 141 150 L143 230 L145 150 Q147 127 165 125 Q183 123 185 147 L185 230 L189 160 Q191 145 206 147 Q222 149 221 167 L216 270 Q225 315 215 355 Q205 393 165 412 Q135 424 105 412 Q65 397 55 355 Z"
+        fill="#F4A57B"
+        style={{transform: `scaleY(${fingerScales[0]})`, transformOrigin: '135px 400px'}}
+      />
+
+      {/* Finger highlights — flat design */}
+      {[
+        {cx: 83, cy: 143, delay: 0},
+        {cx: 121, cy: 140, delay: 6},
+        {cx: 163, cy: 136, delay: 12},
+        {cx: 202, cy: 155, delay: 18},
+      ].map((f, i) => (
+        <ellipse
+          key={i} cx={f.cx} cy={f.cy} rx="9" ry="7"
+          fill="#E8915A"
+          opacity={fingerScales[i + 1]}
+        />
+      ))}
+
+      {/* Thumb */}
+      <path
+        d="M55 270 Q35 260 25 242 Q14 218 24 200 Q34 184 50 188 L55 270Z"
+        fill="#F4A57B"
+      />
+
+      {/* Bold outline — Kurzgesagt style */}
+      <path
+        d="M55 270 Q45 195 50 155 Q53 135 70 133 Q87 131 90 150 L93 230 L100 155 Q103 131 121 129 Q139 127 141 150 L143 230 L145 150 Q147 127 165 125 Q183 123 185 147 L185 230 L189 160 Q191 145 206 147 Q222 149 221 167 L216 270 Q225 315 215 355 Q205 393 165 412 Q135 424 105 412 Q65 397 55 355 Z"
+        fill="none" stroke="#1a0a00" strokeWidth="3.5"
+      />
+
+      {/* Nail polish — bold red */}
+      {[
+        {cx: 83, cy: 143, rx: 8, ry: 5.5},
+        {cx: 121, cy: 140, rx: 8, ry: 5.5},
+        {cx: 163, cy: 136, rx: 8, ry: 5.5},
+        {cx: 202, cy: 155, rx: 7, ry: 4.5},
+      ].map((n, i) => (
+        <ellipse key={i} cx={n.cx} cy={n.cy} rx={n.rx} ry={n.ry}
+          fill="#E53935" opacity={fingerScales[i + 1]}
+        />
+      ))}
+    </svg>
+  );
+};
+
+// Gold bar in Kurzgesagt flat style
+const FlatGoldBar: React.FC<{x: number; y: number; scale: number; rotation: number}> = ({x, y, scale, rotation}) => (
+  <div style={{
+    position: 'absolute', left: x, top: y,
+    transform: `scale(${scale}) rotate(${rotation}deg)`,
+    transformOrigin: 'center',
+    width: 140, height: 62,
+    background: 'linear-gradient(135deg, #FFF176 0%, #FFC107 40%, #FF8F00 100%)',
+    borderRadius: 8,
+    border: '3px solid #E65100',
+    boxShadow: '0 8px 24px rgba(0,0,0,0.5), inset 0 2px 0 rgba(255,255,255,0.3)',
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+    fontSize: 22, fontWeight: 900, color: '#4E2800', letterSpacing: 2,
+    fontFamily: 'serif',
+    textShadow: '0 1px 0 rgba(255,255,255,0.4)',
+  }}>
+    AURUM
+  </div>
 );
 
 export const HookScene: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
 
-  const kb = useKenBurns({durationFrames: 90, fromScale: 1.0, toScale: 1.13, fromX: 0, toX: 18});
+  const kb = useKenBurns({durationFrames: 90, fromScale: 1.0, toScale: 1.14, fromX: 0, toX: 20});
   const punch = useZoomPunch(PUNCH_FRAMES);
 
-  const contentScale = kb.scale * punch;
+  // Rings — spring entrance staggered (Kurzgesagt pattern: 8-12 frame delay)
+  const ringScales = [6, 16, 26, 36].map((d) =>
+    spring({frame: frame - d, fps, config: {damping: 200, stiffness: 26}})
+  );
 
-  const ring1S = spring({frame: frame - 6, fps, config: {damping: 8, stiffness: 200}});
-  const ring2S = spring({frame: frame - 15, fps, config: {damping: 8, stiffness: 200}});
-  const ring3S = spring({frame: frame - 24, fps, config: {damping: 8, stiffness: 200}});
-  const ring4S = spring({frame: frame - 33, fps, config: {damping: 8, stiffness: 200}});
+  const flashOpacity = interpolate(frame, [52, 56, 59, 66], [0, 1, 1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const ringsOpacity = interpolate(frame, [59, 70], [1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
 
-  const flashOpacity = interpolate(frame, [53, 57, 60, 67], [0, 1, 1, 0], {
-    extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
-  });
-  const ringsOpacity = interpolate(frame, [60, 71], [1, 0], {
-    extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
-  });
+  const barScales = [69, 74, 79].map((d) =>
+    spring({frame: frame - d, fps, config: {damping: 200, stiffness: 22}})
+  );
 
-  const goldBar1S = spring({frame: frame - 69, fps, config: {damping: 10, stiffness: 180}});
-  const goldBar2S = spring({frame: frame - 73, fps, config: {damping: 10, stiffness: 180}});
-  const goldBar3S = spring({frame: frame - 77, fps, config: {damping: 10, stiffness: 180}});
+  const handIn = interpolate(frame, [0, 12], [0, 1], {extrapolateRight: 'clamp'});
 
-  const handIn = interpolate(frame, [0, 10], [0, 1], {extrapolateRight: 'clamp'});
+  // Pulsing glow ring
+  const glow = Math.sin(frame * 0.14) * 0.4 + 0.6;
 
-  // Heartbeat ambient glow pulsing behind rings
-  const glowPulse = Math.sin(frame * 0.15) * 0.5 + 0.5;
+  // "Ring Stacking" label slides in
+  const labelIn = interpolate(frame, [2, 12], [0, 1], {extrapolateRight: 'clamp'});
 
   return (
     <>
-      {/* ── BACKGROUND + CONTENT ── */}
       <AbsoluteFill
         style={{
-          background: 'radial-gradient(ellipse at 50% 35%, #1e1a2e 0%, #0a0a12 100%)',
-          filter: 'brightness(1.0) contrast(1.15) saturate(1.2)',
+          background: 'radial-gradient(ellipse at 40% 30%, #1e1240 0%, #070510 100%)',
+          filter: 'brightness(1.0) contrast(1.18) saturate(1.22)',
         }}
       >
-        {/* Bokeh atmosphere */}
-        <Bokeh color="255,200,50" maxOpacity={0.09} />
+        <Bokeh color="255,200,50" maxOpacity={0.1} />
 
-        {/* Warm golden tint overlay */}
-        <div
-          style={{
-            position: 'absolute', inset: 0,
-            background: 'rgba(200,140,0,0.08)',
-            mixBlendMode: 'screen',
-            pointerEvents: 'none',
-          }}
-        />
+        {/* Diagonal accent lines — Kurzgesagt graphic element */}
+        <svg style={{position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.06}}>
+          {Array.from({length: 8}).map((_, i) => (
+            <line key={i}
+              x1={i * 140} y1={0} x2={i * 140 + 200} y2={1920}
+              stroke="#FFE566" strokeWidth="1"
+            />
+          ))}
+        </svg>
 
-        {/* ── KEN BURNS + PUNCH WRAPPER ── */}
-        <div
-          style={{
-            position: 'absolute', inset: 0,
-            transform: `scale(${contentScale}) translateX(${kb.x}px)`,
-            transformOrigin: 'center center',
-          }}
-        >
-          {/* Ambient glow ring */}
-          <div
-            style={{
-              position: 'absolute', left: 350, top: 680,
-              width: 380, height: 300,
-              borderRadius: '50%',
-              background: `radial-gradient(circle, rgba(212,160,23,${0.15 + glowPulse * 0.08}) 0%, transparent 70%)`,
-              pointerEvents: 'none',
-            }}
-          />
+        {/* KEN BURNS + PUNCH */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          transform: `scale(${kb.scale * punch}) translateX(${kb.x}px)`,
+          transformOrigin: 'center',
+        }}>
+          {/* Ambient ring glow */}
+          <div style={{
+            position: 'absolute', left: 330, top: 700, width: 420, height: 320,
+            borderRadius: '50%',
+            background: `radial-gradient(circle, rgba(212,160,23,${0.18 * glow}) 0%, transparent 70%)`,
+          }} />
 
-          {/* Hand illustration */}
-          <HandSVG opacity={ringsOpacity * handIn} />
+          <FlatHand opacity={ringsOpacity * handIn} frame={frame} fps={fps} />
 
-          {/* Stacking rings */}
-          {frame >= 6 && (
-            <div style={{opacity: ringsOpacity, transform: `scale(${ring1S})`, transformOrigin: '480px 810px'}}>
-              <Ring x={480} y={810} rx={52} ry={18} color="#D4A017" />
+          {/* Rings — flat Kurzgesagt-style with bold outlines */}
+          {[
+            {d: 6, x: 483, y: 812, rx: 54, ry: 20, color: '#D4A017', gem: undefined},
+            {d: 16, x: 543, y: 793, rx: 52, ry: 19, color: '#AB47BC', gem: '#E040FB'},
+            {d: 26, x: 601, y: 802, rx: 50, ry: 18, color: '#D4A017', gem: undefined},
+            {d: 36, x: 483, y: 853, rx: 52, ry: 19, color: '#26C6DA', gem: '#00BCD4'},
+          ].map((r, i) => (
+            frame >= r.d && (
+              <div key={i} style={{
+                opacity: ringsOpacity,
+                transform: `scale(${ringScales[i]})`,
+                transformOrigin: `${r.x}px ${r.y}px`,
+              }}>
+                <Ring x={r.x} y={r.y} rx={r.rx} ry={r.ry} color={r.color} gemColor={r.gem} />
+              </div>
+            )
+          ))}
+
+          {/* Particles */}
+          {frame >= 6 && <Particles startFrame={6} cx={483} cy={812} count={12} radius={90} />}
+          {frame >= 16 && <Particles startFrame={16} cx={543} cy={793} count={12} radius={90} color="#E040FB" />}
+          {frame >= 26 && <Particles startFrame={26} cx={601} cy={802} count={10} radius={80} />}
+          {frame >= 36 && <Particles startFrame={36} cx={483} cy={853} count={10} radius={80} color="#00BCD4" />}
+
+          {/* Gold bars after flash */}
+          {frame >= 69 && <FlatGoldBar x={398} y={824} scale={barScales[0]} rotation={-5} />}
+          {frame >= 74 && <FlatGoldBar x={498} y={804} scale={barScales[1]} rotation={2} />}
+          {frame >= 79 && <FlatGoldBar x={578} y={836} scale={barScales[2]} rotation={-3} />}
+
+          {frame >= 69 && <Particles startFrame={69} cx={530} cy={825} count={18} radius={160} color="#FFE566" />}
+
+          {/* Count-up: how many years of history */}
+          {frame >= 70 && (
+            <div style={{
+              position: 'absolute', left: 0, right: 0, top: 1150,
+              display: 'flex', justifyContent: 'center',
+            }}>
+              <CountUp
+                from={0} to={3000}
+                startFrame={70} durationFrames={18}
+                suffix=" ปีแห่งประวัติศาสตร์"
+                style={{
+                  fontSize: 52, fontWeight: 900, color: '#FFE566',
+                  textShadow: '0 0 30px rgba(255,229,102,0.6), 3px 3px 0 #000',
+                }}
+              />
             </div>
           )}
-          {frame >= 15 && (
-            <div style={{opacity: ringsOpacity, transform: `scale(${ring2S})`, transformOrigin: '540px 790px'}}>
-              <Ring x={540} y={790} rx={52} ry={18} color="#C0A060" gemColor="#E040FB" />
-            </div>
-          )}
-          {frame >= 24 && (
-            <div style={{opacity: ringsOpacity, transform: `scale(${ring3S})`, transformOrigin: '600px 800px'}}>
-              <Ring x={600} y={800} rx={48} ry={17} color="#D4A017" />
-            </div>
-          )}
-          {frame >= 33 && (
-            <div style={{opacity: ringsOpacity, transform: `scale(${ring4S})`, transformOrigin: '480px 850px'}}>
-              <Ring x={480} y={850} rx={50} ry={17} gemColor="#00BCD4" />
-            </div>
-          )}
-
-          {/* Particles on ring appear */}
-          {frame >= 6 && <Particles startFrame={6} cx={480} cy={810} count={12} radius={90} />}
-          {frame >= 15 && <Particles startFrame={15} cx={540} cy={790} count={12} radius={90} color="#E040FB" />}
-          {frame >= 24 && <Particles startFrame={24} cx={600} cy={800} count={10} radius={80} />}
-          {frame >= 33 && <Particles startFrame={33} cx={480} cy={850} count={10} radius={80} color="#00BCD4" />}
-
-          {/* Gold bars appear after flash */}
-          {frame >= 69 && (
-            <>
-              <GoldBar x={395} y={820} scale={goldBar1S} rotation={-5} />
-              <GoldBar x={495} y={800} scale={goldBar2S} rotation={2} />
-              <GoldBar x={575} y={832} scale={goldBar3S} rotation={-3} />
-            </>
-          )}
-
-          {/* Particles when bars appear */}
-          {frame >= 69 && <Particles startFrame={69} cx={530} cy={820} count={15} radius={150} color="#FFE566" />}
         </div>
 
-        {/* Screech flash */}
-        <div
-          style={{
-            position: 'absolute', inset: 0, background: '#fff',
-            opacity: flashOpacity, pointerEvents: 'none',
-          }}
-        />
+        {/* Flash */}
+        <div style={{position: 'absolute', inset: 0, background: '#fff', opacity: flashOpacity, pointerEvents: 'none'}} />
       </AbsoluteFill>
 
-      {/* ── POST-PROCESS ── */}
-      <Vignette intensity={0.65} />
-      <GrainOverlay opacity={0.038} />
+      <Vignette intensity={0.68} />
+      <GrainOverlay opacity={0.036} />
 
-      {/* ── HUD / UI ── */}
-      <div
-        style={{
-          position: 'absolute', top: 110, left: 0, right: 0,
-          display: 'flex', justifyContent: 'center',
-          opacity: interpolate(frame, [0, 8], [0, 1], {extrapolateRight: 'clamp'}),
-          zIndex: 100,
-        }}
-      >
-        <div
-          style={{
-            background: 'rgba(212,160,23,0.18)',
-            border: '2px solid rgba(255,229,102,0.8)',
-            borderRadius: 40,
-            padding: '12px 44px',
-            fontSize: 38, fontWeight: 700, color: '#FFE566',
-            letterSpacing: 3,
-            backdropFilter: 'blur(4px)',
-            textShadow: '0 0 20px rgba(255,229,102,0.4)',
-          }}
-        >
+      {/* Glass badge — Kurzgesagt style label */}
+      <div style={{
+        position: 'absolute', top: 108, left: 0, right: 0,
+        display: 'flex', justifyContent: 'center',
+        opacity: labelIn, zIndex: 100,
+      }}>
+        <GlassBadge startFrame={0} accentColor="#FFE566" size="md">
           💍 Ring Stacking
-        </div>
+        </GlassBadge>
       </div>
 
-      <SfxPop text="เอี๊ยด! 🛑" x={280} y={680} startFrame={54} color="#FF5722" size={82} />
-
-      <WordCaption words={line1Words} endFrame={55} />
+      <SfxPop text="เอี๊ยด! 🛑" x={265} y={668} startFrame={53} color="#FF5722" size={84} />
+      <WordCaption words={line1Words} endFrame={53} />
       <WordCaption words={line2Words} endFrame={89} />
     </>
   );
