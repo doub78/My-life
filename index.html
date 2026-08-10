@@ -27,7 +27,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
   background:radial-gradient(ellipse at 50% 40%, transparent 45%, rgba(140,100,40,.14) 100%)}
 body::after{content:'';position:fixed;inset:0;opacity:.075;pointer-events:none;z-index:9999;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")}
-#app{display:flex;flex-direction:column;height:100%;height:100dvh;max-width:480px;margin:0 auto}
+#app{position:relative;display:flex;flex-direction:column;height:100%;height:100dvh;max-width:480px;margin:0 auto}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -207,6 +207,17 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 .t-bold{font-weight:700}.t-accent{color:var(--accent-l)}
 .mt2{margin-top:8px}.mt3{margin-top:12px}
 .flex{display:flex}.ai-c{align-items:center}.jb{justify-content:space-between}.g2{gap:8px}.w-full{width:100%}
+
+/* LOST BUTTON */
+.lost-fab{position:absolute;right:14px;bottom:calc(78px + var(--sb));z-index:50;
+  background:var(--accent);color:#fff;border:none;border-radius:100px;padding:11px 18px;
+  font-size:12px;font-weight:800;letter-spacing:.03em;box-shadow:0 4px 16px rgba(0,0,0,.35);
+  cursor:pointer;-webkit-tap-highlight-color:transparent;font-family:inherit}
+.lost-fab:active{transform:scale(.94)}
+.lost-section{margin-bottom:16px}
+.lost-label{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-l);margin-bottom:6px}
+.lost-text{font-size:14px;line-height:1.6;color:var(--text)}
+.lost-list{font-size:13px;line-height:1.8;color:var(--text2)}
 </style>
 </head>
 <body>
@@ -499,6 +510,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
 </main>
 
+<button class="lost-fab" onclick="openLostModal()">🆘 Lost?</button>
+
 <!-- BOTTOM NAV -->
 <nav id="nav">
   <button class="nav-btn active" onclick="switchTab('today',this)">
@@ -574,6 +587,62 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
       <button class="btn btn-secondary btn-full" onclick="closeModal('vent-modal')">Cancel</button>
       <button class="btn btn-primary btn-full" onclick="saveVentures()">Save</button>
     </div>
+  </div>
+</div>
+
+<!-- I'M LOST MODAL -->
+<div class="modal-overlay" id="lost-modal">
+  <div class="modal-sheet">
+    <div class="modal-title">🆘 I'm Lost</div>
+
+    <div class="lost-section">
+      <div class="lost-label">My Mission</div>
+      <div class="lost-text">Build my media company — turn knowledge, references and creativity into published content, learn from the market, and make the process repeatable. Freedom and independence. Not the money — what it means: never depending on anyone again.</div>
+    </div>
+
+    <div class="lost-section">
+      <div class="lost-label">My Current Goals</div>
+      <div class="lost-list" id="lost-goals"></div>
+    </div>
+
+    <div class="lost-section">
+      <div class="lost-label">My Channels</div>
+      <div class="lost-list" id="lost-channels"></div>
+    </div>
+
+    <div class="lost-section">
+      <div class="lost-label">My Current Priority</div>
+      <div class="lost-text" id="lost-priority"></div>
+      <div class="t-xs t-muted mt2">Edit in Goals → Next 5 Moves</div>
+    </div>
+
+    <div class="lost-section">
+      <div class="lost-label">Today's Output</div>
+      <div class="lost-text" id="lost-output"></div>
+      <div class="t-xs t-muted mt2">Edit in Today → Top 3 Today</div>
+    </div>
+
+    <div class="field">
+      <label>Next action — one physical thing</label>
+      <input type="text" id="lost-next" placeholder="Open CapCut → export yesterday's edit" onblur="saveLostField('next',this.value)" />
+    </div>
+
+    <div class="field">
+      <label>Tool</label>
+      <input type="text" id="lost-tool" placeholder="CapCut · Claude · Canva" onblur="saveLostField('tool',this.value)" />
+    </div>
+
+    <div class="field">
+      <label>Definition of done</label>
+      <textarea id="lost-dod" rows="2" placeholder="What does finished look like today?" onblur="saveLostField('dod',this.value)"></textarea>
+    </div>
+
+    <div class="lost-section">
+      <div class="lost-label">Stop Doing</div>
+      <div class="lost-text">Research. Organizing. Browsing — if enough already exists, build instead.</div>
+    </div>
+
+    <button class="btn btn-primary btn-full mt2" onclick="closeModal('lost-modal')">Back to work</button>
   </div>
 </div>
 
@@ -706,6 +775,45 @@ function switchTab(name, btn) {
 
 function openModal(id)  { document.getElementById(id).classList.add('open') }
 function closeModal(id) { document.getElementById(id).classList.remove('open') }
+
+// ── I'M LOST ─────────────────────────────────────────────────────────────────
+function openLostModal() { renderLostModal(); openModal('lost-modal') }
+
+function renderLostModal() {
+  const now         = new Date()
+  const b20d        = dayDiff(B20_DL, now)
+  const currentMonth= now.toISOString().slice(0,7)
+  const mt          = MONTHLY_TARGETS.find(m=>m.month===currentMonth) || MONTHLY_TARGETS[0]
+  const income      = S.get('monthly_income', {})
+  const actual      = income[currentMonth] || 0
+  const hrs         = S.get('watch_hours', WATCH_HOURS_START)
+  const hrsLeft     = Math.max(0, WATCH_HOURS_GOAL - hrs)
+
+  document.getElementById('lost-goals').innerHTML = `
+    <div>${b20d}d to B20 — $20,000+/month by Nov 2, 2026</div>
+    <div>${mt.label} income: $${actual.toLocaleString()} / $${mt.target.toLocaleString()}</div>
+    <div>Watch hours: ${hrs.toLocaleString()} / ${WATCH_HOURS_GOAL.toLocaleString()}${hrsLeft?' ('+hrsLeft.toLocaleString()+' to go)':' ✓ unlocked'}</div>`
+
+  document.getElementById('lost-channels').innerHTML =
+    VENTURES.map(v=>`<div>${v.name} — ${v.note}</div>`).join('')
+
+  const moves = S.get('moves', MOVES_DEFAULTS)
+  document.getElementById('lost-priority').textContent = moves[0] || '—'
+
+  const t3blank = [{text:'',done:false},{text:'',done:false},{text:'',done:false}]
+  const t3      = S.get('top3_'+today(), t3blank)
+  const output  = (t3.find(t=>t.text && t.text.trim())||{}).text
+  document.getElementById('lost-output').textContent = output || 'Not set — add it in Top 3 Today'
+
+  document.getElementById('lost-next').value = S.get('lost_next_'+today(), '')
+  document.getElementById('lost-tool').value = S.get('lost_tool_'+today(), '')
+  document.getElementById('lost-dod').value  = S.get('lost_dod_'+today(), '')
+}
+
+function saveLostField(field, val) {
+  S.set('lost_'+field+'_'+today(), val)
+  flash()
+}
 
 // ── HEADER ───────────────────────────────────────────────────────────────────
 function renderHeader() {
