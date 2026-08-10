@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#ede0c4" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="description" content="Media Vault — creative intelligence & knowledge system" />
+<title>Media Vault</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ede0c4;--surface:#f5ecda;--card:#fdf8ee;--border:#d4c49a;
+  --text:#1a1208;--text2:#604830;--muted:#907558;
+  --accent:#c93018;--accent-l:#e04428;--accent-dim:rgba(201,48,24,.1);
+  --green:#2d7048;--amber:#9a6d18;--blue:#2a6090;--purple:#6030b8;
+  --sb:env(safe-area-inset-bottom,0px)
+}
+html,body{height:100%;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text',system-ui,sans-serif;
+  font-size:16px;line-height:1.5;overflow:hidden;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
+  background:radial-gradient(ellipse at 50% 40%, transparent 45%, rgba(140,100,40,.14) 100%)}
+body::after{content:'';position:fixed;inset:0;opacity:.075;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")}
+#app{display:flex;flex-direction:column;height:100%;height:100dvh;max-width:480px;margin:0 auto}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+
+#hdr{padding:12px 18px 10px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
+.hdr-row{display:flex;align-items:center;justify-content:space-between}
+.hdr-title{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.badge{background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:3px 11px;border-radius:100px}
+
+#main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.tab-pane{display:none;padding:16px 16px calc(16px + var(--sb))}
+.tab-pane.active{display:block;animation:fadeUp .3s cubic-bezier(.4,0,.2,1)}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px;animation:scaleIn .22s cubic-bezier(.4,0,.2,1)}
+.card-title{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+
+textarea,input[type=text],input[type=number],select{
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  color:var(--text);font-family:inherit;font-size:14px;padding:10px 12px;width:100%;
+  outline:none;transition:border-color .2s}
+textarea:focus,input:focus,select:focus{border-color:var(--accent)}
+textarea{resize:none;line-height:1.6}
+::placeholder{color:var(--muted)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:10px 18px;border-radius:10px;font-size:14px;font-weight:600;border:none;
+  cursor:pointer;transition:opacity .15s,transform .12s;-webkit-tap-highlight-color:transparent;font-family:inherit}
+.btn:active{transform:scale(.95);opacity:.85}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-secondary{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+.btn-ghost{background:transparent;color:var(--muted);font-size:12px;padding:8px 10px;border:1px solid var(--border);border-radius:10px}
+.btn-sm{padding:7px 12px;font-size:12px}
+.btn-full{width:100%}
+
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:100;
+  align-items:flex-end;justify-content:center;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex;animation:fadeIn .2s ease}
+.modal-sheet{background:var(--card);border-top-left-radius:22px;border-top-right-radius:22px;
+  padding:20px 18px calc(20px + var(--sb));width:100%;max-width:480px;max-height:85vh;overflow-y:auto;
+  border-top:1px solid var(--border)}
+.modal-title{font-size:17px;font-weight:700;margin-bottom:16px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+
+#nav{background:var(--surface);border-top:1px solid var(--border);display:flex;flex-shrink:0;padding-bottom:var(--sb)}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;padding:8px 2px;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  border:none;background:transparent;color:var(--muted);font-size:9px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.06em;transition:color .2s;font-family:inherit}
+.nav-btn.active{color:var(--accent-l)}
+.nav-icon{width:22px;height:22px;flex-shrink:0}
+
+.flash{position:fixed;top:20px;left:50%;transform:translateX(-50%);
+  background:var(--green);color:#fff;padding:9px 22px;border-radius:100px;
+  font-size:13px;font-weight:600;z-index:200;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
+.flash.show{opacity:1}
+.t-muted{color:var(--muted)}.t-2{color:var(--text2)}.t-sm{font-size:13px}.t-xs{font-size:11px}
+.t-bold{font-weight:700}
+.mt2{margin-top:8px}.mt3{margin-top:12px}
+.flex{display:flex}.ai-c{align-items:center}.jb{justify-content:space-between}.g2{gap:8px}.w-full{width:100%}
+
+.type-chip-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.type-chip{background:var(--surface);border:1px solid var(--border);border-radius:100px;font-size:12px;padding:6px 12px;color:var(--muted);cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
+.type-chip.on{background:var(--accent-dim);border-color:var(--accent);color:var(--accent-l);font-weight:700}
+
+.entry-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;cursor:pointer;animation:scaleIn .2s ease;-webkit-tap-highlight-color:transparent}
+.entry-card:active{transform:scale(.98)}
+.entry-title-row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px}
+.entry-title{font-size:14px;font-weight:700;line-height:1.3}
+.entry-score{background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:100px;flex-shrink:0;white-space:nowrap}
+.entry-meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+.entry-tags{display:flex;gap:5px;flex-wrap:wrap}
+.tag-pill{background:var(--surface);border:1px solid var(--border);border-radius:100px;font-size:10px;padding:2px 8px;color:var(--text2)}
+
+.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ov-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:left;cursor:pointer;font-family:inherit;color:var(--text);-webkit-tap-highlight-color:transparent}
+.ov-item:active{transform:scale(.97)}
+.ov-count{font-size:22px;font-weight:800}
+.ov-label{font-size:11px;color:var(--muted);margin-top:2px}
+
+.tag-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px}
+.tag-row:last-child{border-bottom:none}
+.tag-name{font-weight:600;flex:1}
+.tag-count{color:var(--muted);min-width:16px;text-align:right}
+.clutter-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;white-space:nowrap}
+.clutter-badge.muted{background:var(--surface);color:var(--muted)}
+.clutter-badge.ok{background:rgba(45,112,72,.15);color:var(--green)}
+.clutter-badge.warn{background:rgba(154,109,24,.18);color:var(--amber)}
+.clutter-badge.stop{background:var(--accent-dim);color:var(--accent-l)}
+</style>
+</head>
+<body>
+<div id="app">
+
+<div id="hdr">
+  <div class="hdr-row">
+    <span class="hdr-title">Media Vault</span>
+    <span class="badge" id="total-count">0</span>
+  </div>
+</div>
+
+<main id="main">
+
+<div id="tab-dash" class="tab-pane active">
+  <div class="card">
+    <div class="card-title">Overview</div>
+    <div class="ov-grid" id="ov-grid"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Search Everything</div>
+    <input type="text" id="global-search" placeholder="Search all entries…" oninput="renderGlobalSearch()" />
+    <div id="global-search-results" class="mt2"></div>
+  </div>
+
+  <div class="card">
+    <div class="flex ai-c jb" style="margin-bottom:12px">
+      <span class="card-title" style="margin-bottom:0">Reference Topics</span>
+    </div>
+    <div id="tag-cloud"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Quick Capture</div>
+    <div class="field"><label>Type</label><select id="qc-type"></select></div>
+    <div class="field"><label>Title</label><input type="text" id="qc-title" placeholder="What is this?" /></div>
+    <div class="field"><label>URL (optional)</label><input type="text" id="qc-url" placeholder="https://…" /></div>
+    <div class="field"><label>Why I saved this / note</label><textarea id="qc-note" rows="2" placeholder="How could I use this?"></textarea></div>
+    <button class="btn btn-primary btn-full" onclick="quickCapture()">Save to Inbox</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Daily Research Mode</div>
+    <div class="t-xs t-muted" style="margin-bottom:10px">Run this in your Claude project, then log results back here as References / Ideas.</div>
+    <ol style="padding-left:18px;font-size:13px;line-height:1.85;color:var(--text2)">
+      <li>Find today's references</li>
+      <li>Identify patterns</li>
+      <li>Find references relevant to my channels</li>
+      <li>Find unusual examples</li>
+      <li>Find visual references</li>
+      <li>Find one useful case study</li>
+      <li>Generate original ideas</li>
+      <li>Recommend what to actually save</li>
+    </ol>
+    <button class="btn btn-secondary btn-full mt3" onclick="copyResearchPrompt()">Copy "Find Today's References" Prompt</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Backup</div>
+    <div class="flex g2">
+      <button class="btn btn-secondary btn-full" onclick="exportData()">Export JSON</button>
+      <button class="btn btn-secondary btn-full" onclick="document.getElementById('import-file').click()">Import JSON</button>
+    </div>
+    <input type="file" id="import-file" accept="application/json" style="display:none" onchange="importData(event)" />
+  </div>
+</div>
+
+<div id="tab-ref" class="tab-pane">
+  <div class="flex ai-c jb" style="margin-bottom:10px">
+    <div class="t-sm t-bold">References</div>
+    <button class="btn btn-primary btn-sm" onclick="openAdd(curType.ref)">+ Add</button>
+  </div>
+  <div class="type-chip-row" id="ref-chips"></div>
+  <input type="text" id="ref-search" placeholder="Search references…" oninput="renderList('ref')" style="margin-bottom:10px" />
+  <div id="ref-list"></div>
+</div>
+
+<div id="tab-create" class="tab-pane">
+  <div class="flex ai-c jb" style="margin-bottom:10px">
+    <div class="t-sm t-bold">Create</div>
+    <button class="btn btn-primary btn-sm" onclick="openAdd(curType.create)">+ Add</button>
+  </div>
+  <div class="type-chip-row" id="create-chips"></div>
+  <input type="text" id="create-search" placeholder="Search ideas, templates, prompts…" oninput="renderList('create')" style="margin-bottom:10px" />
+  <div id="create-list"></div>
+</div>
+
+<div id="tab-vault" class="tab-pane">
+  <div class="flex ai-c jb" style="margin-bottom:10px">
+    <div class="t-sm t-bold">Vault</div>
+    <button class="btn btn-primary btn-sm" onclick="openAdd(curType.vault)">+ Add</button>
+  </div>
+  <div class="type-chip-row" id="vault-chips"></div>
+  <input type="text" id="vault-search" placeholder="Search business & knowledge…" oninput="renderList('vault')" style="margin-bottom:10px" />
+  <div id="vault-list"></div>
+</div>
+
+<div id="tab-assets" class="tab-pane">
+  <div class="flex ai-c jb" style="margin-bottom:10px">
+    <div class="t-sm t-bold">Assets</div>
+    <button class="btn btn-primary btn-sm" onclick="openAdd(curType.assets)">+ Add</button>
+  </div>
+  <div class="type-chip-row" id="assets-chips"></div>
+  <input type="text" id="assets-search" placeholder="Search assets…" oninput="renderList('assets')" style="margin-bottom:10px" />
+  <div id="assets-list"></div>
+</div>
+
+</main>
+
+<nav id="nav">
+  <button id="navbtn-dash" class="nav-btn active" onclick="switchTab('dash')">
+    <svg class="nav-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="7" height="7" rx="1.3"/><rect x="12" y="3" width="7" height="7" rx="1.3"/>
+      <rect x="3" y="12" width="7" height="7" rx="1.3"/><rect x="12" y="12" width="7" height="7" rx="1.3"/>
+    </svg>Home</button>
+  <button id="navbtn-ref" class="nav-btn" onclick="switchTab('ref')">
+    <svg class="nav-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 3h10a1 1 0 0 1 1 1v15l-6-3.5L5 19V4a1 1 0 0 1 1-1z"/>
+    </svg>Refs</button>
+  <button id="navbtn-create" class="nav-btn" onclick="switchTab('create')">
+    <svg class="nav-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 3a5.5 5.5 0 0 1 3 10.1V15h-6v-1.9A5.5 5.5 0 0 1 11 3z"/>
+      <line x1="8.5" y1="18" x2="13.5" y2="18"/><line x1="9.3" y1="20.5" x2="12.7" y2="20.5"/>
+    </svg>Create</button>
+  <button id="navbtn-vault" class="nav-btn" onclick="switchTab('vault')">
+    <svg class="nav-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="16" height="14" rx="2"/><circle cx="11" cy="11" r="2.6"/><line x1="11" y1="8.4" x2="11" y2="9.4"/>
+    </svg>Vault</button>
+  <button id="navbtn-assets" class="nav-btn" onclick="switchTab('assets')">
+    <svg class="nav-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11 3l8 4.5-8 4.5-8-4.5L11 3z"/><path d="M3 12l8 4.5 8-4.5"/><path d="M3 16l8 4.5 8-4.5"/>
+    </svg>Assets</button>
+</nav>
+</div>
+
+<div class="modal-overlay" id="entry-modal">
+  <div class="modal-sheet">
+    <div class="modal-title" id="entry-modal-title">Add Entry</div>
+    <div id="entry-fields"></div>
+    <div id="entry-score-line" class="t-xs t-muted mt2"></div>
+    <div class="flex g2 mt3">
+      <button class="btn btn-secondary btn-full" onclick="closeModal('entry-modal')">Cancel</button>
+      <button class="btn btn-primary btn-full" onclick="saveEntry()">Save</button>
+    </div>
+    <div class="flex g2 mt2">
+      <button class="btn btn-ghost btn-full" onclick="copyEntryText()">Copy as Text</button>
+      <button class="btn btn-ghost btn-full" id="entry-delete-btn" style="display:none;color:var(--accent-l);border-color:var(--accent-dim)" onclick="deleteEntry()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="flash" id="flash"></div>
+
+<script>
+const Store = {
+  get(k,d=null){ try{ const v=localStorage.getItem(k); return v!==null?JSON.parse(v):d }catch{ return d } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)) }catch{} }
+}
+
+const TYPES = {
+  reference:{ label:'Content Reference', group:'ref',
+    metaFields:['platform','niche','format'],
+    fields:[
+      {k:'title',label:'Title',type:'text'},
+      {k:'url',label:'URL',type:'text'},
+      {k:'platform',label:'Platform',type:'text'},
+      {k:'creator',label:'Creator',type:'text'},
+      {k:'channel',label:'Channel',type:'text'},
+      {k:'niche',label:'Niche',type:'text'},
+      {k:'subNiche',label:'Sub-niche',type:'text'},
+      {k:'format',label:'Format',type:'select',opts:['Long-form','Short-form','Reel','TikTok','Image','Website','Advertisement']},
+      {k:'whySaved',label:'Why I saved this',type:'ta'},
+      {k:'coreIdea',label:'Core idea',type:'ta'},
+      {k:'whatMakesItWork',label:'What makes it work',type:'ta'},
+      {k:'hook',label:'Hook',type:'ta'},
+      {k:'hookType',label:'Hook type',type:'text'},
+      {k:'titleMechanism',label:'Title mechanism',type:'text'},
+      {k:'thumbnailMechanism',label:'Thumbnail mechanism',type:'text'},
+      {k:'curiosityGap',label:'Curiosity gap',type:'ta'},
+      {k:'storyStructure',label:'Story structure',type:'ta'},
+      {k:'retentionMechanisms',label:'Retention mechanisms',type:'ta'},
+      {k:'emotionalMechanisms',label:'Emotional mechanisms',type:'ta'},
+      {k:'psychologicalMechanisms',label:'Psychological mechanisms',type:'ta'},
+      {k:'visualEditingStyle',label:'Visual / camera / editing / pacing / motion graphics / sound / music / color / transitions',type:'ta'},
+      {k:'assetTypes',label:'Asset types',type:'text'},
+      {k:'aiGeneratableElements',label:'AI-generatable elements',type:'ta'},
+      {k:'realFootageElements',label:'Real-footage elements',type:'ta'},
+      {k:'whatICanAdapt',label:'What I can adapt',type:'ta'},
+      {k:'whatIShouldNotCopy',label:'What I should not copy',type:'ta'},
+      {k:'originalityOpportunity',label:'Originality opportunity',type:'ta'},
+      {k:'potentialChannel',label:'Potential channel',type:'text'},
+      {k:'potentialVideoIdea',label:'Potential video idea',type:'ta'},
+      {k:'score_hook',label:'Score: Hook quality (1-5)',type:'num'},
+      {k:'score_story',label:'Score: Storytelling quality (1-5)',type:'num'},
+      {k:'score_retention',label:'Score: Retention potential (1-5)',type:'num'},
+      {k:'score_packaging',label:'Score: Packaging (1-5)',type:'num'},
+      {k:'score_visual',label:'Score: Visual quality (1-5)',type:'num'},
+      {k:'score_originality',label:'Score: Originality (1-5)',type:'num'},
+      {k:'score_educational',label:'Score: Educational value (1-5)',type:'num'},
+      {k:'score_adaptability',label:'Score: Adaptability to my channels (1-5)',type:'num'},
+      {k:'relatedReferences',label:'Related references',type:'text'},
+      {k:'tags',label:'Tags (comma separated)',type:'text'},
+    ]
+  },
+  visual:{ label:'Visual Reference', group:'ref',
+    metaFields:['category','style','source'],
+    fields:[
+      {k:'title',label:'Title',type:'text'},
+      {k:'source',label:'Source',type:'text'},
+      {k:'url',label:'URL',type:'text'},
+      {k:'category',label:'Category',type:'text'},
+      {k:'style',label:'Style',type:'text'},
+      {k:'composition',label:'Composition',type:'text'},
+      {k:'color',label:'Color',type:'text'},
+      {k:'typography',label:'Typography',type:'text'},
+      {k:'lighting',label:'Lighting',type:'text'},
+      {k:'camera',label:'Camera',type:'text'},
+      {k:'subject',label:'Subject',type:'text'},
+      {k:'background',label:'Background',type:'text'},
+      {k:'textPlacement',label:'Text placement',type:'text'},
+      {k:'whyItWorks',label:'Why it works',type:'ta'},
+      {k:'whatCanBeRecreated',label:'What can be recreated',type:'ta'},
+      {k:'aiImagePrompt',label:'AI image prompt',type:'ta'},
+      {k:'aiVideoPrompt',label:'AI video prompt',type:'ta'},
+      {k:'editingApplication',label:'Editing application',type:'ta'},
+      {k:'tags',label:'Tags (comma separated)',type:'text'},
+    ]
+  },
+  editref:{ label:'Editing Reference', group:'ref',
+    metaFields:['style','pacing'],
+    fields:[
+      {k:'title',label:'Title',type:'text'},
+      {k:'videoUrl',label:'Video URL',type:'text'},
+      {k:'style',label:'Style',type:'text'},
+      {k:'cutFrequency',label:'Cut frequency',type:'text'},
+      {k:'avgShotLength',label:'Average shot length',type:'text'},
+      {k:'visualChangeFrequency',label:'Visual change frequency',type:'text'},
+      {k:'bRollStyle',label:'B-roll style',type:'text'},
+      {k:'textStyle',label:'Text style',type:'text'},
+      {k:'captionStyle',label:'Caption style',type:'text'},
+      {k:'zoomPan',label:'Zoom / pan',type:'text'},
+      {k:'transitions',label:'Transitions',type:'text'},
+      {k:'sfx',label:'SFX',type:'text'},
+      {k:'music',label:'Music',type:'text'},
+      {k:'silence',label:'Silence',type:'text'},
+      {k:'motionGraphics',label:'Motion graphics',type:'text'},
+      {k:'screenshots',label:'Screenshots',type:'text'},
+      {k:'archivalFootage',label:'Archival footage',type:'text'},
+      {k:'aiVisuals',label:'AI visuals',type:'text'},
+      {k:'color',label:'Color',type:'text'},
+      {k:'pacing',label:'Pacing',type:'text'},
+      {k:'howToRecreate',label:'How to recreate this with my current tools',type:'ta'},
+      {k:'tags',label:'Tags (comma separated)',type:'text'},
+    ]
+  },
+  idea:{ label:'Content Idea', group:'create',
+    metaFields:['channel','difficulty','potential'],
+    fields:[
+      {k:'title',label:'Title',type:'text'},
+      {k:'coreQuestion',label:'Core question',type:'text'},
+      {k:'hook',label:'Hook',type:'ta'},
+      {k:'whyClick',label:'Why people would click',type:'ta'},
+      {k:'curiosityGap',label:'Curiosity gap',type:'text'},
+      {k:'story',label:'Story',type:'ta'},
+      {k:'caseStudy',label:'Case study',type:'text'},
+      {k:'psychologicalAngle',label:'Psychological angle',type:'text'},
+      {k:'visualAngle',label:'Visual angle',type:'text'},
+      {k:'thumbnail',label:'Possible thumbnail',type:'text'},
+      {k:'videoStructure',label:'Video structure',type:'ta'},
+      {k:'difficulty',label:'Difficulty',type:'select',opts:['Easy','Medium','Hard']},
+      {k:'researchRequired',label:'Research required',type:'text'},
+      {k:'aiAssetOpportunity',label:'AI asset opportunity',type:'text'},
+      {k:'originality',label:'Originality',type:'select',opts:['Low','Medium','High']},
+      {k:'potential',label:'Potential',type:'select',opts:['Low','Medium','High']},
+      {k:'channel',label:'Potential channel',type:'text'},
+      {k:'tags',label:'Tags (comma separated)',type:'text'},
+    ]
+  },
+  template:{ label:'Script Template', group:'create',
+    metaFields:['bestUsedFor'],
+    fields:[
+      {k:'title',label:'Template name',type:'text'},
+      {k:'bestUsedFor',label:'Best used for',type:'text'},
+      {k:'viewerPromise',label:'Viewer promise',type:'text'},
+      {k:'hookStructure',label:'Hook structure',type:'ta'},
+      {k:'sectionStructure',label:'Act / section structure',type:'ta'},
+      {k:'transitionPatterns',label:'Transition patterns',type:'text'},
+      {k:'curiosityMechanisms',label:'Curiosity mechanisms',type:'text'},
+      {k:'payoffMechanism',label:'Payoff mechanism',type:'text'},
+      {k:'visualRequirements',label:'Visual requirements',type:'text'},
+      {k:'editingRequirements',label:'Editing requirements',type:'text'},
+      {k:'exampleTopic',label:'Example topic',type:'text'},
+      {k:'exampleTitle',label:'Example title',type:'text'},
+      {k:'exampleOutline',label:'Example outline',type:'ta'},
+      {k:'commonMistakes',label:'Common mistakes',type:'ta'},
+      {k:'tags',label:'Tags (comma separated)',type:'text'},
+    ]
+  },
+  imgprompt:{ label:'AI Image Prompt', group:'create',
+    metaFields:['category','style'],
+    fields:[
+      {k:'title',label:'Prompt name',type:'text'},
+      {k:'category',label:'Category',type:'select',opts:['Cinematic scene','Editorial photography','Product shot','Beauty','Fashion','3D character','3D environment','Documentary visual','Conceptual psychology','Philosophy visual','Abstract concept','Historical scene','Architecture','Food','Asia','Motion graphic background']},
+      {k:'subject',label:'Subject',type:'text'},
+      {k:'environment',label:'Environment',type:'text'},
+      {k:'composition',label:'Composition',type:'text'},
+      {k:'camera',label:'Camera',type:'text'},
+      {k:'lens',label:'Lens',type:'text'},
+      {k:'lighting',label:'Lighting',type:'text'},
+      {k:'color',label:'Color',type:'text'},
+      {k:'material',label:'Material',type:'text'},
+      {k:'texture',label:'Texture',type:'text'},
+      {k:'depth',label:'Depth',type:'text'},
+      {k:'mood',label:'Mood',type:'text'},
+      {k:'style',label:'Style',type:'text'},
+      {k:'aspectRatio',label:'Aspect ratio',type:'text'},
+      {k:'negativeConstraints',label:'Negative constraints',type:'text'},
+      {k:'tags',label:'Tags (comma separated)',type:'text'},
+    ]
+  },
+  vidprompt:{ label:'AI Video Prompt', group:'create',
+    metaFields:['category','duration'],
+    fields:[
+      {k:'title',label:'Prompt name',type:'text'},
+      {k:'category',label:'Category',type:'select',opts:['Cinematic documentary','3D animation','Abstract concept','Psychology visualization','Product visualization','Beauty','Fashion','Food','Architecture','Historical reconstruction','Surreal conceptual']},
+      {k:'shotPurpose',label:'Shot purpose',type:'text'},
+      {k:'duration',label:'Duration',type:'text'},
+      {k:'subject',label:'Subject',type:'text'},
+      {k:'action',label:'Action',type:'text'},
+      {k:'environment',label:'Environment',type:'text'},
+      {k:'camera',label:'Camera',type:'text'},
+      {k:'cameraMovement',label:'Camera movement',type:'text'},
+      {k:'lens',label:'Lens',type:'text'},
+      {k:'lighting',label:'Lighting',type:'text'},
+      {k:'color',label:'Color',type:'text'},
+      {k:'material',label:'Material',type:'text'},
+      {k:'physics',label:'Physics',type:'text'},
+      {k:'motion',label:'Motion',type:'text'},
+      {k:'background',label:'Background',type:'text'},
+      {k:'composition',label:'Composition',type:'text'},
+      {k:'transition',label:'Transition',type:'text'},
+      {k:'mood',label:'Mood',type:'text'},
+      {k:'tags',label:'Tags (comma separated)',type:'text'},
+    ]
+  },
+  prompt:{ label:'Workflow Prompt', group:'create',
+    metaFields:['category','version'],
+    fields:[
+      {k:'title',label:'Prompt name',type:'text'},
+      {k:'category',label:'Category',type:'select',opts:['Research','Learning','Viral Analysis','Idea Generation','Script Writing','Hook Writing','Title Generation','Thumbnail Generation','Image Generation','Video Generation','Editing','Visual Planning','Asset Research','Content Repurposing','Analytics','Business','Startup','Knowledge Management','AI Workflow','Daily Planning']},
+      {k:'purpose',label:'Purpose',type:'text'},
+      {k:'whenToUse',label:'When to use',type:'text'},
+      {k:'input',label:'Input',type:'text'},
+      {k:'promptText',label:'Prompt',type:'ta'},
+      {k:'output',label:'Output',type:'text'},
+      {k:'example',label:'Example',type:'ta'},
+      {k:'qualityCheck',label:'Quality check',type:'text'},
+      {k:'version',label:'Version',type:'text'},
+      {k:'tags',label:'Tags (comma separated)',type:'text'},
+    ]
+  },
+  business:{ label:'Business Idea', group:'vault',
+    metaFields:['status','potential'],
+    fields:[
+      {k:'title',label:'Idea name',type:'text'},
+      {k:'status',label:'Status',type:'select',opts:['Idea','Experimenting','Validated','Parked']},
+      {k:'problem',label:'Problem',type:'ta'},
+      {k:'customer',label:'Customer',type:'text'},
+      {k:'currentSolution',label:'Current solution',type:'text'},
+      {k:'pain',label:'Pain',type:'ta'},
+      {k:'proposedSolution',label:'Proposed solution',type:'ta'},
+      {k:'whyNow',label:'Why now',type:'text'},
+      {k:'market',label:'Market',type:'text'},
+      {k:'competitors',label:'Competitors',type:'text'},
+      {k:'businessModel',label:'Business model',type:'text'},
+      {k:'distribution',label:'Distribution',type:'text'},
+      {k:'moat',label:'Moat',type:'text'},
+      {k:'risks',label:'Risks',type:'ta'},
+      {k:'cheapestExperiment',label:'Cheapest experiment',type:'ta'},
+      {k:'firstCustomer',label:'First customer',type:'text'},
+      {k:'potential',label:'Potential',type:'select',opts:['Low','Medium','High']},
+      {k:'relatedKnowledge',label:'Related knowledge',type:'text'},
+      {k:'tags',label:'Tags (comma separated)',type:'text'},
+    ]
+  },
+  knowledge:{ label:'Knowledge Vault', group:'vault',
+    metaFields:['source','book'],
+    fields:[
+      {k:'title',label:'Concept',type:'text'},
+      {k:'definition',label:'Definition',type:'ta'},
+      {k:'corePrinciple',label:'Core principle',type:'ta'},
+      {k:'whyItMatters',label:'Why it matters',type:'ta'},
+      {k:'mentalModel',label:'Mental model',type:'text'},
+      {k:'framework',label:'Framework',type:'text'},
+      {k:'realCaseStudy',label:'Real case study',type:'ta'},
+      {k:'example',label:'Example',type:'ta'},
+      {k:'commonMistake',label:'Common mistake',type:'text'},
+      {k:'applicationToContent',label:'Application to content',type:'ta'},
+      {k:'applicationToBusiness',label:'Application to business',type:'ta'},
+      {k:'applicationToLife',label:'Application to life',type:'ta'},
+      {k:'relatedConcepts',label:'Related concepts',type:'text'},
+      {k:'source',label:'Source',type:'text'},
+      {k:'book',label:'Book',type:'text'},
+      {k:'author',label:'Author',type:'text'},
+      {k:'questionToThink',label:'Question to think about',type:'ta'},
+      {k:'oneThingToRemember',label:'One thing I should remember',type:'ta'},
+      {k:'oneThingICanDo',label:'One thing I can do with this',type:'ta'},
+      {k:'tags',label:'Tags (comma separated)',type:'text'},
+    ]
+  },
+  asset:{ label:'Asset', group:'assets',
+    metaFields:['assetType','license'],
+    fields:[
+      {k:'title',label:'Name',type:'text'},
+      {k:'assetType',label:'Type',type:'select',opts:['01 Footage','02 AI Video','03 AI Images','04 Stock','05 Screenshots','06 Backgrounds','07 Textures','08 Music','09 Sound Effects','10 Fonts','11 Icons','12 Motion Graphics','13 Overlays','14 Transitions','15 3D Assets','16 Thumbnails']},
+      {k:'source',label:'Source',type:'text'},
+      {k:'license',label:'License / usage status',type:'text'},
+      {k:'channel',label:'Channel',type:'text'},
+      {k:'style',label:'Style',type:'text'},
+      {k:'keywords',label:'Keywords',type:'text'},
+      {k:'useCase',label:'Use case',type:'text'},
+      {k:'fileLocation',label:'File location',type:'text'},
+      {k:'relatedReferences',label:'Related references',type:'text'},
+      {k:'tags',label:'Tags (comma separated)',type:'text'},
+    ]
+  },
+}
+
+const TAB_GROUPS = {
+  ref: ['reference','visual','editref'],
+  create: ['idea','template','imgprompt','vidprompt','prompt'],
+  vault: ['business','knowledge'],
+  assets: ['asset']
+}
+
+let entries = Store.get('mv_entries', [])
+let curType = Store.get('mv_curtype', {ref:'reference', create:'idea', vault:'business', assets:'asset'})
+let editingId = null
+let currentFormType = null
+let flashT = null
+
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,8) }
+function esc(s){ return String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])) }
+function fieldExists(type,k){ return TYPES[type].fields.some(f=>f.k===k) }
+
+function flash(msg){
+  const el = document.getElementById('flash')
+  el.textContent = msg
+  el.classList.add('show')
+  clearTimeout(flashT)
+  flashT = setTimeout(()=>el.classList.remove('show'), 1600)
+}
+
+function openModal(id){ document.getElementById(id).classList.add('open') }
+function closeModal(id){ document.getElementById(id).classList.remove('open') }
+
+function switchTab(tab){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'))
+  document.getElementById('tab-'+tab).classList.add('active')
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'))
+  document.getElementById('navbtn-'+tab).classList.add('active')
+  renderAll()
+}
+
+function refScore(e){
+  const keys = ['score_hook','score_story','score_retention','score_packaging','score_visual','score_originality','score_educational','score_adaptability']
+  const vals = keys.map(k=>parseFloat(e[k])).filter(v=>!isNaN(v) && v>0)
+  if(!vals.length) return null
+  return (vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1)
+}
+
+function clutterStatus(n){
+  if(n>=10) return {text:'STOP COLLECTING. BUILD.', cls:'stop'}
+  if(n>=5) return {text:'Enough for pattern analysis', cls:'warn'}
+  if(n>=3) return {text:'Enough to start', cls:'ok'}
+  return {text:'Collecting', cls:'muted'}
+}
+
+function fieldHTML(f,val){
+  val = val==null ? '' : val
+  if(f.type==='select'){
+    const opts = ['<option value="">— select —</option>'].concat(f.opts.map(o=>`<option ${val===o?'selected':''}>${esc(o)}</option>`))
+    return `<div class="field"><label>${esc(f.label)}</label><select id="ef-${f.k}">${opts.join('')}</select></div>`
+  }
+  if(f.type==='ta'){
+    return `<div class="field"><label>${esc(f.label)}</label><textarea id="ef-${f.k}" rows="3">${esc(val)}</textarea></div>`
+  }
+  if(f.type==='num'){
+    return `<div class="field"><label>${esc(f.label)}</label><input type="number" id="ef-${f.k}" min="1" max="5" step="1" value="${esc(val)}" /></div>`
+  }
+  return `<div class="field"><label>${esc(f.label)}</label><input type="text" id="ef-${f.k}" value="${esc(val)}" /></div>`
+}
+
+function buildEntryForm(type, data){
+  currentFormType = type
+  document.getElementById('entry-fields').innerHTML = TYPES[type].fields.map(f=>fieldHTML(f, data[f.k])).join('')
+  const scoreLine = document.getElementById('entry-score-line')
+  if(type==='reference'){
+    const s = refScore(data)
+    scoreLine.textContent = s ? ('Reference Score: '+s+' / 5') : ''
+  } else {
+    scoreLine.textContent = ''
+  }
+}
+
+function openAdd(type){
+  editingId = null
+  buildEntryForm(type, {})
+  document.getElementById('entry-modal-title').textContent = 'Add ' + TYPES[type].label
+  document.getElementById('entry-delete-btn').style.display = 'none'
+  openModal('entry-modal')
+}
+
+function openEdit(id){
+  const e = entries.find(x=>x.id===id)
+  if(!e) return
+  editingId = id
+  buildEntryForm(e.type, e)
+  document.getElementById('entry-modal-title').textContent = 'Edit ' + TYPES[e.type].label
+  document.getElementById('entry-delete-btn').style.display = ''
+  openModal('entry-modal')
+}
+
+function saveEntry(){
+  const type = currentFormType
+  const data = {}
+  TYPES[type].fields.forEach(f=>{ data[f.k] = document.getElementById('ef-'+f.k).value })
+  if(!data.title || !data.title.trim()){ flash('Title required'); return }
+  if(editingId){
+    const idx = entries.findIndex(x=>x.id===editingId)
+    entries[idx] = {...entries[idx], ...data, type, updatedAt:Date.now()}
+  } else {
+    entries.push({id:uid(), type, ...data, createdAt:Date.now(), updatedAt:Date.now()})
+  }
+  Store.set('mv_entries', entries)
+  closeModal('entry-modal')
+  renderAll()
+  flash('Saved')
+}
+
+function deleteEntry(){
+  if(!editingId) return
+  if(!confirm('Delete this entry?')) return
+  entries = entries.filter(x=>x.id!==editingId)
+  Store.set('mv_entries', entries)
+  closeModal('entry-modal')
+  renderAll()
+  flash('Deleted')
+}
+
+function copyEntryText(){
+  const type = currentFormType
+  const data = {}
+  TYPES[type].fields.forEach(f=>{ const el = document.getElementById('ef-'+f.k); data[f.k] = el ? el.value : '' })
+  let out = TYPES[type].label.toUpperCase() + '\n\n'
+  TYPES[type].fields.forEach(f=>{
+    const v = (data[f.k]||'').toString().trim()
+    if(v) out += f.label.toUpperCase() + ':\n' + v + '\n\n'
+  })
+  if(type==='reference'){
+    const s = refScore(data)
+    if(s) out += 'REFERENCE SCORE: ' + s + ' / 5\n'
+  }
+  navigator.clipboard.writeText(out).then(()=>flash('Copied')).catch(()=>flash('Copy failed'))
+}
+
+function quickCapture(){
+  const type = document.getElementById('qc-type').value
+  const title = document.getElementById('qc-title').value.trim()
+  const url = document.getElementById('qc-url').value.trim()
+  const note = document.getElementById('qc-note').value.trim()
+  if(!title){ flash('Add a title'); return }
+  const e = {id:uid(), type, title, tags:'inbox', createdAt:Date.now(), updatedAt:Date.now()}
+  if(url && fieldExists(type,'url')) e.url = url
+  const noteField = ['whySaved','coreIdea','purpose','problem','definition','useCase','hook'].find(f=>fieldExists(type,f))
+  if(note && noteField) e[noteField] = note
+  entries.push(e)
+  Store.set('mv_entries', entries)
+  document.getElementById('qc-title').value = ''
+  document.getElementById('qc-url').value = ''
+  document.getElementById('qc-note').value = ''
+  renderAll()
+  flash('Captured to Inbox — finish later')
+}
+
+function copyResearchPrompt(){
+  navigator.clipboard.writeText("Find today's references").then(()=>flash('Copied')).catch(()=>flash('Copy failed'))
+}
+
+function exportData(){
+  const blob = new Blob([JSON.stringify({entries, exportedAt:new Date().toISOString()}, null, 2)], {type:'application/json'})
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'media-vault-backup-' + new Date().toISOString().slice(0,10) + '.json'
+  a.click()
+  URL.revokeObjectURL(url)
+  flash('Exported')
+}
+
+function importData(ev){
+  const file = ev.target.files[0]
+  if(!file) return
+  const reader = new FileReader()
+  reader.onload = () => {
+    try{
+      const data = JSON.parse(reader.result)
+      if(!Array.isArray(data.entries)) throw new Error('bad')
+      if(confirm('Import ' + data.entries.length + ' entries? Duplicates (same ID) are skipped.')){
+        const existingIds = new Set(entries.map(e=>e.id))
+        let added = 0
+        data.entries.forEach(e=>{ if(e && e.id && !existingIds.has(e.id) && TYPES[e.type]){ entries.push(e); added++ } })
+        Store.set('mv_entries', entries)
+        renderAll()
+        flash(added + ' entries imported')
+      }
+    }catch(err){ flash('Invalid file') }
+  }
+  reader.readAsText(file)
+  ev.target.value = ''
+}
+
+function matchQuery(e,q){
+  if(!q) return true
+  const hay = Object.values(e).join(' ').toLowerCase()
+  return hay.includes(q)
+}
+
+function cardHTML(e){
+  const t = TYPES[e.type]
+  const meta = (t.metaFields||[]).map(k=>e[k]).filter(v=>v && v.toString().trim()).join(' · ')
+  const tags = (e.tags||'').split(',').map(s=>s.trim()).filter(Boolean)
+  const score = e.type==='reference' ? refScore(e) : null
+  return `<div class="entry-card" onclick="openEdit('${e.id}')">
+    <div class="entry-title-row">
+      <div class="entry-title">${esc(e.title || '(untitled)')}</div>
+      ${score ? `<span class="entry-score">${score}</span>` : ''}
+    </div>
+    ${meta ? `<div class="entry-meta">${esc(meta)}</div>` : ''}
+    ${tags.length ? `<div class="entry-tags">${tags.slice(0,5).map(tag=>`<span class="tag-pill">${esc(tag)}</span>`).join('')}</div>` : ''}
+  </div>`
+}
+
+function emptyState(type){
+  return `<div class="t-xs t-muted" style="padding:24px 0;text-align:center">No ${esc(TYPES[type].label)} entries yet. Tap + Add to create one.</div>`
+}
+
+function renderChips(g){
+  const types = TAB_GROUPS[g]
+  const el = document.getElementById(g+'-chips')
+  if(types.length<=1){ el.style.display='none'; return }
+  el.style.display='flex'
+  el.innerHTML = types.map(t=>`<button class="type-chip ${curType[g]===t?'on':''}" onclick="selectType('${g}','${t}')">${esc(TYPES[t].label)}</button>`).join('')
+}
+
+function selectType(g,t){
+  curType[g] = t
+  Store.set('mv_curtype', curType)
+  renderChips(g)
+  renderList(g)
+}
+
+function renderList(g){
+  const type = curType[g]
+  const q = (document.getElementById(g+'-search').value || '').toLowerCase()
+  const list = entries.filter(e=>e.type===type).filter(e=>matchQuery(e,q)).sort((a,b)=>b.updatedAt-a.updatedAt)
+  const el = document.getElementById(g+'-list')
+  el.innerHTML = list.length ? list.map(cardHTML).join('') : emptyState(type)
+}
+
+function renderOverview(){
+  const el = document.getElementById('ov-grid')
+  el.innerHTML = Object.keys(TYPES).map(t=>{
+    const n = entries.filter(e=>e.type===t).length
+    return `<button class="ov-item" onclick="jumpTo('${t}')"><div class="ov-count">${n}</div><div class="ov-label">${esc(TYPES[t].label)}</div></button>`
+  }).join('')
+  document.getElementById('total-count').textContent = entries.length
+}
+
+function jumpTo(type){
+  const g = TYPES[type].group
+  curType[g] = type
+  Store.set('mv_curtype', curType)
+  switchTab(g)
+}
+
+function renderTagCloud(){
+  const relevant = entries.filter(e=>['reference','visual','editref'].includes(e.type))
+  const counts = {}
+  relevant.forEach(e=>{
+    (e.tags||'').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean).forEach(tag=>{
+      counts[tag] = (counts[tag]||0) + 1
+    })
+  })
+  const arr = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,15)
+  const el = document.getElementById('tag-cloud')
+  if(!arr.length){ el.innerHTML = '<div class="t-xs t-muted">No tags yet. Add tags to references to track patterns.</div>'; return }
+  el.innerHTML = arr.map(([tag,n])=>{
+    const s = clutterStatus(n)
+    return `<div class="tag-row"><span class="tag-name">${esc(tag)}</span><span class="tag-count">${n}</span><span class="clutter-badge ${s.cls}">${esc(s.text)}</span></div>`
+  }).join('')
+}
+
+function renderGlobalSearch(){
+  const q = document.getElementById('global-search').value.toLowerCase().trim()
+  const el = document.getElementById('global-search-results')
+  if(!q){ el.innerHTML = ''; return }
+  const results = entries.filter(e=>matchQuery(e,q)).sort((a,b)=>b.updatedAt-a.updatedAt).slice(0,20)
+  el.innerHTML = results.length
+    ? results.map(e=>`<div class="entry-card" onclick="openEdit('${e.id}')">
+        <div class="entry-title-row"><div class="entry-title">${esc(e.title||'(untitled)')}</div></div>
+        <div class="entry-meta">${esc(TYPES[e.type].label)}</div>
+      </div>`).join('')
+    : '<div class="t-xs t-muted" style="padding:10px 0">No matches.</div>'
+}
+
+function renderAll(){
+  renderOverview()
+  renderTagCloud()
+  Object.keys(TAB_GROUPS).forEach(g=>{ renderChips(g); renderList(g) })
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('qc-type').innerHTML = Object.keys(TYPES).map(t=>`<option value="${t}">${esc(TYPES[t].label)}</option>`).join('')
+  document.querySelectorAll('.modal-overlay').forEach(m=>{
+    m.addEventListener('click', e=>{ if(e.target===m) m.classList.remove('open') })
+  })
+  renderAll()
+})
+</script>
+</body>
+</html>
