@@ -302,19 +302,30 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
 
 <!-- GOALS -->
 <div id="tab-goals" class="tab-pane">
+
+  <!-- Mission -->
+  <div class="manifest-card" style="margin-bottom:10px">
+    <div class="manifest-label">The Mission · Nov 2, 2026</div>
+    <div style="font-size:17px;font-weight:800;color:var(--text);margin-bottom:6px">$20K/month before I turn 20</div>
+    <div class="t-xs t-muted" style="line-height:1.6">AI Agency · Gumroad · ZEN Travel · Content<br/>Full independence. Built alone. No waiting.</div>
+  </div>
+
+  <!-- Monthly Roadmap -->
   <div class="card">
     <div class="flex ai-c jb" style="margin-bottom:10px">
-      <span class="card-title" style="margin-bottom:0">Road to $20K · Nov 2</span>
+      <span class="card-title" style="margin-bottom:0">Monthly Roadmap</span>
       <span id="monthly-total-chip" class="chip">$0 earned</span>
     </div>
     <div id="monthly-road"></div>
   </div>
 
+  <!-- Income Streams -->
   <div class="card">
-    <div class="card-title">12-Week Sprint</div>
-    <div id="sprint-detail"></div>
+    <div class="card-title">Income Streams — This Month</div>
+    <div id="streams-tracker"></div>
   </div>
 
+  <!-- Watch Hours -->
   <div class="card">
     <div class="flex ai-c jb" style="margin-bottom:10px">
       <span class="card-title" style="margin-bottom:0">@yakjatama · Watch Hours</span>
@@ -330,6 +341,31 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     <div id="watch-hours-lbl" class="t-xs t-muted" style="margin-top:6px"></div>
   </div>
 
+  <!-- Ideas Vault -->
+  <div class="card">
+    <div class="flex ai-c jb" style="margin-bottom:10px">
+      <span class="card-title" style="margin-bottom:0">Ideas Vault</span>
+    </div>
+    <div class="flex g2" style="margin-bottom:10px">
+      <input type="text" id="idea-input" placeholder="Content idea · product · business angle…" style="flex:1" />
+      <button class="btn btn-primary btn-sm" onclick="addIdea()">Save</button>
+    </div>
+    <div id="ideas-list"></div>
+  </div>
+
+  <!-- For Later -->
+  <div class="card">
+    <div class="flex ai-c jb" style="margin-bottom:10px">
+      <span class="card-title" style="margin-bottom:0">For Later</span>
+    </div>
+    <div class="flex g2" style="margin-bottom:10px">
+      <input type="text" id="later-input" placeholder="Not now — save it, don't lose it…" style="flex:1" />
+      <button class="btn btn-secondary btn-sm" onclick="addLater()">Save</button>
+    </div>
+    <div id="later-list"></div>
+  </div>
+
+  <!-- Next 5 Moves -->
   <div class="card">
     <div class="flex ai-c jb" style="margin-bottom:10px">
       <span class="card-title" style="margin-bottom:0">Next 5 Moves</span>
@@ -338,19 +374,19 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;heigh
     <div id="moves-list"></div>
   </div>
 
+  <!-- Sprint -->
   <div class="card">
-    <div class="flex ai-c jb" style="margin-bottom:10px">
-      <span class="card-title" style="margin-bottom:0">Ventures</span>
-      <button class="btn btn-ghost btn-sm" onclick="editVentures()">Edit %</button>
-    </div>
-    <div id="vent-goals"></div>
+    <div class="card-title">12-Week Sprint</div>
+    <div id="sprint-detail"></div>
   </div>
 
+  <!-- Week Intention -->
   <div class="card">
-    <div class="card-title">This Week's Intention</div>
-    <textarea id="week-intention" rows="3" placeholder="What does winning this week look like?"></textarea>
+    <div class="card-title">This Week's Win Condition</div>
+    <textarea id="week-intention" rows="3" placeholder="What must be true by Sunday to call this week a win?"></textarea>
     <button class="btn btn-primary btn-sm btn-full mt2" onclick="saveIntention()">Save</button>
   </div>
+
 </div>
 
 <!-- PIPELINE -->
@@ -672,20 +708,20 @@ const MORNING = [
 ]
 
 const MOVES_DEFAULTS = [
-  'May 11 — post first @yakjatama script. Tim Danilov method. No more waiting.',
-  'ZEN Tour — switch engagement ad to Messages campaign ฿100/day',
-  'Post TikTok daily — repurpose @yakjatama content as short form',
-  'Pitch 1 AI service client this week — design, website, or UGC',
-  'Month 2 — launch @evren-updated + one English high-RPM faceless channel',
+  'Post first @yakjatama script TODAY — Tim Danilov method. No more waiting.',
+  'Create first Gumroad product this week — AI prompt kit or content templates',
+  'Reach out to 5 Thai businesses for agency — start at $200-300/month to close fast',
+  'ZEN Travel — switch to Messages campaign ฿100/day · reply every DM within 1 hour',
+  'Set up Gumroad store + link in every channel bio this week',
 ]
 
 const MONTHLY_TARGETS = [
-  { month:'2026-05', label:'May',  target:500,   focus:'Post 10 yakjatama scripts · TikTok daily · ZEN content daily · first ZEN inquiry' },
-  { month:'2026-06', label:'Jun',  target:2000,  focus:'yakjatama monetized · first ZEN booking · reactivate @evren-updated' },
-  { month:'2026-07', label:'Jul',  target:5000,  focus:'All 3 channels posting · ZEN 3-5 bookings · digital product launched' },
-  { month:'2026-08', label:'Aug',  target:10000, focus:'Brand deals · evren monetized · ZEN 10+ bookings · product selling' },
-  { month:'2026-09', label:'Sep',  target:15000, focus:'Systems running · Singapore fund sprint · Psychology channel live' },
-  { month:'2026-10', label:'Oct',  target:20000, focus:'Hit $20K AVA · save · B20 is coming' },
+  { month:'2026-05', label:'May',  target:200,   focus:'Foundation — post daily · create Gumroad product · 5 agency outreaches/week · ZEN first inquiry' },
+  { month:'2026-06', label:'Jun',  target:800,   focus:'yakjatama monetized · 2-3 agency clients · Gumroad live · first ZEN booking' },
+  { month:'2026-07', label:'Jul',  target:2500,  focus:'4-6 agency clients · Gumroad traction · AdSense starts · 2-3 ZEN bookings' },
+  { month:'2026-08', label:'Aug',  target:5000,  focus:'7-9 agency clients · Gumroad $500+ · 3-4 ZEN bookings · @evren reactivated' },
+  { month:'2026-09', label:'Sep',  target:9000,  focus:'10-12 clients · Gumroad $1,500+ · 4-5 ZEN bookings · Singapore fund sprint' },
+  { month:'2026-10', label:'Oct',  target:15000, focus:'12-15 clients · Gumroad $3,000+ · all streams running · push to $20K' },
 ]
 
 const DEFAULT_WEEK_PLAN = {
@@ -699,10 +735,10 @@ const DEFAULT_WEEK_PLAN = {
 }
 
 const CONTENT_CHECKS = [
-  { id:'yakja',  label:'@yakjatama — script / edit / post' },
-  { id:'zen',    label:'ZEN Tour — Facebook post published' },
-  { id:'tiktok', label:'TikTok — posted today' },
-  { id:'script', label:'Tomorrow — 1 script written or planned' },
+  { id:'content', label:'Content — posted on @yakjatama / TikTok / @evren' },
+  { id:'agency',  label:'Agency — reached out to 1 business today' },
+  { id:'gumroad', label:'Gumroad — promoted or improved product today' },
+  { id:'zen',     label:'ZEN Travel — replied to inquiries / posted' },
 ]
 
 const WATCH_HOURS_GOAL = 4000
@@ -854,7 +890,7 @@ function renderQuote() {
   const q = DAILY_QUOTES[doy % DAILY_QUOTES.length]
   const en = document.getElementById('quote-en')
   const zh = document.getElementById('quote-zh')
-  if (en) en.textContent = '“' + q.en + '”'
+  if (en) en.textContent = '"' + q.en + '"'
   if (zh) zh.textContent = q.zh
 }
 
@@ -982,11 +1018,102 @@ function renderVentSnap() {
 // ── GOALS ────────────────────────────────────────────────────────────────────
 function renderGoals() {
   renderMonthlyRoad()
+  renderStreamsTracker()
   renderSprintDetail()
   renderWatchHours()
   renderMoves()
-  renderVentGoals()
+  renderIdeas()
+  renderLater()
   document.getElementById('week-intention').value = S.get('week_intention','')
+}
+
+const STREAM_DEFS = [
+  { id:'agency',  name:'AI Agency',    label:'clients',          hint:'$200-300/month each', color:'var(--accent)' },
+  { id:'gumroad', name:'Gumroad',      label:'products live',    hint:'$27-97 per sale',     color:'var(--amber)'  },
+  { id:'zen',     name:'ZEN Travel',   label:'bookings/month',   hint:'$200 profit each',    color:'var(--green)'  },
+  { id:'content', name:'Content',      label:'channels active',  hint:'AdSense + deals',     color:'var(--blue)'   },
+]
+
+function renderStreamsTracker() {
+  const currentMonth = new Date().toISOString().slice(0,7)
+  const streams = S.get('streams_'+currentMonth, {})
+  const el = document.getElementById('streams-tracker')
+  if (!el) return
+  el.innerHTML = STREAM_DEFS.map((s,i) => {
+    const count   = streams[s.id+'_count']   || 0
+    const revenue = streams[s.id+'_revenue'] || 0
+    return `<div style="margin-bottom:${i<STREAM_DEFS.length-1?14:0}px">
+      <div class="flex ai-c jb" style="margin-bottom:6px">
+        <div><span class="t-sm t-bold" style="color:${s.color}">${s.name}</span>
+          <span class="t-xs t-muted" style="margin-left:6px">${s.hint}</span></div>
+        <span class="t-sm t-bold">$${revenue.toLocaleString()}</span>
+      </div>
+      <div class="flex ai-c g2">
+        <input type="number" value="${count||\'\'}" placeholder="0" min="0"
+          style="width:60px;font-size:12px;padding:4px 8px"
+          onchange="saveStream('${currentMonth}','${s.id}_count',this.value)" />
+        <span class="t-xs t-muted">${s.label}</span>
+        <input type="number" value="${revenue||\'\'}" placeholder="$0" min="0"
+          style="width:80px;font-size:12px;padding:4px 8px;margin-left:auto"
+          onchange="saveStream('${currentMonth}','${s.id}_revenue',this.value)" />
+      </div>
+      ${i<STREAM_DEFS.length-1?'<div class="divider" style="margin-top:14px"></div>':''}
+    </div>`
+  }).join('')
+}
+
+function saveStream(month, key, val) {
+  const streams = S.get('streams_'+month, {})
+  streams[key] = parseFloat(val)||0
+  S.set('streams_'+month, streams)
+  const total = STREAM_DEFS.reduce((s,d)=>s+(streams[d.id+'_revenue']||0), 0)
+  const income = S.get('monthly_income',{})
+  income[month] = total
+  S.set('monthly_income', income)
+  renderMonthlyRoad()
+  renderGoalsSnapshot()
+}
+
+function addIdea() {
+  const input = document.getElementById('idea-input')
+  const text  = input.value.trim(); if (!text) return
+  const ideas = S.get('ideas',[])
+  ideas.unshift({ id:Date.now().toString(), text, date:today() })
+  S.set('ideas', ideas.slice(0,100))
+  input.value = ''; renderIdeas(); flash('Idea saved ✓')
+}
+
+function removeIdea(id) { S.set('ideas', S.get('ideas',[]).filter(i=>i.id!==id)); renderIdeas() }
+
+function renderIdeas() {
+  const ideas = S.get('ideas',[])
+  const el = document.getElementById('ideas-list'); if (!el) return
+  if (!ideas.length) { el.innerHTML='<div class="t-xs t-muted">No ideas yet — drop everything here.</div>'; return }
+  el.innerHTML = ideas.map(i=>`<div class="log-item">
+    <span class="t-sm">${i.text}</span>
+    <button class="btn btn-ghost" style="font-size:13px;padding:0 6px;color:var(--muted)" onclick="removeIdea('${i.id}')">×</button>
+  </div>`).join('')
+}
+
+function addLater() {
+  const input = document.getElementById('later-input')
+  const text  = input.value.trim(); if (!text) return
+  const later = S.get('for_later',[])
+  later.unshift({ id:Date.now().toString(), text, date:today() })
+  S.set('for_later', later.slice(0,100))
+  input.value = ''; renderLater(); flash('Saved for later ✓')
+}
+
+function removeLater(id) { S.set('for_later', S.get('for_later',[]).filter(i=>i.id!==id)); renderLater() }
+
+function renderLater() {
+  const later = S.get('for_later',[])
+  const el = document.getElementById('later-list'); if (!el) return
+  if (!later.length) { el.innerHTML='<div class="t-xs t-muted">Nothing here yet — save ideas that aren\'t for now.</div>'; return }
+  el.innerHTML = later.map(i=>`<div class="log-item">
+    <span class="t-sm">${i.text}</span>
+    <button class="btn btn-ghost" style="font-size:13px;padding:0 6px;color:var(--muted)" onclick="removeLater('${i.id}')">×</button>
+  </div>`).join('')
 }
 
 function renderSprintDetail() {
@@ -1081,7 +1208,7 @@ function renderMonthlyRoad() {
         <span class="t-sm t-bold" style="color:${isCurrent?'var(--accent-l)':isPast?'var(--muted)':'var(--text)'}">${m.label}${isCurrent?' ← now':''}</span>
         <div class="flex ai-c g2">
           <span class="t-xs t-muted">↑$${m.target.toLocaleString()}</span>
-          <input type="number" value="${actual||''}" placeholder="0"
+          <input type="number" value="${actual||\'\'}" placeholder="0"
             style="width:68px;font-size:12px;padding:3px 8px;text-align:right"
             onchange="saveMonthIncome('${m.month}',this.value)" />
         </div>
