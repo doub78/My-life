@@ -51,21 +51,43 @@ Demotivated by: no visible results, overwhelm, unclear path.
 - ZEN Travel: Facebook page active, website live (zentourservices.netlify.app), 0 clients, Nang runs everything.
 - Monthly income: $0. No allowance currently. Savings: ~20,000 THB/PHP.
 
-## The 4 Active Ventures (Month 1 — 30-Day Commitment)
-1. **@yakjatama** — Thai Storytelling. PRIORITY. Post Tim Danilov scripts. 1,800 watch hours to monetization.
-2. **ZEN Travel (Em Ava)** — Facebook content daily. 1-month test. Handle all bookings personally.
-3. **TikTok** — Post daily. Repurpose @yakjatama content as short form. Build from 50 followers.
-4. **@evren-updated** — Month 2 reactivation. 300 subs. Beauty/Glow Up EN. Highest RPM potential.
+## The Real Income Strategy (Realistic — not delusional)
+$20K/month by Nov 2 requires 4 streams running together. Content channels alone won't get there.
 
-Month 2+ additions: Psychology/Communication channel (account created, never posted). Instagram + YouTube Shop for products.
+### Stream 1: AI Content Agency (PRIMARY — fastest to $20K)
+Sell done-for-you AI content to Thai/SEA businesses. Start affordable ($200-300/month) to close fast and get testimonials. Scale price as proof builds. 12-15 clients = $20K.
+- Daily action: reach out to 1 business, reply to every lead within 1 hour
 
-## Content Method
-Tim Danilov method: Find viral video → analyze → script → visuals → title → thumbnail.
-10 scripts already written. Must start posting. One post unlocks the data loop.
-Faceless AI channels — all 3 can run simultaneously with AI batch production.
+### Stream 2: Gumroad Digital Products (PASSIVE — AI video funnel)
+Create digital products (AI prompt kits, content templates, creator guides). Sell on Gumroad. AI videos on all channels drive traffic to products. $27-97 per product.
+- Daily action: post content that links to Gumroad, improve/add products weekly
+
+### Stream 3: ZEN Travel (SUPPLEMENTARY — $200 profit/person)
+$200 profit per person (not per package). Realistic: 3-6 bookings/month = $600-1,200. Not the $20K vehicle alone but consistent supplementary income.
+- Daily action: reply to every DM, post on Facebook, run Messages campaign ฿100/day
+
+### Stream 4: Content Channels (TRAFFIC + LONG-TERM)
+@yakjatama (1,100 subs, 1,800/4,000 watch hours), TikTok (50 followers), @evren-updated (300 subs, Month 2).
+These build audience that drives Gumroad sales and agency credibility. AdSense is bonus, not primary.
+Tim Danilov method: viral video → analyze → script → visuals → title → thumbnail.
+
+## Realistic Monthly Targets (May 11 → Nov 2, 2026)
+- May: $200 (foundation — post daily, create Gumroad product, first agency outreach)
+- Jun: $800 (2-3 agency clients + yakjatama monetized + first ZEN booking)
+- Jul: $2,500 (4-6 clients + Gumroad live + AdSense starts)
+- Aug: $5,000 (7-9 clients + Gumroad $500+ + @evren reactivated)
+- Sep: $9,000 (10-12 clients + Gumroad $1,500+ + Singapore fund sprint)
+- Oct: $15,000 (12-15 clients + Gumroad $3,000+ + push to $20K)
+
+## The 4 Daily Non-Negotiables
+1. Post content (@yakjatama / TikTok / @evren)
+2. Reach out to 1 business for agency
+3. Promote or improve Gumroad product
+4. Reply to every ZEN Travel inquiry
 
 ## ZEN Travel
 Family business origin. Myanmar → China/Thailand tours. $1,200–1,520/package.
+**$200 profit per person** (not full package price — costs are high).
 Built after $4K scam — wants to be the transparent alternative.
 Running Facebook engagement ads (฿93 spent, 97 engagements). Switching to Messages campaign ฿100/day.
 First client will come from warm network, not cold ads.
